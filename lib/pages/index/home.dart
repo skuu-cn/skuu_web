@@ -48,19 +48,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             _tabTitle = [
               '关注',
               '推荐',
-              '热榜',
-              '购物',
-              '工具',
               '本地',
-              '娱乐',
-              '游戏',
+              '广场',
+              '商场',
+              '聚力',
+              '共享',
+              '工具',
             ];
             tabBoby = [
               HomeItemPage(),
               HomeItemPage(),
+              HomeItemPage(),
               MyWorks(),
               MyTeams(),
-              HomeItemPage(),
               HomeItemPage(),
               HomeItemPage(),
               MyGridView()
