@@ -142,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       //导航栏
-      appBar: _selected == 0 ? getAppbar1() : getAppbar2(),
+      appBar: getAppbar(),
       drawer: const DrawerPage(),
       body: getTabBar(_tabTitle, tabBoby).values.first,
       floatingActionButton: GestureDetector(
@@ -167,6 +167,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               color: Colors.white,
               shape: const CircularNotchedRectangle(), // 底部导航栏打一个圆形的洞
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Padding(
                     padding: EdgeInsets.only(top: 4),
@@ -222,8 +223,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       onPress: () => {_changeIndex(3)},
                     ),
                   ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceAround, //均分底部导航栏横向空间
+                ], //均分底部导航栏横向空间
               ),
             ),
 
@@ -232,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   }
 
   PreferredSizeWidget getAppbar() {
-    if (_selected == 0) {
+    if (_selected == 0 && !Constant.LOOK_MODE) {
       return getAppbar1();
     } else {
       return getAppbar2();
@@ -336,14 +336,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           );
         }).toList(),
       ): Center(
-        child: TabBarView(
-          controller: _controller,
-          physics: _selected == 2
-              ? NeverScrollableScrollPhysics()
-              : AlwaysScrollableScrollPhysics(), //禁止滑动
-          children: tabBoby,
-        ),
-      )
+          child: TabBarView(
+        controller: _controller,
+        physics: _selected == 2
+            ? NeverScrollableScrollPhysics()
+            : AlwaysScrollableScrollPhysics(), //禁止滑动
+        children: tabBoby,
+      ))
     };
   }
 

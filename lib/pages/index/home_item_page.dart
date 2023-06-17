@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:skuu_web/constant/constant.dart';
 
 import 'myindex_video_item.dart';
 import 'myimg_item.dart';
@@ -41,6 +42,7 @@ class _HomeItemPage extends State<HomeItemPage> {
   Widget build(BuildContext context) {
 //    double width = MediaQuery.of(context).size.width;
 //    int count = getColCount(width);
+
     setState(() {
       colCount = getColCount(MediaQuery.of(context).size.width);
     });
@@ -50,9 +52,7 @@ class _HomeItemPage extends State<HomeItemPage> {
           padding: EdgeInsets.all(5),
           // ignore: missing_required_param
           child: NotificationListener<ScrollNotification>(
-            onNotification: (ScrollNotification notification){
-             String name = notification.metrics.axisDirection.name;
-             int index = notification.metrics.axisDirection.index;
+            onNotification: (ScrollNotification notification) {
               return false;
             },
             child: MasonryGridView.count(
