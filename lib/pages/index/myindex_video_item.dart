@@ -34,161 +34,159 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(13),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    InkWell(
-                      onTap: () {},
-                      child: Image.asset(
-                        'imgs/img_default.png',
-                        width: 60,
-                        height: 60,
-                      ),
+    return Padding(
+      padding: EdgeInsets.all(2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  InkWell(
+                    onTap: () {},
+                    child: Image.asset(
+                      'imgs/img_default.png',
+                      width: 60,
+                      height: 60,
                     ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {},
-                          child: AutoSizeText(
-                            name,
-                            style: TextStyle(fontSize: 20),
-                            minFontSize: 10,
-                            maxLines: 1,
-                          ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      InkWell(
+                        onTap: () {},
+                        child: AutoSizeText(
+                          name,
+                          style: TextStyle(fontSize: 20),
+                          minFontSize: 10,
+                          maxLines: 1,
                         ),
-                        LevelIcon(lv: Random().nextInt(7)),
-                      ],
-                    ),
+                      ),
+                      LevelIcon(lv: Random().nextInt(7)),
+                    ],
+                  ),
 
-                    Text(
-                      '关注 32 KW  活跃 333 KW',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(color: Colors.grey, fontSize: 12),
-                    ),
-                  ],
-                ),
-                Spacer(),
-                Column(
-                  children: <Widget>[
-                    SizedBox(
-                      width: 80,
-                      height: 30,
-                      child: ElevatedButton(
-                        child: Text(
-                          _care ? "已关注" : "+ 关注",
-                          style: TextStyle(fontSize: 12),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _care = !_care;
-                          });
-                        },
+                  Text(
+                    '关注 32 KW  活跃 333 KW',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                  ),
+                ],
+              ),
+              Spacer(),
+              Column(
+                children: <Widget>[
+                  SizedBox(
+                    width: 80,
+                    height: 30,
+                    child: ElevatedButton(
+                      child: Text(
+                        _care ? "已关注" : "+ 关注",
+                        style: TextStyle(fontSize: 12),
                       ),
+                      onPressed: () {
+                        setState(() {
+                          _care = !_care;
+                        });
+                      },
                     ),
-                  ],
-                ),
-              ],
-            ),
-            AutoSizeText(
-              '  ' + '风萧萧兮易水寒，壮士一去兮不复还。',
-              maxLines: 1,
-              style: TextStyle(fontSize: 20),
-              minFontSize: 10,
-              stepGranularity: 10,
-              overflow: TextOverflow.ellipsis,
-            ),
-            Container(
-              height: 2,
-              color: Colors.white,
-            ),
-            Expanded(
-              flex: 9,
-              child: AspectRatio(
-                aspectRatio: 15 / 9,
-                child: MyVideo(
-                  url:
-                      'https://cloud.video.taobao.com//play/u/153810888/p/2/e/6/t/1/395124651263.mp4',
-                  color: Colors.black,
-                ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          AutoSizeText(
+            '  ' + '风萧萧兮易水寒，壮士一去兮不复还。',
+            maxLines: 1,
+            style: TextStyle(fontSize: 20),
+            minFontSize: 10,
+            stepGranularity: 10,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Container(
+            height: 2,
+            color: Colors.white,
+          ),
+          Expanded(
+            flex: 9,
+            child: AspectRatio(
+              aspectRatio: 15 / 9,
+              child: MyVideo(
+                url:
+                'https://cloud.video.taobao.com//play/u/153810888/p/2/e/6/t/1/395124651263.mp4',
+                color: Colors.black,
               ),
             ),
-            Row(
-              children: <Widget>[
-                TextButton.icon(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.transparent)
-                  ),
-                  onPressed: () =>
-                  {
-                    setState(() {
-                      _zan = !_zan;
-                    })
-                  },
-                  icon: _zan
-                      ? Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  )
-                      : Icon(Icons.favorite_border),
-                  label: Text(_zan ? '取消' : '喜欢'),
+          ),
+          Row(
+            children: <Widget>[
+              TextButton.icon(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.transparent)
                 ),
-                TextButton.icon(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.transparent)
-                  ),
-                  onPressed: () =>
-                  {Routes.navigateTo(context, Routes.watch)},
-                  icon: Icon(Icons.comment),
-                  label: Text('评论'),
+                onPressed: () =>
+                {
+                  setState(() {
+                    _zan = !_zan;
+                  })
+                },
+                icon: _zan
+                    ? Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                )
+                    : Icon(Icons.favorite_border),
+                label: Text(_zan ? '取消' : '喜欢'),
+              ),
+              TextButton.icon(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.transparent)
                 ),
-                MySharePage(),
-                Spacer(),
-                PopupMenuButton(
-                  tooltip: "更多",
-                  icon: Icon(
-                    Icons.more_vert,
-                    color: Colors.black54,
-                  ),
-                  onSelected: (va) {
-                    print(va);
-                  },
-                  itemBuilder: (BuildContext context) {
-                    return <PopupMenuEntry<String>>[
-                      PopupMenuItem<String>(
-                        value: '0',
-                        child: Text('收藏'),
-                      ),
-                      PopupMenuItem<String>(
-                        value: '1',
-                        child: Text('举报'),
-                      ),
-                      PopupMenuItem<String>(
-                        value: '2',
-                        child: Text('不感兴趣'),
-                      ),
-                      PopupMenuItem<String>(
-                        value: '3',
-                        child: Text('加入播放队列'),
-                      ),
-                    ];
-                  },
+                onPressed: () =>
+                {Routes.navigateTo(context, Routes.watch)},
+                icon: Icon(Icons.comment),
+                label: Text('评论'),
+              ),
+              MySharePage(),
+              Spacer(),
+              PopupMenuButton(
+                tooltip: "更多",
+                icon: Icon(
+                  Icons.more_vert,
+                  color: Colors.black54,
                 ),
-              ],
-            ),
-          ],
-        ),
+                onSelected: (va) {
+                  print(va);
+                },
+                itemBuilder: (BuildContext context) {
+                  return <PopupMenuEntry<String>>[
+                    PopupMenuItem<String>(
+                      value: '0',
+                      child: Text('收藏'),
+                    ),
+                    PopupMenuItem<String>(
+                      value: '1',
+                      child: Text('举报'),
+                    ),
+                    PopupMenuItem<String>(
+                      value: '2',
+                      child: Text('不感兴趣'),
+                    ),
+                    PopupMenuItem<String>(
+                      value: '3',
+                      child: Text('加入播放队列'),
+                    ),
+                  ];
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

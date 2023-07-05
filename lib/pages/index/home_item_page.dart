@@ -1,13 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:skuu_web/constant/constant.dart';
 
-import 'myindex_video_item.dart';
 import 'myimg_item.dart';
+import 'myindex_video_item.dart';
 
 //首页
 class HomeItemPage extends StatefulWidget {
@@ -49,7 +47,7 @@ class _HomeItemPage extends State<HomeItemPage> {
     return Scaffold(
       backgroundColor: Colors.black12,
       body: Padding(
-          padding: EdgeInsets.all(5),
+          padding: EdgeInsets.only(left: 5,right: 5),
           // ignore: missing_required_param
           child: NotificationListener<ScrollNotification>(
             onNotification: (ScrollNotification notification) {
@@ -106,7 +104,7 @@ class _HomeItemPage extends State<HomeItemPage> {
   double getImgItemHeight(int itemCount) {
     //没有图片的时候
     if (itemCount == 0) {
-      return 155;
+      return 133;
     }
     double widthItem = 1.sw;
     if (colCount > 1) {

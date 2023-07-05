@@ -46,8 +46,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         case 0:
           {
             _tabTitle = [
-              '关注',
               '推荐',
+              '关注',
               '本地',
               '广场',
               '商场',
@@ -232,6 +232,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   }
 
   PreferredSizeWidget getAppbar() {
+    print(_controller.index);
     if (_selected == 0 && !Constant.LOOK_MODE) {
       return getAppbar1();
     } else {
