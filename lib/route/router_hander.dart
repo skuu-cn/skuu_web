@@ -13,6 +13,7 @@ import '../pages/lookart/look_art_page.dart';
 import '../pages/meleft/mycare_page.dart' deferred as mycare_page;
 import '../pages/meleft/mycollect_page.dart' deferred as mycollect_page;
 import '../pages/search/search_page.dart' deferred as search_page;
+import '../pages/tool/date_tool_page.dart' deferred as date_tool_pagedef;
 import '../pages/watchvideo/play_video_page.dart' deferred as play_video_page;
 
 var rootHandler = Handler(
@@ -87,3 +88,11 @@ var userDetailPage = Handler(
     builder: () => user_detail_page.UserDetailPage(int.parse(userId)),
   );
 });
+
+var dateToolPageHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
+      return AppDeferredWidget(
+        libraryLoader: date_tool_pagedef.loadLibrary,
+        builder: () => date_tool_pagedef.DateToolPage(),
+      );
+    });

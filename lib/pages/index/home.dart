@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skuu_web/component/my_grid_view.dart';
 import 'package:skuu_web/constant/constant.dart';
 import 'package:skuu_web/pages/drawer_page.dart';
 import 'package:skuu_web/pages/me/myku_page.dart';
 import 'package:skuu_web/pages/me/myteams.dart';
 import 'package:skuu_web/pages/me/myworks.dart';
+import 'package:skuu_web/pages/tool/tool_page.dart';
 import 'package:skuu_web/route/routers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -31,6 +31,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   late int _selected = 0;
 
+  late bool hasSearch = true;
+
   List<String> _tabTitle = [];
 
   late List<Widget> tabBoby;
@@ -42,6 +44,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   void _changeIndex(int index) {
     setState(() {
       _selected = index;
+      if (_selected != 0) {
+        hasSearch = true;
+      }
       switch (_selected) {
         case 0:
           {
@@ -63,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               MyTeams(),
               HomeItemPage(),
               HomeItemPage(),
-              MyGridView()
+              ToolPage()
             ];
             break;
           }
@@ -128,7 +133,24 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       _controller = TabController(
         length: _tabTitle.length,
         vsync: this,
-      );
+      )..addListener(() {
+          if (_controller.index.toDouble() == _controller.animation?.value &&
+              _selected == 0) {
+            if (_controller.index != 0) {
+              if (hasSearch) {
+                setState(() {
+                  hasSearch = false;
+                });
+              }
+            } else {
+              if (!hasSearch) {
+                setState(() {
+                  hasSearch = true;
+                });
+              }
+            }
+          }
+        });
     });
   }
 
@@ -232,8 +254,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   }
 
   PreferredSizeWidget getAppbar() {
-    print(_controller.index);
-    if (_selected == 0 && !Constant.LOOK_MODE) {
+    if (_selected == 0 && hasSearch && !Constant.LOOK_MODE) {
       return getAppbar1();
     } else {
       return getAppbar2();

@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 
 class MyVideo extends StatefulWidget {
   MyVideo({this.url =
-  'https://cloud.video.taobao.com//play/u/153810888/p/2/e/6/t/1/266102583124.mp4',
+  'https://cloud.video.taobao.com/play/u/153810888/p/2/e/6/t/1/266102583124.mp4',
     this.title,
     this.color});
 

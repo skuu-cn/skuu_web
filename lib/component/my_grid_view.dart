@@ -18,7 +18,7 @@ class _MyGridView extends State<MyGridView> {
   void initState() {
     super.initState();
     _items.addAll([
-      '1',
+      '时间（date）',
       '1',
       '1',
       '1',
@@ -33,17 +33,17 @@ class _MyGridView extends State<MyGridView> {
 
   @override
   Widget build(BuildContext context) {
-//    double width = MediaQuery.of(context).size.width;
-//    int count = getColCount(width);
     return Scaffold(
+      appBar: AppBar(),
         backgroundColor: Colors.black12,
         body: MasonryGridView.count(
           crossAxisCount: 4,
           mainAxisSpacing: 4,
           crossAxisSpacing: 4,
+          itemCount: _items.length,
           itemBuilder: (context, index) {
             return ElevatedButton(
-              child: Text('index'),
+              child: Text(_items[index]),
               onPressed: () {},
             );
           },
