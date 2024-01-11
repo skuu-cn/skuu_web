@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
             textTheme: Typography.englishLike2018.apply(fontSizeFactor: 4.sp),
           ),
-          home:  DateToolPage(),
+          home: const MyHomePage(),
+          // home:  DateToolPage(),
         );
       },
     );
