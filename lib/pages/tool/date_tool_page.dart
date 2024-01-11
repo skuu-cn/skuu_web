@@ -12,8 +12,12 @@ class DateToolPage extends StatefulWidget {
 
 class _DateToolPage extends State<DateToolPage> {
   late int currentTimeStamp;
+  late String currentTime;
 
   //时间格式，1：毫秒。2：秒
+  int secondTypeSelect = 1;
+
+  //日期格式，1：时间。2：日期
   int dateTypeSelect = 1;
   late TextEditingController _controller;
   late TextEditingController dateController;
@@ -23,6 +27,8 @@ class _DateToolPage extends State<DateToolPage> {
     super.initState();
     currentTimeStamp = DateTime.now().millisecondsSinceEpoch;
     _controller = TextEditingController(text: '$currentTimeStamp');
+    currentTime = timestampToDateStr(currentTimeStamp);
+    dateController = TextEditingController(text: '$currentTime');
   }
 
   @override
@@ -38,45 +44,38 @@ class _DateToolPage extends State<DateToolPage> {
             // color: Colors.greenAccent,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-
                 children: [
-                  SelectableText(
-                    "当前时间戳（毫秒）是： $currentTimeStamp",
-                    style: const TextStyle(color: Colors.black, fontSize: 20),
+                  SelectableText.rich(
+                      style: TextStyle(fontSize: 20),
+                      TextSpan(children: [
+                        TextSpan(text: "当前时间戳（毫秒）："),
+                        TextSpan(text: "$currentTimeStamp"),
+                      ])),
+                  Container(
+                    height: 10,
                   ),
-                  Container(height: 10,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            currentTimeStamp =
-                                DateTime.now().millisecondsSinceEpoch;
-                          });
-                        },
-                        child: const Text('刷新'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            currentTimeStamp =
-                                DateTime.now().millisecondsSinceEpoch;
-                          });
-                        },
-                        child: const Text('转换'),
-                      ),
-                    ],
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        secondChange();
+                        dateChange();
+                      });
+                    },
+                    child: const Text('刷新'),
                   ),
-                  Container(height: 10,),
+                  Container(
+                    height: 10,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text("时间戳："),
                       SizedBox(
-                          width: 220,
+                          width: 210,
                           child: TextField(
                               controller: _controller,
+                              keyboardType: TextInputType.number,
+                              maxLength: secondTypeSelect == 1 ? 13 : 10,
                               decoration: InputDecoration(
                                 suffixIcon: IconButton(
                                   icon: const Icon(Icons.close),
@@ -90,17 +89,19 @@ class _DateToolPage extends State<DateToolPage> {
                                   ),
                                 ),
                               ))),
-                      SizedBox(width: 10,),
+                      SizedBox(
+                        width: 20,
+                      ),
                       DropdownButton(
                         focusColor: Colors.transparent,
-                        value: dateTypeSelect,
+                        value: secondTypeSelect,
                         items: <DropdownMenuItem<int>>[
                           DropdownMenuItem(
                             value: 1,
                             child: Text(
                               "毫秒",
                               style: TextStyle(
-                                  color: dateTypeSelect == 1
+                                  color: secondTypeSelect == 1
                                       ? Colors.greenAccent
                                       : Colors.grey),
                             ),
@@ -110,7 +111,7 @@ class _DateToolPage extends State<DateToolPage> {
                             child: Text(
                               "秒",
                               style: TextStyle(
-                                  color: dateTypeSelect == 2
+                                  color: secondTypeSelect == 2
                                       ? Colors.greenAccent
                                       : Colors.grey),
                             ),
@@ -118,26 +119,51 @@ class _DateToolPage extends State<DateToolPage> {
                         ],
                         onChanged: (int? value) {
                           setState(() {
-                            dateTypeSelect = value!;
+                            secondTypeSelect = value!;
+                            secondChange();
                           });
                         },
-                      )
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (int.tryParse(_controller.text) == null) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const AlertDialog(
+                                    content: Text("请输入正确的时间戳"));
+                              },
+                            );
+                          } else {
+                            setState(() {
+                              int inputTimeStamp = int.parse(_controller.text);
+                              dateController = TextEditingController(
+                                  text: timestampToDateStr(inputTimeStamp));
+                            });
+                          }
+                        },
+                        child: const Text('转日期'),
+                      ),
                     ],
                   ),
-                  Container(height: 10,),
+                  Container(
+                    height: 10,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("时间    ："),
+                      const Text("时间  ："),
                       SizedBox(
-                          width: 220,
+                          width: 250,
                           child: TextField(
-                              controller: _controller,
+                              controller: dateController,
+                              keyboardType: TextInputType.datetime,
+                              maxLength: dateTypeSelect == 1 ? 19 : 10,
                               decoration: InputDecoration(
                                 suffixIcon: IconButton(
                                   icon: const Icon(Icons.close),
                                   onPressed: () {
-                                    _controller.clear();
+                                    dateController.clear();
                                   },
                                 ),
                                 border: const OutlineInputBorder(
@@ -146,7 +172,9 @@ class _DateToolPage extends State<DateToolPage> {
                                   ),
                                 ),
                               ))),
-                      SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       DropdownButton(
                         focusColor: Colors.transparent,
                         value: dateTypeSelect,
@@ -154,7 +182,7 @@ class _DateToolPage extends State<DateToolPage> {
                           DropdownMenuItem(
                             value: 1,
                             child: Text(
-                              "毫秒",
+                              "时间",
                               style: TextStyle(
                                   color: dateTypeSelect == 1
                                       ? Colors.greenAccent
@@ -164,7 +192,7 @@ class _DateToolPage extends State<DateToolPage> {
                           DropdownMenuItem(
                             value: 2,
                             child: Text(
-                              "秒",
+                              "日期",
                               style: TextStyle(
                                   color: dateTypeSelect == 2
                                       ? Colors.greenAccent
@@ -175,13 +203,78 @@ class _DateToolPage extends State<DateToolPage> {
                         onChanged: (int? value) {
                           setState(() {
                             dateTypeSelect = value!;
+                            dateChange();
                           });
                         },
-                      )
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          setState(() {
+                            var strtimes = DateTime.parse(dateController.text);
+                            if (secondTypeSelect == 1) {
+                              currentTimeStamp =
+                                  strtimes.millisecondsSinceEpoch;
+                            } else {
+                              currentTimeStamp =
+                                  (strtimes.millisecondsSinceEpoch / 1000)
+                                      .truncate();
+                            }
+                            _controller = TextEditingController(
+                                text: '$currentTimeStamp');
+                          });
+                        },
+                        child: const Text('转时间戳'),
+                      ),
                     ],
                   ),
                 ]),
           ),
         ));
+  }
+
+  static String timestampToDateStr(int timestamp, {onlyNeedDate = false}) {
+    DateTime dataTime = timestampToDate(timestamp);
+    String dateTime = dataTime.toString();
+
+    ///去掉时间后面的.000
+    dateTime = dateTime.substring(0, dateTime.length - 4);
+    if (onlyNeedDate) {
+      List<String> dataList = dateTime.split(" ");
+      dateTime = dataList[0];
+    }
+    return dateTime;
+  }
+
+  static DateTime timestampToDate(int timestamp) {
+    DateTime dateTime = DateTime.now();
+
+    ///如果是十三位时间戳返回这个
+    if (timestamp.toString().length == 13) {
+      dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    } else if (timestamp.toString().length == 16) {
+      ///如果是十六位时间戳
+      dateTime = DateTime.fromMicrosecondsSinceEpoch(timestamp);
+    }
+    return dateTime;
+  }
+
+  void secondChange() {
+    if (secondTypeSelect == 1) {
+      currentTimeStamp = DateTime.now().millisecondsSinceEpoch;
+      _controller = TextEditingController(text: '$currentTimeStamp');
+    } else {
+      currentTimeStamp =
+          (DateTime.now().millisecondsSinceEpoch / 1000).truncate();
+    }
+    _controller = TextEditingController(text: '$currentTimeStamp');
+  }
+
+  void dateChange() {
+    if (dateTypeSelect == 1) {
+      currentTime = timestampToDateStr(currentTimeStamp, onlyNeedDate: false);
+    } else {
+      currentTime = timestampToDateStr(currentTimeStamp, onlyNeedDate: true);
+    }
+    dateController = TextEditingController(text: '$currentTime');
   }
 }
