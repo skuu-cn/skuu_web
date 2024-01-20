@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../bean/contact.dart';
 
 class Utils {
-  static String getImgPath(String name, {String format: 'png'}) {
+  static String getImgPath(String name, {String format = 'png'}) {
     return 'imgs/$name.$format';
   }
 

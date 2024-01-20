@@ -47,12 +47,7 @@ class _MyVideoShortItem extends State<MyVideoShortItem> {
                 crossAxisSpacing: 5.0),
             itemCount: _items.length,
             itemBuilder: (context, index) {
-              return Material(
-                borderRadius: BorderRadius.circular(10.0),
-                child: Container(
-                  child: MyVideoVideoItem(),
-                ),
-              );
+              return MyVideoVideoItem();
             }),
       ),
     );

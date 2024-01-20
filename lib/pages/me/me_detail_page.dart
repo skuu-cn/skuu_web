@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skuu_web/constant/constant.dart';
 import 'package:skuu_web/pages/friends/friend_detail.dart';
 import 'package:skuu_web/pages/video/myvideo_long_item.dart';
 
@@ -23,6 +24,7 @@ class _MeDetailPage extends State<MeDetailPage>
   final List<String> _pageViews = [];
   late int _curPageView = 0;
   bool _care = true;
+  String split_o =  Constant.SPLIT_O;
 
   @override
   void initState() {
@@ -122,7 +124,7 @@ class _MeDetailPage extends State<MeDetailPage>
                                     color: Colors.white,
                                   ),
                                   const Text(
-                                    '关注 32 KW  活跃 333 KW',
+                                    '关注 32 KW ◉ 活跃 333 KW',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 15),
@@ -133,7 +135,7 @@ class _MeDetailPage extends State<MeDetailPage>
                               Column(
                                 children: <Widget>[
                                   SizedBox(
-                                    width: 80,
+                                    width: 85,
                                     height: 30,
                                     child: ElevatedButton(
                                       child: Text(

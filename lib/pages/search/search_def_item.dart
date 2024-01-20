@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SearchDefItem extends StatefulWidget {
   String content;
 
-  SearchDefItem({this.content: ""});
+  SearchDefItem({this.content = ""});
 
   @override
   State<StatefulWidget> createState() {

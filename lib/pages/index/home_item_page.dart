@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:skuu_web/constant/color_constant.dart';
+import 'package:skuu_web/constant/constant.dart';
 
 import 'myimg_item.dart';
 import 'myindex_video_item.dart';
@@ -47,7 +49,7 @@ class _HomeItemPage extends State<HomeItemPage> {
     return Scaffold(
       backgroundColor: Colors.black12,
       body: Padding(
-          padding: EdgeInsets.only(left: 5,right: 5),
+          padding: EdgeInsets.only(left: 5, right: 5),
           // ignore: missing_required_param
           child: NotificationListener<ScrollNotification>(
             onNotification: (ScrollNotification notification) {
@@ -62,7 +64,8 @@ class _HomeItemPage extends State<HomeItemPage> {
                 if (index % 2 == 0) {
                   return Material(
                     child: Container(
-                      height: getImgItemHeight(index > 6 ? 6 : index),
+                      height:
+                          getImgItemHeight(index > 6 ? 6 : index, index * 100),
                       child: MyImgItem(
                         id: index > 6 ? 6 : index,
                       ),
@@ -101,20 +104,25 @@ class _HomeItemPage extends State<HomeItemPage> {
   }
 
   //动态根据图片个数算item高度
-  double getImgItemHeight(int itemCount) {
-    //没有图片的时候
-    if (itemCount == 0) {
-      return 133;
-    }
+  double getImgItemHeight(int itemCount, double length) {
+    length = length == 0 ? 100 : length;
     double widthItem = 1.sw;
     if (colCount > 1) {
       widthItem = 0.5.sw;
     }
+    length = '长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。'.length.toDouble();
+    length = length * 22;
+    double lineCount = (length / widthItem).ceilToDouble();
+    double wordHeight = (lineCount > 3 ? 3 : lineCount) * 30 + 102;
+    //没有图片的时候
+    if (itemCount == 0) {
+      return wordHeight;
+    }
     //图片超过3个的时候，高度固定
     if (itemCount > 3) {
-      return (2 / 3) * widthItem + 120;
+      return (2 / 3) * widthItem + wordHeight;
     }
-    return widthItem / itemCount + 130;
+    return widthItem / itemCount + wordHeight;
   }
 
   double getVideoItemHeight() {

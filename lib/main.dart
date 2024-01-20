@@ -2,19 +2,17 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skuu_web/pages/index/home.dart';
-import 'package:skuu_web/pages/tool/date_tool_page.dart';
 import 'package:skuu_web/route/routers.dart';
-import 'dart:html';
-
+import 'package:skuu_web/themes/skuu_theme_data.dart';
 
 void main() {
-  FluroRouter router = new FluroRouter();
+  FluroRouter router = FluroRouter();
   Routes.configureRoutes(router);
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key}) {}
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +21,13 @@ class MyApp extends StatelessWidget {
       designSize: const Size(1170, 2532),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (BuildContext context, Widget? child) {
+      builder: (context, child) {
         return MaterialApp(
           title: 'skuu',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            textTheme: Typography.englishLike2018.apply(fontSizeFactor: 4.sp),
-          ),
+          theme: SkuuThemeData.lightThemeData.copyWith(),
           home: const MyHomePage(),
-          // home:  DateToolPage(),
+          // home:  UrlToolPage(),
         );
       },
     );

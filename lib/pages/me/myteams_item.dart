@@ -3,6 +3,8 @@ import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../constant/constant.dart';
+
 class MyTeamsItem extends StatefulWidget {
   MyTeamsItem({this.id = 0});
 
@@ -18,6 +20,7 @@ class _MyTeamsItem extends State<MyTeamsItem> {
   late String name;
   late Color click;
   final List<String> _items = [];
+  String split_o = Constant.SPLIT_O;
 
   //网络请求,获取详情
   @override
@@ -36,17 +39,13 @@ class _MyTeamsItem extends State<MyTeamsItem> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Image.asset(
+          'imgs/img_default.png',
+          width: 60,
+          height: 60,
+        ),
         title: Row(
           children: <Widget>[
-            Column(
-              children: <Widget>[
-                Image.asset(
-                  'imgs/img_default.png',
-                  width: 48,
-                  height: 48,
-                ),
-              ],
-            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -55,13 +54,12 @@ class _MyTeamsItem extends State<MyTeamsItem> {
                     Text(
                       name,
                       textAlign: TextAlign.left,
-                      style: TextStyle(color: Colors.white, fontSize: 11),
-                      textScaleFactor: 1.5,
+                      style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                     Image.asset(
                       'imgs/img_default.png',
-                      width: 20,
-                      height: 20,
+                      width: 30,
+                      height: 30,
                     ),
                   ],
                 ),
@@ -70,9 +68,9 @@ class _MyTeamsItem extends State<MyTeamsItem> {
                   color: Colors.white,
                 ),
                 Text(
-                  '关注 32 KW  活跃 333 KW',
+                  '关注 32 KW $split_o 评分 5.0分',
                   textAlign: TextAlign.left,
-                  style: TextStyle(color: Colors.white, fontSize: 4),
+                  style: TextStyle(color: Colors.white, fontSize: 10),
                 ),
               ],
             ),
@@ -116,5 +114,4 @@ class _MyTeamsItem extends State<MyTeamsItem> {
       return 3;
     }
   }
-
 }

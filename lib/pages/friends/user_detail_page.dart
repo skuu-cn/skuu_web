@@ -133,7 +133,7 @@ class _UserDetailPage extends State<UserDetailPage>
                               Column(
                                 children: <Widget>[
                                   SizedBox(
-                                    width: 80,
+                                    width: 85,
                                     height: 30,
                                     child: ElevatedButton(
                                       child: Text(

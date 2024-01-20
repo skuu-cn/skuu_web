@@ -1,5 +1,14 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../route/routers.dart';
+
+void main() {
+  FluroRouter router = FluroRouter();
+  Routes.configureRoutes(router);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -23,6 +32,6 @@ class TemplatePage extends StatefulWidget {
 class _TemplatePage extends State<TemplatePage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ElevatedButton(onPressed: (){}, child: Text("ddd"));
   }
 }

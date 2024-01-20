@@ -45,13 +45,8 @@ class _MyVideoLongItem extends State<MyVideoLongItem> {
               childAspectRatio: 3 / 2),
           itemCount: _items.length,
           itemBuilder: (context, index) {
-            return Material(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Container(
-                child: MyVideoImgItem(
-                  id: index,
-                ),
-              ),
+            return MyVideoImgItem(
+              id: index,
             );
           }),
     );

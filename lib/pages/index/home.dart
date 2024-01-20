@@ -1,3 +1,4 @@
+import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skuu_web/constant/constant.dart';
@@ -9,7 +10,7 @@ import 'package:skuu_web/pages/tool/tool_page.dart';
 import 'package:skuu_web/route/routers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../component/button_img.dart';
+import '../../component/AnimatedBottomBar.dart';
 import '../friends/chat_page_list.dart';
 import '../friends/friends_page.dart';
 import '../me/me_detail_page.dart';
@@ -41,118 +42,32 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   final controller = TextEditingController();
 
-  void _changeIndex(int index) {
-    setState(() {
-      _selected = index;
-      if (_selected != 0) {
-        hasSearch = true;
-      }
-      switch (_selected) {
-        case 0:
-          {
-            _tabTitle = [
-              '推荐',
-              '关注',
-              '本地',
-              '广场',
-              '商场',
-              '聚力',
-              '共享',
-              '工具',
-            ];
-            tabBoby = [
-              HomeItemPage(),
-              HomeItemPage(),
-              HomeItemPage(),
-              MyWorks(),
-              MyTeams(),
-              HomeItemPage(),
-              HomeItemPage(),
-              ToolPage()
-            ];
-            break;
-          }
-        case 1:
-          {
-            _tabTitle = [
-              '影视',
-              '短视频',
-            ];
-            tabBoby = [
-              // AppDeferredWidget(
-              //   libraryLoader: myvideo_long_item.loadLibrary,
-              //   builder: () => myvideo_long_item.MyVideoLongItem(),
-              // ),
-              MyVideoLongItem(),
-              MyVideoShortItem(),
-              // AppDeferredWidget(
-              //   libraryLoader: myvideo_short_item.loadLibrary,
-              //   builder: () => myvideo_short_item.MyVideoShortItem(),
-              // ),
-            ];
-            break;
-          }
-        case 2:
-          {
-            _tabTitle = [
-              '消息',
-              '好友',
-            ];
-            tabBoby = [
-              ChatPageList(),
-              FriendsPage(),
-              // AppDeferredWidget(
-              //   libraryLoader: chat_page.loadLibrary,
-              //   builder: () => chat_page.ChatPage(),
-              // ),
-              // AppDeferredWidget(
-              //   libraryLoader: friends_page.loadLibrary,
-              //   builder: () => friends_page.FriendsPage(),
-              // ),
-            ];
-            break;
-          }
-        case 3:
-          {
-            _tabTitle = ['UU库', '作品'];
-            tabBoby = [
-              MykuPage(userId: 12),
-              MeDetailPage(12),
-              // AppDeferredWidget(
-              //   libraryLoader: myworks.loadLibrary,
-              //   builder: () => myworks.MyWorks(),
-              // ),
-              // AppDeferredWidget(
-              //   libraryLoader: myteams.loadLibrary,
-              //   builder: () => myteams.MyTeams(),
-              // ),
-            ];
-            break;
-          }
-      }
-      _controller = TabController(
-        length: _tabTitle.length,
-        vsync: this,
-      )..addListener(() {
-          if (_controller.index.toDouble() == _controller.animation?.value &&
-              _selected == 0) {
-            if (_controller.index != 0) {
-              if (hasSearch) {
-                setState(() {
-                  hasSearch = false;
-                });
-              }
-            } else {
-              if (!hasSearch) {
-                setState(() {
-                  hasSearch = true;
-                });
-              }
-            }
-          }
-        });
-    });
-  }
+  final List<BarItem> barItems = [
+    BarItem(
+      text: "首页",
+      selectPath: "imgs/index-sel.svg",
+      unSelectPath: "imgs/index.svg",
+      color: Colors.indigo,
+    ),
+    BarItem(
+      text: "影视",
+      selectPath: "imgs/video-sel.svg",
+      unSelectPath: "imgs/video.svg",
+      color: Colors.purple,
+    ),
+    BarItem(
+      text: "消息",
+      selectPath: "imgs/msg-sel.svg",
+      unSelectPath: "imgs/msg.svg",
+      color: Colors.yellow.shade900,
+    ),
+    BarItem(
+      text: "我的",
+      selectPath: "imgs/me-sel.svg",
+      unSelectPath: "imgs/me.svg",
+      color: Colors.teal,
+    ),
+  ];
 
   @override
   void initState() {
@@ -167,89 +82,53 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       appBar: getAppbar(),
       drawer: const DrawerPage(),
       body: getTabBar(_tabTitle, tabBoby).values.first,
-      floatingActionButton: GestureDetector(
-        onDoubleTap: () {
-          setState(() {
-            Constant.LOOK_MODE = !Constant.LOOK_MODE;
-          });
-        },
-        onTap: () {},
-        child: FloatingActionButton(
-          onPressed: null,
-          tooltip: '发布/双击切换浏览模式',
-          child: const Icon(Icons.add),
-        ),
+      floatingActionButton: CircularMenu(
+        toggleButtonColor: Colors.lightGreen,
+        items: [
+          CircularMenuItem(
+              color: Colors.lightGreen,
+              icon: Icons.add,
+              onTap: () {
+                // callback
+              }),
+          CircularMenuItem(
+              color: Colors.lightGreen,
+              icon: Icons.layers,
+              onTap: () {
+                setState(() {
+                  Constant.LOOK_MODE = false;
+                });
+              }),
+          CircularMenuItem(
+              color: Colors.lightGreen,
+              icon: Icons.layers_clear,
+              onTap: () {
+                setState(() {
+                  Constant.LOOK_MODE = true;
+                });
+              }),
+          CircularMenuItem(
+              color: Colors.lightGreen,
+              icon: Icons.settings,
+              onTap: () {
+                //callback
+              }),
+        ],
+        alignment: Alignment.bottomRight,
       ),
-      floatingActionButtonLocation: Constant.LOOK_MODE
-          ? FloatingActionButtonLocation.endFloat
-          : FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Constant.LOOK_MODE
           ? null
-          : BottomAppBar(
-              color: Colors.white,
-              shape: const CircularNotchedRectangle(), // 底部导航栏打一个圆形的洞
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 4),
-                    child: ButtonImg(
-                      text: '首页',
-                      textSize: 12,
-                      img: _selected == 0
-                          ? imgPath + 'index-sel.svg'
-                          : imgPath + 'index.svg',
-                      textColor: _selected == 0
-                          ? Constant.ICON_COLOR
-                          : Constant.ICON_COLOR_DEF,
-                      onPress: () => {_changeIndex(0)},
-                    ),
-                  ),
-                  ButtonImg(
-                    text: '影视',
-                    textSize: 12,
-                    img: _selected == 1
-                        ? imgPath + 'video-sel.svg'
-                        : imgPath + 'video.svg',
-                    textColor: _selected == 1
-                        ? Constant.ICON_COLOR
-                        : Constant.ICON_COLOR_DEF,
-                    onPress: () => {_changeIndex(1)},
-                  ),
-                  SizedBox(),
-                  Padding(
-                    padding: EdgeInsets.only(top: 4),
-                    child: ButtonImg(
-                      text: '消息',
-                      textSize: 12,
-                      img: _selected == 2
-                          ? imgPath + 'msg-sel.svg'
-                          : imgPath + 'msg.svg',
-                      textColor: _selected == 2
-                          ? Constant.ICON_COLOR
-                          : Constant.ICON_COLOR_DEF,
-                      onPress: () => {_changeIndex(2)},
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 4),
-                    child: ButtonImg(
-                      text: '我的',
-                      textSize: 12,
-                      img: _selected == 3
-                          ? imgPath + 'me-sel.svg'
-                          : imgPath + 'me.svg',
-                      textColor: _selected == 3
-                          ? Constant.ICON_COLOR
-                          : Constant.ICON_COLOR_DEF,
-                      onPress: () => {_changeIndex(3)},
-                    ),
-                  ),
-                ], //均分底部导航栏横向空间
-              ),
+          : AnimatedBottomBar(
+              barItems: barItems,
+              onBarTap: (index) {
+                setState(() {
+                  _selected = index;
+                  _changeIndex(index);
+                });
+              },
+              animationDuration: const Duration(milliseconds: 150),
+              barStyle: BarStyle(fontSize: 20.0, iconSize: 30.0),
             ),
-
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
@@ -366,6 +245,119 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         children: tabBoby,
       ))
     };
+  }
+
+  void _changeIndex(int index) {
+    setState(() {
+      _selected = index;
+      if (_selected != 0) {
+        hasSearch = true;
+      }
+      switch (_selected) {
+        case 0:
+          {
+            _tabTitle = [
+              '推荐',
+              '关注',
+              '本地',
+              '广场',
+              '商场',
+              '聚力',
+              '共享',
+              '工具',
+            ];
+            tabBoby = [
+              HomeItemPage(),
+              HomeItemPage(),
+              HomeItemPage(),
+              MyWorks(),
+              MyTeams(),
+              HomeItemPage(),
+              HomeItemPage(),
+              ToolPage()
+            ];
+            break;
+          }
+        case 1:
+          {
+            _tabTitle = [
+              '影视',
+              '短视频',
+            ];
+            tabBoby = [
+              // AppDeferredWidget(
+              //   libraryLoader: myvideo_long_item.loadLibrary,
+              //   builder: () => myvideo_long_item.MyVideoLongItem(),
+              // ),
+              MyVideoLongItem(),
+              MyVideoShortItem(),
+              // AppDeferredWidget(
+              //   libraryLoader: myvideo_short_item.loadLibrary,
+              //   builder: () => myvideo_short_item.MyVideoShortItem(),
+              // ),
+            ];
+            break;
+          }
+        case 2:
+          {
+            _tabTitle = [
+              '消息',
+              '好友',
+            ];
+            tabBoby = [
+              ChatPageList(),
+              FriendsPage(),
+              // AppDeferredWidget(
+              //   libraryLoader: chat_page.loadLibrary,
+              //   builder: () => chat_page.ChatPage(),
+              // ),
+              // AppDeferredWidget(
+              //   libraryLoader: friends_page.loadLibrary,
+              //   builder: () => friends_page.FriendsPage(),
+              // ),
+            ];
+            break;
+          }
+        case 3:
+          {
+            _tabTitle = ['UU库', '作品'];
+            tabBoby = [
+              MykuPage(userId: 12),
+              MeDetailPage(12),
+              // AppDeferredWidget(
+              //   libraryLoader: myworks.loadLibrary,
+              //   builder: () => myworks.MyWorks(),
+              // ),
+              // AppDeferredWidget(
+              //   libraryLoader: myteams.loadLibrary,
+              //   builder: () => myteams.MyTeams(),
+              // ),
+            ];
+            break;
+          }
+      }
+      _controller = TabController(
+        length: _tabTitle.length,
+        vsync: this,
+      )..addListener(() {
+          if (_controller.index.toDouble() == _controller.animation?.value &&
+              _selected == 0) {
+            if (_controller.index != 0) {
+              if (hasSearch) {
+                setState(() {
+                  hasSearch = false;
+                });
+              }
+            } else {
+              if (!hasSearch) {
+                setState(() {
+                  hasSearch = true;
+                });
+              }
+            }
+          }
+        });
+    });
   }
 
   _launchURL(url) async {

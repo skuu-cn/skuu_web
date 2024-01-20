@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:skuu_web/constant/constant.dart';
 
 import '../../component/level_icon.dart';
 import '../../component/myshare_page.dart';
@@ -24,6 +25,7 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
   late String name;
   bool _care = false;
   bool _zan = false;
+  String split_o = Constant.SPLIT_O;
 
   //网络请求,获取详情
   @override
@@ -70,9 +72,8 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
                       LevelIcon(lv: Random().nextInt(7)),
                     ],
                   ),
-
                   Text(
-                    '关注 32 KW  活跃 333 KW',
+                    '关注 32 KW $split_o️ 活跃 333 KW',
                     textAlign: TextAlign.left,
                     style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
@@ -82,7 +83,7 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
               Column(
                 children: <Widget>[
                   SizedBox(
-                    width: 80,
+                    width: 85,
                     height: 30,
                     child: ElevatedButton(
                       child: Text(
@@ -100,13 +101,13 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
               ),
             ],
           ),
-          AutoSizeText(
-            '  ' + '风萧萧兮易水寒，壮士一去兮不复还。',
-            maxLines: 1,
-            style: TextStyle(fontSize: 20),
-            minFontSize: 10,
-            stepGranularity: 10,
-            overflow: TextOverflow.ellipsis,
+          Padding(
+            padding: EdgeInsets.only(left: 5, right: 5),
+            child: SelectableText(
+              '一寸光阴一寸金，寸金难买寸光阴。',
+              maxLines: 1,
+              style: TextStyle(fontSize: 20, overflow: TextOverflow.ellipsis),
+            ),
           ),
           Container(
             height: 2,
@@ -118,7 +119,7 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
               aspectRatio: 15 / 9,
               child: MyVideo(
                 url:
-                'https://cloud.video.taobao.com//play/u/153810888/p/2/e/6/t/1/395124651263.mp4',
+                    'https://cloud.video.taobao.com//play/u/153810888/p/2/e/6/t/1/395124651263.mp4',
                 color: Colors.black,
               ),
             ),
@@ -127,28 +128,26 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
             children: <Widget>[
               TextButton.icon(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.transparent)
-                ),
-                onPressed: () =>
-                {
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.transparent)),
+                onPressed: () => {
                   setState(() {
                     _zan = !_zan;
                   })
                 },
                 icon: _zan
                     ? Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                )
+                        Icons.favorite,
+                        color: Colors.red,
+                      )
                     : Icon(Icons.favorite_border),
                 label: Text(_zan ? '取消' : '喜欢'),
               ),
               TextButton.icon(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.transparent)
-                ),
-                onPressed: () =>
-                {Routes.navigateTo(context, Routes.watch)},
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.transparent)),
+                onPressed: () => {Routes.navigateTo(context, Routes.watch)},
                 icon: Icon(Icons.comment),
                 label: Text('评论'),
               ),

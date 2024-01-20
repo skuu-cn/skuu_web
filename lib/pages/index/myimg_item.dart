@@ -47,7 +47,7 @@ class _MyImgItem extends State<MyImgItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(2),
+      padding: const EdgeInsets.all(1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -83,49 +83,48 @@ class _MyImgItem extends State<MyImgItem> {
                     color: Colors.white,
                   ),
                   const Text(
-                    '关注 32 KW  活跃 333 KW',
+                    '关注 32 KW ▪️ 活跃 333 KW',
                     textAlign: TextAlign.left,
                     style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ],
               ),
               const Spacer(),
-              Column(
-                children: <Widget>[
-                  SizedBox(
-                    width: 80,
-                    height: 30,
-                    child: ElevatedButton(
-                      child: Text(
-                        _care ? "已关注" : "+ 关注",
-                        style: const TextStyle(fontSize: 12),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _care = !_care;
-                        });
-                      },
-                    ),
+              SizedBox(
+                width: 85,
+                height: 30,
+                child: ElevatedButton(
+                  child: Text(
+                    _care ? "已关注" : "+ 关注",
+                    style: const TextStyle(fontSize: 12),
                   ),
-                ],
+                  onPressed: () {
+                    setState(() {
+                      _care = !_care;
+                    });
+                  },
+                ),
               ),
             ],
           ),
-          const AutoSizeText(
-            '  ' + '长风破浪会有时，直挂云帆济沧海。',
-            maxLines: 1,
-            style: TextStyle(fontSize: 20),
-            minFontSize: 10,
-            stepGranularity: 10,
-            overflow: TextOverflow.ellipsis,
+          Padding(
+            padding: EdgeInsets.only(left: 5, right: 5),
+            child: SelectableText(
+              '长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。',
+              scrollPhysics: NeverScrollableScrollPhysics(),
+              maxLines: 3,
+              minLines: 1,
+              style: TextStyle(
+                fontSize: 20,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ),
           if (length > 0)
             Expanded(
               // flex: 9,
-              child: TextButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.white)),
-                onPressed: () {
+              child: InkWell(
+                onTap: () {
                   Routes.navigateTo(context, Routes.whatArticle);
                 },
                 child: Container(
@@ -150,8 +149,6 @@ class _MyImgItem extends State<MyImgItem> {
           Row(
             children: <Widget>[
               TextButton.icon(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.transparent)),
                 onPressed: () => {
                   setState(() {
                     _zan = !_zan;
@@ -159,19 +156,28 @@ class _MyImgItem extends State<MyImgItem> {
                 },
                 icon: _zan
                     ? Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                )
-                    : Icon(Icons.favorite_border),
-                label: Text(_zan ? '取消' : '喜欢'),
+                        Icons.favorite,
+                        color: Colors.red,
+                      )
+                    : Icon(
+                        Icons.favorite_border,
+                      ),
+                label: Text(
+                  _zan ? '取消' : '喜欢',
+                ),
               ),
               TextButton.icon(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.transparent)),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.transparent)),
                 onPressed: () =>
-                {Routes.navigateTo(context, Routes.whatArticle)},
-                icon: Icon(Icons.comment),
-                label: Text('评论'),
+                    {Routes.navigateTo(context, Routes.whatArticle)},
+                icon: Icon(
+                  Icons.comment,
+                ),
+                label: Text(
+                  '评论',
+                ),
               ),
               MySharePage(),
               Spacer(),
@@ -188,15 +194,24 @@ class _MyImgItem extends State<MyImgItem> {
                   return <PopupMenuEntry<String>>[
                     PopupMenuItem<String>(
                       value: '0',
-                      child: Text('收藏'),
+                      child: Text(
+                        '收藏',
+                        style: TextStyle(color: Colors.black54),
+                      ),
                     ),
                     PopupMenuItem<String>(
                       value: '1',
-                      child: Text('举报'),
+                      child: Text(
+                        '举报',
+                        style: TextStyle(color: Colors.black54),
+                      ),
                     ),
                     PopupMenuItem<String>(
                       value: '2',
-                      child: Text('不感兴趣'),
+                      child: Text(
+                        '不感兴趣',
+                        style: TextStyle(color: Colors.black54),
+                      ),
                     ),
                   ];
                 },

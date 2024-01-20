@@ -1,18 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'mywork_item.dart';
+import 'mywork_item2.dart';
+
 //我的小组
-class MyWorks extends StatefulWidget{
+class MyWorks extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return _MyWorks();
   }
-
 }
 
-class _MyWorks extends State<MyWorks>{
-
+class _MyWorks extends State<MyWorks> {
   final List<String> _items = [];
 
   @override
@@ -31,26 +30,21 @@ class _MyWorks extends State<MyWorks>{
       '1',
     ]);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black12,
       body: Padding(
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.all(1),
         child: GridView.builder(
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 320.0,
-                mainAxisSpacing: 5.0,
-                crossAxisSpacing: 5.0),
+                maxCrossAxisExtent: 431.0,
+                mainAxisSpacing: 1.0,
+                crossAxisSpacing: 1.0),
             itemCount: _items.length,
             itemBuilder: (context, index) {
-              return Material(
-                borderRadius: BorderRadius.circular(10.0),
-                child: Container(
-//                    color: Colors.green,
-                  child: MyWorkItem(),
-                ),
-              );
+              return MyVideoImgItemV2();
             }),
       ),
     );

@@ -97,10 +97,11 @@ class FriendDetail extends StatelessWidget {
               margin: EdgeInsets.only(top: 10),
               height: 1,
             ),
+            Container(height: 10,),
             ElevatedButton(
               child: Text(
                 '发消息',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.lightBlue),
               ),
               onPressed: () => {},
             ),

@@ -73,7 +73,7 @@ class _LookArticalPage extends State<LookArticalPage>
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: ifInputing == true
           ? SizedBox(
-              width: hiddenRight ? 1.sw - 400 : 1.sw-30,
+              width: hiddenRight ? 1.sw - 400 : 1.sw - 30,
               height: 100,
               child: TextField(
                 maxLines: 100,
@@ -82,8 +82,7 @@ class _LookArticalPage extends State<LookArticalPage>
                   fillColor: Colors.white,
                   filled: true,
                   hintText: '评论',
-                  border: InputBorder.none,
-                  suffix: Column(
+                  suffixIcon: Column(
                     children: [
                       TextButton(
                           onPressed: () => {
@@ -225,6 +224,7 @@ class _LookArticalPage extends State<LookArticalPage>
     return ListTile(
       hoverColor: Colors.white,
       focusColor: Colors.white,
+      titleAlignment: ListTileTitleAlignment.titleHeight,
       leading: Image.asset(
         'imgs/defbak.png',
         width: Constant.HEAD_IMG_SEZE,
@@ -240,7 +240,7 @@ class _LookArticalPage extends State<LookArticalPage>
           children: [
             Row(
               children: [
-                InkWell(child: Text('新飞飞')),
+                InkWell(child: Text('新飞飞',style: TextStyle(fontSize: 17),)),
                 LevelIcon(
                   lv: 5,
                 ),
@@ -264,11 +264,17 @@ class _LookArticalPage extends State<LookArticalPage>
                     return <PopupMenuEntry<String>>[
                       PopupMenuItem<String>(
                         value: '0',
-                        child: Text('收藏'),
+                        child: Text(
+                          '收藏',
+                          style: TextStyle(color: Colors.black54),
+                        ),
                       ),
                       PopupMenuItem<String>(
                         value: '1',
-                        child: Text('举报'),
+                        child: Text(
+                          '举报',
+                          style: TextStyle(color: Colors.black54),
+                        ),
                       ),
                     ];
                   },
@@ -335,9 +341,9 @@ class _LookArticalPage extends State<LookArticalPage>
           ],
         ),
       ),
-      onTap: () {
-        setState(() {});
-      },
+      // onTap: () {
+      //   setState(() {});
+      // },
     );
   }
 }

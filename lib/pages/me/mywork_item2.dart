@@ -1,24 +1,27 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skuu_web/constant/constant.dart';
 
 import '../../route/routers.dart';
 
-class MyVideoImgItem extends StatefulWidget {
-  MyVideoImgItem({this.id = 0});
+class MyVideoImgItemV2 extends StatefulWidget {
+  MyVideoImgItemV2({this.id = 0});
 
   final int id;
 
   @override
   State<StatefulWidget> createState() {
-    return _MyVideoImgItem();
+    return _MyVideoImgItemV2();
   }
 }
 
-class _MyVideoImgItem extends State<MyVideoImgItem> {
+class _MyVideoImgItemV2 extends State<MyVideoImgItemV2> {
   late String name;
   double imgHover = 60;
   final List<String> _items = [];
   bool _care = false;
+  String SPLIT_O = Constant.SPLIT_O;
 
   //网络请求,获取详情
   @override
@@ -35,16 +38,16 @@ class _MyVideoImgItem extends State<MyVideoImgItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(5),
-      child: InkWell(
-        onTap: () {
-          Routes.navigateTo(context, Routes.watch);
-        },
+    return InkWell(
+      onTap: () {
+        Routes.navigateTo(context, Routes.watch);
+      },
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        surfaceTintColor: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Spacer(),
             Expanded(
               flex: 9,
               child: Container(
@@ -65,14 +68,10 @@ class _MyVideoImgItem extends State<MyVideoImgItem> {
                   InkWell(
                     onHover: (a) {},
                     onTap: () => {},
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset(
-                          'imgs/img_default.png',
-                          width: imgHover,
-                          height: imgHover,
-                        ),
-                      ],
+                    child: Image.asset(
+                      'imgs/img_default.png',
+                      width: imgHover,
+                      height: imgHover,
                     ),
                   ),
                   Expanded(
@@ -87,27 +86,9 @@ class _MyVideoImgItem extends State<MyVideoImgItem> {
                         ),
                         Row(
                           children: [
-                            InkWell(
-                              onHover: (a) {},
-                              onTap: () => {},
-                              child: Row(
-                                children: <Widget>[
-                                  Text(
-                                    name,
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 17,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                    // textScaleFactor: 1.5,
-                                  ),
-                                ],
-                              ),
-                            ),
                             Expanded(
                               child: Text(
-                                ' ◉ 1212 次观看  ◉ 2天前',
+                                '关注 123KW $SPLIT_O 热度 45W',
                                 textAlign: TextAlign.left,
                                 overflow: TextOverflow.ellipsis,
                                 style:
@@ -125,25 +106,31 @@ class _MyVideoImgItem extends State<MyVideoImgItem> {
                   // Spacer(),
                   Column(
                     children: <Widget>[
-                      SizedBox(
-                        width: 85,
-                        height: 30,
-                        child: ElevatedButton(
-                          child: Text(
-                            _care ? "已关注" : "+ 关注",
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _care = !_care;
-                            });
-                          },
-                        ),
-                      ),
+                      _care
+                          ? IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _care = false;
+                                });
+                              },
+                              icon: Icon(
+                                Icons.check_box,
+                                color: Colors.black54,
+                              ))
+                          : IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _care = true;
+                                });
+                              },
+                              icon: Icon(
+                                Icons.add_box,
+                                color: Colors.black54,
+                              )),
                       PopupMenuButton(
                         tooltip: "更多",
                         icon: Icon(
-                          Icons.more_horiz,
+                          Icons.more_vert,
                           color: Colors.black54,
                         ),
                         onSelected: (va) {
@@ -172,13 +159,6 @@ class _MyVideoImgItem extends State<MyVideoImgItem> {
                                 style: TextStyle(color: Colors.black54),
                               ),
                             ),
-                            PopupMenuItem<String>(
-                              value: '3',
-                              child: Text(
-                                '加入播放队列',
-                                style: TextStyle(color: Colors.black54),
-                              ),
-                            ),
                           ];
                         },
                       ),
@@ -190,7 +170,6 @@ class _MyVideoImgItem extends State<MyVideoImgItem> {
           ],
         ),
       ),
-      // ),
     );
   }
 

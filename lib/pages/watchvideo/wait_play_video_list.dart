@@ -48,35 +48,40 @@ class _WaitPlayVideoList extends State<WaitPlayVideoList> {
                       width: 10,
                     ),
                     Expanded(
-                      flex: 5,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '女教官不甘心输给男新兵，非要比一场，让全场特种兵直呼精彩!',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
+                        flex: 5,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '女教官不甘心输给男新兵，非要比一场，让全场特种兵直呼精彩!',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  '爱看电影',
+                                  style: TextStyle(color: Colors.black54),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  '19万次播放',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              '爱看电影',
-                              style: TextStyle(color: Colors.black54),
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              '19万次播放',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                        )),
                   ],
                 ),
               ),

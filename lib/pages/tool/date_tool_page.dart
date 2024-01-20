@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../constant/color_constant.dart';
+
 class DateToolPage extends StatefulWidget {
   const DateToolPage({super.key});
 
@@ -35,199 +37,229 @@ class _DateToolPage extends State<DateToolPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("时间工具"),
+          title: const Text(
+            "时间工具",
+          ),
         ),
         body: Center(
-          child: SizedBox(
-            width: 0.5.sw,
+          child: Container(
+            width: 400,
             height: 0.5.sh,
-            // color: Colors.greenAccent,
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SelectableText.rich(
-                      style: TextStyle(fontSize: 20),
-                      TextSpan(children: [
-                        TextSpan(text: "当前时间戳（毫秒）："),
-                        TextSpan(text: "$currentTimeStamp"),
-                      ])),
-                  Container(
-                    height: 10,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        secondChange();
-                        dateChange();
-                      });
-                    },
-                    child: const Text('刷新'),
-                  ),
-                  Container(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("时间戳："),
-                      SizedBox(
-                          width: 210,
-                          child: TextField(
-                              controller: _controller,
-                              keyboardType: TextInputType.number,
-                              maxLength: secondTypeSelect == 1 ? 13 : 10,
-                              decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  icon: const Icon(Icons.close),
-                                  onPressed: () {
-                                    _controller.clear();
-                                  },
-                                ),
-                                border: const OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                              ))),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      DropdownButton(
-                        focusColor: Colors.transparent,
-                        value: secondTypeSelect,
-                        items: <DropdownMenuItem<int>>[
-                          DropdownMenuItem(
-                            value: 1,
-                            child: Text(
-                              "毫秒",
-                              style: TextStyle(
-                                  color: secondTypeSelect == 1
-                                      ? Colors.greenAccent
-                                      : Colors.grey),
-                            ),
-                          ),
-                          DropdownMenuItem(
-                            value: 2,
-                            child: Text(
-                              "秒",
-                              style: TextStyle(
-                                  color: secondTypeSelect == 2
-                                      ? Colors.greenAccent
-                                      : Colors.grey),
-                            ),
-                          ),
-                        ],
-                        onChanged: (int? value) {
+              children: [
+                SelectableText.rich(
+                    style: TextStyle(fontSize: 20),
+                    TextSpan(children: [
+                      TextSpan(text: "当前时间戳（毫秒）："),
+                      TextSpan(text: "$currentTimeStamp"),
+                    ])),
+                Container(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          secondChange();
+                          dateChange();
+                        });
+                      },
+                      child: const Text('刷新'),
+                    ),
+                    Container(
+                      width: 10,
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (int.tryParse(_controller.text) == null) {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const AlertDialog(
+                                  content: Text("请输入正确的时间戳"));
+                            },
+                          );
+                        } else {
                           setState(() {
-                            secondTypeSelect = value!;
-                            secondChange();
+                            int inputTimeStamp = int.parse(_controller.text);
+                            dateController = TextEditingController(
+                                text: timestampToDateStr(inputTimeStamp));
                           });
-                        },
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          if (int.tryParse(_controller.text) == null) {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return const AlertDialog(
-                                    content: Text("请输入正确的时间戳"));
-                              },
-                            );
+                        }
+                      },
+                      child: const Text('转日期'),
+                    ),
+                    Container(
+                      width: 10,
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        setState(() {
+                          var strtimes = DateTime.parse(dateController.text);
+                          if (secondTypeSelect == 1) {
+                            currentTimeStamp = strtimes.millisecondsSinceEpoch;
                           } else {
-                            setState(() {
-                              int inputTimeStamp = int.parse(_controller.text);
-                              dateController = TextEditingController(
-                                  text: timestampToDateStr(inputTimeStamp));
-                            });
+                            currentTimeStamp =
+                                (strtimes.millisecondsSinceEpoch / 1000)
+                                    .truncate();
                           }
-                        },
-                        child: const Text('转日期'),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("时间  ："),
-                      SizedBox(
-                          width: 250,
-                          child: TextField(
-                              controller: dateController,
-                              keyboardType: TextInputType.datetime,
-                              maxLength: dateTypeSelect == 1 ? 19 : 10,
-                              decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  icon: const Icon(Icons.close),
-                                  onPressed: () {
-                                    dateController.clear();
-                                  },
+                          _controller =
+                              TextEditingController(text: '$currentTimeStamp');
+                        });
+                      },
+                      child: const Text('转时间戳'),
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 20,
+                ),
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // const Text("时间戳："),
+                    SizedBox(
+                        width: 300,
+                        child: TextField(
+                            controller: _controller,
+                            style: TextStyle(fontSize: 20),
+                            keyboardType: TextInputType.number,
+                            maxLength: secondTypeSelect == 1 ? 13 : 10,
+                            decoration: InputDecoration(
+                              labelText: "请输入时间戳",
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  Icons.close,
+                                  color: Colors.grey,
                                 ),
-                                border: const OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
+                                onPressed: () {
+                                  _controller.clear();
+                                },
+                              ),
+                              enabledBorder: const OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
                                 ),
-                              ))),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      DropdownButton(
-                        focusColor: Colors.transparent,
-                        value: dateTypeSelect,
-                        items: <DropdownMenuItem<int>>[
-                          DropdownMenuItem(
-                            value: 1,
-                            child: Text(
-                              "时间",
-                              style: TextStyle(
-                                  color: dateTypeSelect == 1
-                                      ? Colors.greenAccent
-                                      : Colors.grey),
-                            ),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                            ))),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    DropdownButton(
+                      focusColor: Colors.transparent,
+                      value: secondTypeSelect,
+                      items: <DropdownMenuItem<int>>[
+                        DropdownMenuItem(
+                          value: 1,
+                          child: Text(
+                            "毫秒",
+                            style: TextStyle(
+                                color: secondTypeSelect == 1
+                                    ? Colors.black54
+                                    : Colors.grey),
                           ),
-                          DropdownMenuItem(
-                            value: 2,
-                            child: Text(
-                              "日期",
-                              style: TextStyle(
-                                  color: dateTypeSelect == 2
-                                      ? Colors.greenAccent
-                                      : Colors.grey),
-                            ),
+                        ),
+                        DropdownMenuItem(
+                          value: 2,
+                          child: Text(
+                            "秒",
+                            style: TextStyle(
+                                color: secondTypeSelect == 2
+                                    ? Colors.black54
+                                    : Colors.grey),
                           ),
-                        ],
-                        onChanged: (int? value) {
-                          setState(() {
-                            dateTypeSelect = value!;
-                            dateChange();
-                          });
-                        },
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          setState(() {
-                            var strtimes = DateTime.parse(dateController.text);
-                            if (secondTypeSelect == 1) {
-                              currentTimeStamp =
-                                  strtimes.millisecondsSinceEpoch;
-                            } else {
-                              currentTimeStamp =
-                                  (strtimes.millisecondsSinceEpoch / 1000)
-                                      .truncate();
-                            }
-                            _controller = TextEditingController(
-                                text: '$currentTimeStamp');
-                          });
-                        },
-                        child: const Text('转时间戳'),
-                      ),
-                    ],
-                  ),
-                ]),
+                        ),
+                      ],
+                      onChanged: (int? value) {
+                        setState(() {
+                          secondTypeSelect = value!;
+                          secondChange();
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 20,
+                ),
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                        width: 300,
+                        child: TextField(
+                            controller: dateController,
+                            style: TextStyle(fontSize: 20),
+                            keyboardType: TextInputType.datetime,
+                            maxLength: dateTypeSelect == 1 ? 19 : 10,
+                            decoration: InputDecoration(
+                              labelText: "请输入时间",
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  Icons.close,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: () {
+                                  dateController.clear();
+                                },
+                              ),
+                              enabledBorder: const OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                            ))),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    DropdownButton(
+                      focusColor: Colors.transparent,
+                      value: dateTypeSelect,
+                      items: <DropdownMenuItem<int>>[
+                        DropdownMenuItem(
+                          value: 1,
+                          child: Text(
+                            "时间",
+                            style: TextStyle(
+                                color: dateTypeSelect == 1
+                                    ? Colors.black54
+                                    : Colors.grey),
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          value: 2,
+                          child: Text(
+                            "日期",
+                            style: TextStyle(
+                                color: dateTypeSelect == 2
+                                    ? Colors.black54
+                                    : Colors.grey),
+                          ),
+                        ),
+                      ],
+                      onChanged: (int? value) {
+                        setState(() {
+                          dateTypeSelect = value!;
+                          dateChange();
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ],
+              crossAxisAlignment: CrossAxisAlignment.start,
+            ),
           ),
         ));
   }

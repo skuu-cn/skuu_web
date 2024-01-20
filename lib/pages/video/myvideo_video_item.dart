@@ -71,7 +71,7 @@ class _MyVideoVideoItem extends State<MyVideoVideoItem> {
                           height: imgHover,
                         ),
                         SizedBox(
-                          width: 80,
+                          width: 85,
                           height: 30,
                           child: ElevatedButton(
                             child: Text(
@@ -109,9 +109,8 @@ class _MyVideoVideoItem extends State<MyVideoVideoItem> {
                                   name,
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
-                                      color: Colors.grey, fontSize: 10),
+                                      color: Colors.grey, fontSize: 17,),
                                   overflow: TextOverflow.ellipsis,
-                                  textScaleFactor: 1.5,
                                 ),
                               ],
                             ),

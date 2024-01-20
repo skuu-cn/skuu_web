@@ -42,8 +42,8 @@ class _MySharePage extends State<MySharePage> {
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
-      style:
-          ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.transparent)),
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.transparent)),
       onPressed: () => {
         showModalBottomSheet(
             constraints: BoxConstraints(maxHeight: 350.h),
@@ -97,8 +97,12 @@ class _MySharePage extends State<MySharePage> {
               ));
             })
       },
-      icon: Icon(Icons.share),
-      label: Text('分享'),
+      icon: Icon(
+        Icons.share,
+      ),
+      label: Text(
+        '分享',
+      ),
     );
   }
 }

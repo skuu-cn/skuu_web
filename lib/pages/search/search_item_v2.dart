@@ -75,7 +75,7 @@ class _SearchItemV2 extends State<SearchItemV2>
       headerSliverBuilder: (context, boxIsScrolled) {
         return [
           SliverAppBar(
-            expandedHeight: 500.h,
+            expandedHeight: 600.h,
             flexibleSpace: FlexibleSpaceBar(
               background: Column(
                 children: [
@@ -101,19 +101,13 @@ class _SearchItemV2 extends State<SearchItemV2>
                     runSpacing: 1, // 纵轴（垂直）方向间距
                     alignment: WrapAlignment.start,
                     children: _historys
-                        .map<Widget>((e) => GestureDetector(
-                              child: Chip(
-                                backgroundColor: Color(0xFFF5F5F5),
-                                label: Text(
-                                  e,
-                                  style: TextStyle(
-                                      color: Color(0xFF7C7070), fontSize: 13),
-                                ),
-                              ),
-                              onTap: () {
-                                setState(() {});
-                              },
-                            ))
+                        .map<Widget>((e) => ElevatedButton(
+                            onPressed: () {},
+                            child: Text(
+                              e,
+                              style: TextStyle(
+                                  color: Color(0xFF7C7070), fontSize: 10),
+                            )))
                         .toList(),
                   ),
                   // ListTile(
@@ -130,26 +124,6 @@ class _SearchItemV2 extends State<SearchItemV2>
                   //     ),
                   //   ),
                   // ),
-                  Wrap(
-                    spacing: 12.0, // 主轴(水平)方向间距
-                    runSpacing: 1, // 纵轴（垂直）方向间距
-                    alignment: WrapAlignment.start,
-                    children: _hots
-                        .map<Widget>((e) => GestureDetector(
-                              child: Chip(
-                                backgroundColor: Color(0xFFF5F5F5),
-                                label: Text(
-                                  e,
-                                  style: TextStyle(
-                                      color: Color(0xFF7C7070), fontSize: 13),
-                                ),
-                              ),
-                              onTap: () {
-                                setState(() {});
-                              },
-                            ))
-                        .toList(),
-                  ),
                 ],
               ),
             ),

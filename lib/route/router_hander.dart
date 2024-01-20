@@ -2,7 +2,8 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:skuu_web/pages/friends/chat_pagev2.dart'
     deferred as chat_pagev2;
-import 'package:skuu_web/pages/lookart/look_art_page.dart' deferred as look_art_page;
+import 'package:skuu_web/pages/lookart/look_art_page.dart'
+    deferred as look_art_page;
 
 import '../cache/deferred_widget.dart';
 import '../component/watch_article.dart' deferred as watch_article;
@@ -14,6 +15,7 @@ import '../pages/meleft/mycare_page.dart' deferred as mycare_page;
 import '../pages/meleft/mycollect_page.dart' deferred as mycollect_page;
 import '../pages/search/search_page.dart' deferred as search_page;
 import '../pages/tool/date_tool_page.dart' deferred as date_tool_pagedef;
+import '../pages/tool/url_tool_page.dart' deferred as url_tool_pagedef;
 import '../pages/watchvideo/play_video_page.dart' deferred as play_video_page;
 
 var rootHandler = Handler(
@@ -91,8 +93,15 @@ var userDetailPage = Handler(
 
 var dateToolPageHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
-      return AppDeferredWidget(
-        libraryLoader: date_tool_pagedef.loadLibrary,
-        builder: () => date_tool_pagedef.DateToolPage(),
-      );
-    });
+  return AppDeferredWidget(
+    libraryLoader: date_tool_pagedef.loadLibrary,
+    builder: () => date_tool_pagedef.DateToolPage(),
+  );
+});
+var urlToolPageHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
+  return AppDeferredWidget(
+    libraryLoader: url_tool_pagedef.loadLibrary,
+    builder: () => url_tool_pagedef.UrlToolPage(),
+  );
+});

@@ -13,7 +13,7 @@ class MyTeams extends StatefulWidget {
 
 class _MyTeams extends State<MyTeams> {
   final List<String> _items = [];
-  double width = 320.0;
+  double width = 431.0;
 
   @override
   void initState() {
@@ -45,12 +45,7 @@ class _MyTeams extends State<MyTeams> {
                 crossAxisSpacing: 5.0),
             itemCount: _items.length,
             itemBuilder: (context, index) {
-              return Material(
-                borderRadius: BorderRadius.circular(10.0),
-                child: Container(
-                  child: MyTeamsItem(),
-                ),
-              );
+              return MyTeamsItem();
             }),
       ),
     );

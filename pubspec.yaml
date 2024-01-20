@@ -5,35 +5,41 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.18.2 <3.0.0'
+  flutter: ^3.16.7
+  sdk: ^3.2.4
 
 dependencies:
   flutter:
     sdk: flutter
-  fluro: ^2.0.4
-  flutter_screenutil: ^5.5.4
-  dash_chat_2: ^0.0.15
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  fluro: ^2.0.5
+  flutter_screenutil: ^5.9.0
+  dash_chat_2: ^0.0.19
 #  cupertino_icons: ^1.0.2
   dropdown_search: ^5.0.3
   auto_size_text: ^3.0.0
-  adaptive_dialog: ^1.8.0+1
-  flutter_staggered_grid_view: ^0.6.2
-  dash_chat: ^1.1.16
+  adaptive_dialog: ^2.0.0
+  flutter_staggered_grid_view: ^0.7.0
+#  dash_chat: ^1.1.16
   image_network: ^2.5.1
   url_launcher: ^6.1.8
   flukit: ^3.0.1
   lpinyin: ^2.0.3
   scrollable_positioned_list: ^0.3.5
   comment_tree: ^0.3.0
-  dropdown_button2: ^1.9.2
+  dropdown_button2: ^2.3.9
   flutter_svg: ^2.0.0+1
-
+  circular_menu: ^2.0.1
+  flutter_json_view: ^1.1.4
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_webrtc: ^0.9.11
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 flutter:
   uses-material-design: true
 #  fonts:
