@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:skuu_web/component/my_grid_view.dart';
+
+import 'my_grid_view.dart';
 
 class MyTabBar extends StatefulWidget {
   @override
