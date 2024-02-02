@@ -34,6 +34,11 @@ dependencies:
   circular_menu: ^2.0.1
   flutter_json_view: ^1.1.4
   google_fonts: ^6.1.0
+  #黄历
+  lunar: ^1.6.1
+  #日历视图
+  calendar_date_picker2: ^0.5.3
+
 
 dev_dependencies:
   flutter_webrtc: ^0.9.11

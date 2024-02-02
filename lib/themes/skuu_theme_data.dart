@@ -46,8 +46,12 @@ class SkuuThemeData {
         ),
         contentTextStyle: _textTheme.titleMedium!.apply(color: _darkFillColor),
       ),
+      // elevatedButtonTheme: elevatedButtonTheme
     );
   }
+
+  // static const ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
+  // );
 
   static const ColorScheme lightColorScheme = ColorScheme(
     primary: Colors.black54,

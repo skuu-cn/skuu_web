@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../constant/color_constant.dart';
 import '../../route/routers.dart';
 
 class MyVideoImgItem extends StatefulWidget {
@@ -125,13 +126,29 @@ class _MyVideoImgItem extends State<MyVideoImgItem> {
                   // Spacer(),
                   Column(
                     children: <Widget>[
-                      SizedBox(
-                        width: 85,
-                        height: 30,
+                      Padding(
+                        padding: EdgeInsets.only(right: 10),
                         child: ElevatedButton(
-                          child: Text(
-                            _care ? "已关注" : "+ 关注",
-                            style: TextStyle(fontSize: 12),
+                          style: _care
+                              ? ElevatedButton.styleFrom(
+                            minimumSize: const Size(20, 35),
+                            padding: EdgeInsets.only(left: 10, right: 10),
+                          )
+                              : ElevatedButton.styleFrom(
+                            minimumSize: const Size(20, 35),
+                            padding: EdgeInsets.only(left: 13, right: 13),
+                            backgroundColor: ColorConstant.ThemeGreen,
+                          ),
+                          child: _care
+                              ? Text(
+                            "已关注",
+                            style:
+                            const TextStyle(fontSize: 10, color: Colors.grey),
+                          )
+                              : Text(
+                            "关注",
+                            style: const TextStyle(
+                                fontSize: 10, color: Colors.white),
                           ),
                           onPressed: () {
                             setState(() {

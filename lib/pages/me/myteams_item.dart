@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../constant/constant.dart';
+import '../../route/routers.dart';
+import '../drawer_page.dart';
 
 class MyTeamsItem extends StatefulWidget {
   MyTeamsItem({this.id = 0});
@@ -26,7 +28,7 @@ class _MyTeamsItem extends State<MyTeamsItem> {
   @override
   void initState() {
     super.initState();
-    name = "而且大都";
+    name = "十元商场";
     _items.addAll([
       '1',
       '1',
@@ -77,7 +79,7 @@ class _MyTeamsItem extends State<MyTeamsItem> {
             Spacer(),
             IconButton(
               color: Colors.white,
-              icon: Icon(Icons.exit_to_app),
+              icon: Icon(Icons.input),
               iconSize: 20,
               onPressed: () {},
             ),
@@ -88,7 +90,9 @@ class _MyTeamsItem extends State<MyTeamsItem> {
       body: InkWell(
         hoverColor: Colors.green,
         onHover: (a) {},
-        onTap: () {},
+        onTap: () {
+          Routes.navigateTo(context, Routes.goodsPageUrl);
+        },
         child: Container(
           height: double.infinity,
           decoration: BoxDecoration(

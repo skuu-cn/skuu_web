@@ -16,32 +16,23 @@ class ToolPage extends StatefulWidget {
 }
 
 class _ToolPage extends State<ToolPage> {
-  List<String> showItems = [];
-  List<String> allItems = [];
-  List<Widget> allPages = [];
   List<ToolItemBean> showToolItemBeans = [];
   List<ToolItemBean> allToolItemBeans = [];
 
   int colCount = 2;
+  double aspectRatio = 2;
 
   @override
   void initState() {
     super.initState();
-    allItems.addAll([
-      '时间工具',
-      '1',
-      '1',
-      '1',
-      '1',
-      '1',
-      '1',
-      '1',
-      '1',
-      '1',
-    ]);
-    allPages.addAll([
-      DateToolPage(),
-    ]);
+
+    allToolItemBeans.add(ToolItemBean(
+        imageUrl: "imgs/date.svg",
+        title: "日历",
+        subTitle: "时间日历",
+        desc: "时间日历",
+        indexLetter: "rili",
+        clickUrl: Routes.calendarToolPageUrl));
 
     allToolItemBeans.add(ToolItemBean(
         imageUrl: "imgs/date.svg",
@@ -66,7 +57,14 @@ class _ToolPage extends State<ToolPage> {
         clickUrl: Routes.urlToolPageUrl));
     allToolItemBeans.add(ToolItemBean(
         imageUrl: "imgs/phone.svg",
-        title: "手机号查询",
+        title: "手机号查询1",
+        subTitle: "地址工具",
+        desc: "手机号查询，定位",
+        indexLetter: "phone",
+        clickUrl: Routes.urlToolPageUrl));
+    allToolItemBeans.add(ToolItemBean(
+        imageUrl: "imgs/phone.svg",
+        title: "手机号查询2",
         subTitle: "地址工具",
         desc: "手机号查询，定位",
         indexLetter: "phone",
@@ -76,6 +74,11 @@ class _ToolPage extends State<ToolPage> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      colCount = (1.sw / 300).truncate();
+      aspectRatio = (1.sw/colCount/50).toDouble();
+    });
+
     return Scaffold(
         appBar: AppBar(
             backgroundColor: ColorConstant.lightBlue,
@@ -108,15 +111,17 @@ class _ToolPage extends State<ToolPage> {
         backgroundColor: Colors.black12,
         // backgroundColor: ColorConstant.lightBlue,
         body: MasonryGridView.count(
-          crossAxisCount: getColCount(),
-          mainAxisSpacing: 3,
-          crossAxisSpacing: 3,
+          crossAxisCount: colCount,
+          mainAxisSpacing: 1.w,
+          crossAxisSpacing: 1.w,
           itemCount: showToolItemBeans.length,
-          shrinkWrap: true,
           itemBuilder: (context, index) {
             return InkWell(
-              child: ToolItem(showToolItemBeans[index]),
-              onHover: (a) {},
+              child: Container(
+                height: 120,
+                child: ToolItem(showToolItemBeans[index]),
+              ),
+              // onHover: (a) {},
               onTap: () {
                 Routes.navigateTo(context, showToolItemBeans[index].clickUrl);
               },

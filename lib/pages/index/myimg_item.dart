@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skuu_web/constant/color_constant.dart';
 import 'package:skuu_web/constant/constant.dart';
 
 import '../../component/level_icon.dart';
@@ -28,6 +29,7 @@ class _MyImgItem extends State<MyImgItem> {
   bool _care = false;
   bool _zan = false;
   late int length;
+  String split_o = Constant.SPLIT_O;
 
   //网络请求,获取详情
   @override
@@ -83,28 +85,44 @@ class _MyImgItem extends State<MyImgItem> {
                     color: Colors.white,
                   ),
                   const Text(
-                    '关注 32 KW ▪️ 活跃 333 KW',
+                    '关注 32 KW ◉️ 活跃 333 KW',
                     textAlign: TextAlign.left,
                     style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ],
               ),
               const Spacer(),
-              SizedBox(
-                width: 85,
-                height: 30,
+              Padding(
+                padding: EdgeInsets.only(right: 10),
                 child: ElevatedButton(
-                  child: Text(
-                    _care ? "已关注" : "+ 关注",
-                    style: const TextStyle(fontSize: 12),
-                  ),
+                  style: _care
+                      ? ElevatedButton.styleFrom(
+                          minimumSize: const Size(20, 35),
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                        )
+                      : ElevatedButton.styleFrom(
+                          minimumSize: const Size(20, 35),
+                          padding: EdgeInsets.only(left: 13, right: 13),
+                          backgroundColor: ColorConstant.ThemeGreen,
+                        ),
+                  child: _care
+                      ? Text(
+                          "已关注",
+                          style:
+                              const TextStyle(fontSize: 10, color: Colors.grey),
+                        )
+                      : Text(
+                          "关注",
+                          style: const TextStyle(
+                              fontSize: 10, color: Colors.white),
+                        ),
                   onPressed: () {
                     setState(() {
                       _care = !_care;
                     });
                   },
                 ),
-              ),
+              )
             ],
           ),
           Padding(

@@ -17,6 +17,13 @@ import '../pages/search/search_page.dart' deferred as search_page;
 import '../pages/tool/date_tool_page.dart' deferred as date_tool_pagedef;
 import '../pages/tool/url_tool_page.dart' deferred as url_tool_pagedef;
 import '../pages/watchvideo/play_video_page.dart' deferred as play_video_page;
+import '../pages/index/home_item_page.dart' deferred as home_item_page;
+import '../pages/index/home_appbar_item_page.dart'
+    deferred as home_appbar_item_page;
+import '../pages/goods/goods_page.dart' deferred as goods_page;
+import '../pages/goods/goods_detail_page.dart' deferred as goods_detail_page;
+import '../pages/goods/goods_item.dart' deferred as goods_item;
+import '../pages/tool/calendar_tool_page.dart' deferred as calendar_tool_page;
 
 var rootHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
@@ -103,5 +110,53 @@ var urlToolPageHandler = Handler(
   return AppDeferredWidget(
     libraryLoader: url_tool_pagedef.loadLibrary,
     builder: () => url_tool_pagedef.UrlToolPage(),
+  );
+});
+
+var urlHomeItemPageHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
+  return AppDeferredWidget(
+    libraryLoader: home_item_page.loadLibrary,
+    builder: () => home_item_page.HomeItemPage(),
+  );
+});
+
+var urlHomeAppBarItemPageHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
+  return AppDeferredWidget(
+    libraryLoader: home_appbar_item_page.loadLibrary,
+    builder: () => home_appbar_item_page.HomeAppBarItemPage(),
+  );
+});
+
+var urlGoodsPageHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
+  return AppDeferredWidget(
+    libraryLoader: goods_page.loadLibrary,
+    builder: () => goods_page.GoodsPage(),
+  );
+});
+
+var goodsDetailPageHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
+  return AppDeferredWidget(
+    libraryLoader: goods_detail_page.loadLibrary,
+    builder: () => goods_detail_page.GoodsDetailPage(),
+  );
+});
+
+var goodsItemHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
+  return AppDeferredWidget(
+    libraryLoader: goods_item.loadLibrary,
+    builder: () => goods_item.GoodsItem(),
+  );
+});
+
+var calendarToolPageHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
+  return AppDeferredWidget(
+    libraryLoader: calendar_tool_page.loadLibrary,
+    builder: () => calendar_tool_page.CalendarToolPage(),
   );
 });

@@ -17,6 +17,12 @@ class Routes {
   static String searchPage = "/search_page";
   static String dateToolPageUrl = "/data_tool_page";
   static String urlToolPageUrl = "/url_tool_page";
+  static String homeItemPageUrl = "/home_item_page";
+  static String homeAppbarItemPageUrl = "/home_appbar_item_page";
+  static String goodsPageUrl = "/goods_page";
+  static String goodsItemUrl = "/goods_item_page";
+  static String goodsDetailPageUrl = "/goods_detail_page";
+  static String calendarToolPageUrl = "/calendar_tool_page";
 
   static void configureRoutes(FluroRouter fluroRouter) {
     router = fluroRouter;
@@ -37,6 +43,12 @@ class Routes {
     router.define(userDetail, handler: userDetailPage);
     router.define(dateToolPageUrl, handler: dateToolPageHandler);
     router.define(urlToolPageUrl, handler: urlToolPageHandler);
+    router.define(homeItemPageUrl, handler: urlHomeItemPageHandler);
+    router.define(homeAppbarItemPageUrl, handler: urlHomeAppBarItemPageHandler);
+    router.define(goodsPageUrl, handler: urlGoodsPageHandler);
+    router.define(goodsItemUrl, handler: goodsItemHandler);
+    router.define(goodsDetailPageUrl, handler: goodsDetailPageHandler);
+    router.define(calendarToolPageUrl, handler: calendarToolPageHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配

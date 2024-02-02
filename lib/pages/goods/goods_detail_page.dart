@@ -10,14 +10,14 @@ import '../../component/level_icon.dart';
 import '../../constant/constant.dart';
 import '../../pages/watchvideo/mytabbar_video.dart';
 
-class LookArticalPage extends StatefulWidget {
+class GoodsDetailPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _LookArticalPage();
+    return _GoodsDetailPage();
   }
 }
 
-class _LookArticalPage extends State<LookArticalPage>
+class _GoodsDetailPage extends State<GoodsDetailPage>
     with SingleTickerProviderStateMixin {
   int contentLine = 4;
   bool hiddenRight = false;
@@ -51,7 +51,7 @@ class _LookArticalPage extends State<LookArticalPage>
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('详情'),
+        title: Text('商品详情'),
       ),
       body: Padding(
         padding: EdgeInsets.all(10),

@@ -5,18 +5,18 @@ import 'package:skuu_web/constant/constant.dart';
 
 import '../../route/routers.dart';
 
-class MyVideoImgItemV2 extends StatefulWidget {
-  MyVideoImgItemV2({this.id = 0});
+class GoodsItem extends StatefulWidget {
+  GoodsItem({this.id = 0});
 
   final int id;
 
   @override
   State<StatefulWidget> createState() {
-    return _MyVideoImgItemV2();
+    return _GoodsItem();
   }
 }
 
-class _MyVideoImgItemV2 extends State<MyVideoImgItemV2> {
+class _GoodsItem extends State<GoodsItem> {
   late String name;
   double imgHover = 60;
   final List<String> _items = [];
@@ -40,7 +40,7 @@ class _MyVideoImgItemV2 extends State<MyVideoImgItemV2> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Routes.navigateTo(context, Routes.homeAppbarItemPageUrl);
+        Routes.navigateTo(context, Routes.goodsDetailPageUrl);
       },
       child: Card(
         clipBehavior: Clip.antiAlias,

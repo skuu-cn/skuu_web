@@ -5,6 +5,7 @@ import 'package:skuu_web/constant/constant.dart';
 import 'package:skuu_web/pages/watchvideo/component_item.dart';
 import 'package:skuu_web/pages/watchvideo/wait_play_video_list.dart';
 
+import '../../constant/color_constant.dart';
 import 'mytabbar_video.dart';
 import '../../component/myvideo_play.dart';
 
@@ -198,17 +199,37 @@ class _PlayVideoPage extends State<PlayVideoPage>
                     ),
                   ],
                 ),
-                trailing: ElevatedButton(
-                  child: Text(
-                    _care ? "已关注" : "+ 关注",
-                    style: const TextStyle(fontSize: 12),
+                trailing: Padding(
+                  padding: EdgeInsets.only(right: 10),
+                  child: ElevatedButton(
+                    style: _care
+                        ? ElevatedButton.styleFrom(
+                      minimumSize: const Size(20, 35),
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                    )
+                        : ElevatedButton.styleFrom(
+                      minimumSize: const Size(20, 35),
+                      padding: EdgeInsets.only(left: 13, right: 13),
+                      backgroundColor: ColorConstant.ThemeGreen,
+                    ),
+                    child: _care
+                        ? Text(
+                      "已关注",
+                      style:
+                      const TextStyle(fontSize: 10, color: Colors.grey),
+                    )
+                        : Text(
+                      "关注",
+                      style: const TextStyle(
+                          fontSize: 10, color: Colors.white),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _care = !_care;
+                      });
+                    },
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _care = !_care;
-                    });
-                  },
-                ),
+                )
               ),
               Padding(
                 padding: EdgeInsets.only(left: 10, right: 10),

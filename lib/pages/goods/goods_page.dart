@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:skuu_web/pages/goods/goods_item.dart';
 
-import 'mywork_item2.dart';
+import '../me/mywork_item2.dart';
 
-//我的小组
-class MyWorks extends StatefulWidget {
+//商品列表页
+class GoodsPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _MyWorks();
+    return _GoodsPage();
   }
 }
 
-class _MyWorks extends State<MyWorks> {
+class _GoodsPage extends State<GoodsPage> {
   final List<String> _items = [];
 
   @override
@@ -34,6 +35,7 @@ class _MyWorks extends State<MyWorks> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("商品列表"),),
       backgroundColor: Colors.black12,
       body: Padding(
         padding: EdgeInsets.all(1),
@@ -45,7 +47,7 @@ class _MyWorks extends State<MyWorks> {
                 childAspectRatio:3/2),
             itemCount: _items.length,
             itemBuilder: (context, index) {
-              return MyVideoImgItemV2();
+              return GoodsItem();
             }),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skuu_web/constant/color_constant.dart';
 
 class UrlToolPage extends StatefulWidget {
   UrlToolPage({super.key});
@@ -57,8 +58,8 @@ class _UrlToolPage extends State<UrlToolPage> {
                     style: TextStyle(color: Colors.white),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightBlue,
-                  ),
+                      backgroundColor: ColorConstant.ThemeGreen,
+                      padding: EdgeInsets.only(left: 10, right: 10)),
                   onPressed: () {
                     setState(() {
                       searchController.text =
@@ -75,8 +76,8 @@ class _UrlToolPage extends State<UrlToolPage> {
                     style: TextStyle(color: Colors.white),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightBlue,
-                  ),
+                      backgroundColor: ColorConstant.ThemeGreen,
+                      padding: EdgeInsets.only(left: 10, right: 10)),
                   onPressed: () {
                     setState(() {
                       searchController.text =
@@ -90,7 +91,9 @@ class _UrlToolPage extends State<UrlToolPage> {
                 ElevatedButton(
                   child: Text(
                     "清空内容",
-                    style: TextStyle(color: Colors.lightBlue),
+                    style: TextStyle(
+                      color: ColorConstant.ThemeGreen,
+                    ),
                   ),
                   onPressed: () {
                     setState(() {

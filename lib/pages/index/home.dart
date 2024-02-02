@@ -1,6 +1,7 @@
 import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skuu_web/constant/color_constant.dart';
 import 'package:skuu_web/constant/constant.dart';
 import 'package:skuu_web/pages/drawer_page.dart';
 import 'package:skuu_web/pages/me/myku_page.dart';
@@ -45,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final List<BarItem> barItems = [
     BarItem(
       text: "首页",
-      selectPath: "imgs/index-sel.svg",
+      selectPath: "imgs/index-selv2.svg",
       unSelectPath: "imgs/index.svg",
       color: Colors.indigo,
     ),
@@ -57,13 +58,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     ),
     BarItem(
       text: "消息",
-      selectPath: "imgs/msg-sel.svg",
+      selectPath: "imgs/msg-selv2.svg",
       unSelectPath: "imgs/msg.svg",
       color: Colors.yellow.shade900,
     ),
     BarItem(
       text: "我的",
-      selectPath: "imgs/me-sel.svg",
+      selectPath: "imgs/me-selv2.svg",
       unSelectPath: "imgs/me.svg",
       color: Colors.teal,
     ),
@@ -83,16 +84,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       drawer: const DrawerPage(),
       body: getTabBar(_tabTitle, tabBoby).values.first,
       floatingActionButton: CircularMenu(
-        toggleButtonColor: Colors.lightGreen,
+        toggleButtonColor: ColorConstant.ThemeGreen,
         items: [
           CircularMenuItem(
-              color: Colors.lightGreen,
+              color: ColorConstant.ThemeGreen,
               icon: Icons.add,
               onTap: () {
                 // callback
               }),
           CircularMenuItem(
-              color: Colors.lightGreen,
+              color: ColorConstant.ThemeGreen,
               icon: Icons.layers,
               onTap: () {
                 setState(() {
@@ -100,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 });
               }),
           CircularMenuItem(
-              color: Colors.lightGreen,
+              color: ColorConstant.ThemeGreen,
               icon: Icons.layers_clear,
               onTap: () {
                 setState(() {
@@ -108,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 });
               }),
           CircularMenuItem(
-              color: Colors.lightGreen,
+              color: ColorConstant.ThemeGreen,
               icon: Icons.settings,
               onTap: () {
                 //callback
