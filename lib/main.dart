@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skuu_web/pages/index/home.dart';
 import 'package:skuu_web/pages/tool/tool_page.dart';
@@ -32,6 +33,11 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: SkuuThemeData.lightThemeData.copyWith(),
           // home: const MyHomePage(),
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
+          supportedLocales: const [
+            Locale('en', ''),
+            Locale('zh', ''),
+          ],
           home:  ToolPage(),
         );
       },
