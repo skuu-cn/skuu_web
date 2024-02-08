@@ -32,13 +32,13 @@ class MyApp extends StatelessWidget {
           title: 'skuu',
           debugShowCheckedModeBanner: false,
           theme: SkuuThemeData.lightThemeData.copyWith(),
-          // home: const MyHomePage(),
+          home: const MyHomePage(),
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
           supportedLocales: const [
             Locale('en', ''),
             Locale('zh', ''),
           ],
-          home:  ToolPage(),
+          // home:  ToolPage(),
         );
       },
     );

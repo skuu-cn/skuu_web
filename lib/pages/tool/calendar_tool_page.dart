@@ -106,7 +106,7 @@ class _CalendarToolPage extends State<CalendarToolPage>
     var month =
         date.month.truncate() > 9 ? date.month : '0' + date.month.toString();
     var day = date.day > 9 ? date.day : '0' + date.day.toString();
-    var url = 'http://81.70.44.133:8080/dayHistory/news?day=$year$month$day';
+    var url = 'https://skuu.cn/skuu/api/dayHistory/news?day=$year$month$day';
     final dio = Dio();
     return FutureBuilder(
       future: dio.get(url),
@@ -170,7 +170,7 @@ class _CalendarToolPage extends State<CalendarToolPage>
     var month =
         date.month.truncate() > 9 ? date.month : '0' + date.month.toString();
     var day = date.day > 9 ? date.day : '0' + date.day.toString();
-    var url = 'http://81.70.44.133:8080/dayHot/news?date=$year$month$day';
+    var url = 'https://skuu.cn/skuu/api/dayHot/news?date=$year$month$day';
     final dio = Dio();
     return FutureBuilder(
       future: dio.get(url),
