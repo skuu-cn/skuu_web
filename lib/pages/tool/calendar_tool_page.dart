@@ -68,7 +68,7 @@ class _CalendarToolPage extends State<CalendarToolPage>
                 pinned: true,
                 floating: true,
                 elevation: 0.5,
-                expandedHeight: 0.48.sh,
+                expandedHeight: 355,
                 automaticallyImplyLeading: false,
                 backgroundColor: Colors.white,
                 flexibleSpace: FlexibleSpaceBar(
@@ -910,7 +910,6 @@ class _CalendarToolPage extends State<CalendarToolPage>
   }
 
   Widget _buildCalendarView() {
-    print(selectDate);
     final config = CalendarDatePicker2Config(
       selectedDayHighlightColor: Colors.amber[900],
       weekdayLabels: ['日', '一', '二', '三', '四', '五', '六'],
