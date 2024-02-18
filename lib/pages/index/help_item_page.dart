@@ -3,19 +3,23 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:skuu_web/constant/color_constant.dart';
+import 'package:skuu_web/constant/constant.dart';
 
+import 'help_video_item.dart';
+import 'help_img_item.dart';
 import 'myimg_item.dart';
 import 'myindex_video_item.dart';
 
-//首页
-class HomeItemPage extends StatefulWidget {
+//互助页面
+class HelpItemPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _HomeItemPage();
+    return _HelpItemPage();
   }
 }
 
-class _HomeItemPage extends State<HomeItemPage> {
+class _HelpItemPage extends State<HelpItemPage> {
   final List<String> _items = [];
   int colCount = 2;
   bool ifHelpOrShare = false;
@@ -65,7 +69,7 @@ class _HomeItemPage extends State<HomeItemPage> {
                     child: Container(
                       height:
                           getImgItemHeight(index > 6 ? 6 : index, index * 100),
-                      child: MyImgItem(
+                      child: HelpImgItem(
                         id: index > 6 ? 6 : index,
                       ),
                     ),
@@ -76,7 +80,7 @@ class _HomeItemPage extends State<HomeItemPage> {
                     borderRadius: BorderRadius.circular(10.0),
                     child: Container(
                       height: getVideoItemHeight(),
-                      child: MyIndexVideoItem(),
+                      child: HelpVideoItem(),
                     ),
                   );
                 }
@@ -106,30 +110,34 @@ class _HomeItemPage extends State<HomeItemPage> {
   double getImgItemHeight(int itemCount, double length) {
     length = length == 0 ? 100 : length;
     double widthItem = 1.sw;
+    double hsHeight = 50;
     if (colCount > 1) {
       widthItem = 0.5.sw;
     }
-    length = '长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。'.length.toDouble();
+    length =
+        '长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。'.length.toDouble();
     length = length * 22;
     double lineCount = (length / widthItem).ceilToDouble();
     double wordHeight = (lineCount > 3 ? 3 : lineCount) * 30 + 102;
     //没有图片的时候
     if (itemCount == 0) {
-      return wordHeight;
+      return wordHeight + hsHeight;
     }
     //图片超过3个的时候，高度固定
     if (itemCount > 3) {
-      return (2 / 3) * widthItem + wordHeight;
+      return (2 / 3) * widthItem + wordHeight + hsHeight;
     }
-    return widthItem / itemCount + wordHeight;
+    return widthItem / itemCount + wordHeight + hsHeight;
   }
 
   double getVideoItemHeight() {
     double widthItem = 1.sw;
+    double hsHeight = 50;
+
     if (colCount > 1) {
       widthItem = 0.5.sw;
     }
-    return widthItem / (15 / 9) + 150;
+    return widthItem / (15 / 9) + 150 + hsHeight;
   }
 
   int getImgItemCount() {

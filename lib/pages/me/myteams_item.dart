@@ -2,6 +2,7 @@ import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constant/constant.dart';
 import '../../route/routers.dart';
@@ -23,6 +24,9 @@ class _MyTeamsItem extends State<MyTeamsItem> {
   late Color click;
   final List<String> _items = [];
   String split_o = Constant.SPLIT_O;
+  final List<String> _pageViews = [];
+  late int _curPageView = 0;
+  late PageController _pageController;
 
   //网络请求,获取详情
   @override
@@ -35,6 +39,13 @@ class _MyTeamsItem extends State<MyTeamsItem> {
       '1',
       '1',
     ]);
+
+    _pageViews.addAll([
+      'imgs/defbak.png',
+      'imgs/defbak1.png',
+      'imgs/user_default.png',
+    ]);
+    _pageController = PageController();
   }
 
   @override
@@ -88,25 +99,77 @@ class _MyTeamsItem extends State<MyTeamsItem> {
         backgroundColor: Colors.blue,
       ),
       body: InkWell(
-        hoverColor: Colors.green,
         onHover: (a) {},
         onTap: () {
           Routes.navigateTo(context, Routes.goodsPageUrl);
         },
-        child: Container(
-          height: double.infinity,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('imgs/room.png'), fit: BoxFit.fill)),
-          child: Padding(
-            padding: EdgeInsets.only(left: 30, right: 20, top: 20),
-            child: Text(
-              '长风破浪长风破浪长风,破浪长风破浪蓉长风破浪蓉长风破浪蓉长风破浪长风破浪长风破浪',
-              maxLines: 4,
-              style: TextStyle(fontSize: 17, color: Colors.blue),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 3,
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: <Widget>[
+                  Container(
+                    // height: 0.2.sh,
+                    child: _buildPageView(),
+                  ),
+                  _buildIndicator(),
+                ],
+              ),
             ),
-          ),
+            Container(height: 10.w,),
+            Expanded(
+              flex: 1,
+              child: Text(
+                '主要卖一些10元商品：铅笔，橡皮，玩具车，玩家足球，玩偶等，品类多多',
+                maxLines: 4,
+                style: TextStyle(fontSize: 17, color: Colors.blue),
+              ),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildPageView() {
+    var length = _pageViews.length;
+    return PageView.builder(
+      controller: _pageController,
+      onPageChanged: (index) {
+        setState(() {
+          _curPageView = index;
+        });
+      },
+      itemCount: length,
+      itemBuilder: (context, index) {
+        return Image.asset(
+          _pageViews[index],
+          fit: BoxFit.cover,
+        );
+      },
+    );
+  }
+
+  Widget _buildIndicator() {
+    return Positioned(
+      bottom: 10,
+      child: Row(
+        children: _pageViews.map((s) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3.0),
+            child: ClipOval(
+              child: Container(
+                width: 8,
+                height: 8,
+                color: _pageViews.indexOf(s) == _curPageView
+                    ? Colors.white
+                    : Colors.grey,
+              ),
+            ),
+          );
+        }).toList(),
       ),
     );
   }

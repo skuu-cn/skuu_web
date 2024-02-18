@@ -18,6 +18,8 @@ import '../me/me_detail_page.dart';
 import '../video/myvideo_long_item.dart';
 import '../video/myvideo_short_item.dart';
 import 'home_item_page.dart';
+import 'help_img_item.dart';
+import 'help_item_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -273,8 +275,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               HomeItemPage(),
               MyWorks(),
               MyTeams(),
-              HomeItemPage(),
-              HomeItemPage(),
+              HelpItemPage(),
+              HelpItemPage(),
               ToolPage()
             ];
             break;

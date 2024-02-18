@@ -11,19 +11,19 @@ import '../../component/level_icon.dart';
 import '../../component/myshare_page.dart';
 import '../../route/routers.dart';
 
-//首页--图片
-class MyImgItem extends StatefulWidget {
-  const MyImgItem({super.key, this.id = 0});
+//互助页面--图片
+class HelpImgItem extends StatefulWidget {
+  const HelpImgItem({super.key, this.id = 0});
 
   final int id;
 
   @override
   State<StatefulWidget> createState() {
-    return _MyImgItem();
+    return _HelpImgItem();
   }
 }
 
-class _MyImgItem extends State<MyImgItem> {
+class _HelpImgItem extends State<HelpImgItem> {
   late String name;
   late Color click;
   final List<String> _items = [];
@@ -165,6 +165,31 @@ class _MyImgItem extends State<MyImgItem> {
                 ),
               ),
             ),
+          Container(
+              height: 50,
+              // color: Colors.grey[300],
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 50, right: 50, top: 15),
+                    child: Container(
+                      height: 10,
+                      child: LinearProgressIndicator(
+                        backgroundColor: Colors.black26,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                        value: 0.3,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      '收获 20元 ｜ 目标 13000元',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                ],
+              )),
           Row(
             children: <Widget>[
               TextButton.icon(
