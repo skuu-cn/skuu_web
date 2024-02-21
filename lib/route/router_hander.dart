@@ -16,6 +16,8 @@ import '../pages/meleft/mycollect_page.dart' deferred as mycollect_page;
 import '../pages/search/search_page.dart' deferred as search_page;
 import '../pages/tool/date_tool_page.dart' deferred as date_tool_pagedef;
 import '../pages/tool/url_tool_page.dart' deferred as url_tool_pagedef;
+import '../pages/tool/id_tool_page.dart' deferred as id_tool_pagedef;
+import '../pages/tool/ip_tool_page.dart' deferred as ip_tool_pagedef;
 import '../pages/watchvideo/play_video_page.dart' deferred as play_video_page;
 import '../pages/index/home_item_page.dart' deferred as home_item_page;
 import '../pages/index/home_appbar_item_page.dart'
@@ -112,6 +114,22 @@ var urlToolPageHandler = Handler(
     builder: () => url_tool_pagedef.UrlToolPage(),
   );
 });
+
+var idToolPageHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
+      return AppDeferredWidget(
+        libraryLoader: id_tool_pagedef.loadLibrary,
+        builder: () => id_tool_pagedef.IdToolPage(),
+      );
+    });
+
+var ipToolPageHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
+      return AppDeferredWidget(
+        libraryLoader: ip_tool_pagedef.loadLibrary,
+        builder: () => ip_tool_pagedef.IpToolPage(),
+      );
+    });
 
 var urlHomeItemPageHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {

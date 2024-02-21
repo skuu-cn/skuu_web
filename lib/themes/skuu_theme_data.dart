@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/color_constant.dart';
@@ -40,10 +41,9 @@ class SkuuThemeData {
           FloatingActionButtonThemeData(shape: CircleBorder(), elevation: 5),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        backgroundColor: Color.alphaBlend(
-          _lightFillColor.withOpacity(0.80),
-          _darkFillColor,
-        ),
+        backgroundColor: Colors.lightGreen,
+        width: 400,
+        insetPadding: EdgeInsets.only(bottom:0.2.sh,left: 200.w),
         contentTextStyle: _textTheme.titleMedium!.apply(color: _darkFillColor),
       ),
       // elevatedButtonTheme: elevatedButtonTheme

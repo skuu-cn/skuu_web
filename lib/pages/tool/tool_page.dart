@@ -54,17 +54,17 @@ class _ToolPage extends State<ToolPage> {
         subTitle: "地址工具",
         desc: "IP查询，定位",
         indexLetter: "ip",
-        clickUrl: Routes.urlToolPageUrl));
+        clickUrl: Routes.ipToolPageUrl));
     allToolItemBeans.add(ToolItemBean(
         imageUrl: "imgs/phone.svg",
-        title: "手机号查询1",
+        title: "身份证查询",
         subTitle: "地址工具",
-        desc: "手机号查询，定位",
-        indexLetter: "phone",
-        clickUrl: Routes.urlToolPageUrl));
+        desc: "身份证查询，定位",
+        indexLetter: "id",
+        clickUrl: Routes.idToolPageUrl));
     allToolItemBeans.add(ToolItemBean(
         imageUrl: "imgs/phone.svg",
-        title: "手机号查询2",
+        title: "手机号查询",
         subTitle: "地址工具",
         desc: "手机号查询，定位",
         indexLetter: "phone",
