@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:skuu_web/bean/tool_item_bean.dart';
-import 'package:skuu_web/component/tool_item.dart';
-import 'package:skuu_web/pages/tool/date_tool_page.dart';
-import 'package:skuu_web/route/routers.dart';
+import 'package:skuu/bean/tool_item_bean.dart';
+import 'package:skuu/component/tool_item.dart';
+import 'package:skuu/pages/tool/date_tool_page.dart';
+import 'package:skuu/route/routers.dart';
 
 import '../../constant/color_constant.dart';
 
@@ -29,8 +29,8 @@ class _ToolPage extends State<ToolPage> {
     allToolItemBeans.add(ToolItemBean(
         imageUrl: "imgs/date.svg",
         title: "日历",
-        subTitle: "时间日历",
-        desc: "时间日历",
+        subTitle: "查询工具",
+        desc: "时间日历，八字，时事新闻",
         indexLetter: "rili",
         clickUrl: Routes.calendarToolPageUrl));
 
@@ -51,24 +51,17 @@ class _ToolPage extends State<ToolPage> {
     allToolItemBeans.add(ToolItemBean(
         imageUrl: "imgs/ip.svg",
         title: "IP查询",
-        subTitle: "地址工具",
+        subTitle: "查询工具",
         desc: "IP查询，定位",
         indexLetter: "ip",
         clickUrl: Routes.ipToolPageUrl));
     allToolItemBeans.add(ToolItemBean(
-        imageUrl: "imgs/phone.svg",
+        imageUrl: "imgs/idcard.svg",
         title: "身份证查询",
-        subTitle: "地址工具",
-        desc: "身份证查询，定位",
+        subTitle: "查询工具",
+        desc: "身份证信息查询",
         indexLetter: "id",
         clickUrl: Routes.idToolPageUrl));
-    allToolItemBeans.add(ToolItemBean(
-        imageUrl: "imgs/phone.svg",
-        title: "手机号查询",
-        subTitle: "地址工具",
-        desc: "手机号查询，定位",
-        indexLetter: "phone",
-        clickUrl: Routes.urlToolPageUrl));
     showToolItemBeans = allToolItemBeans;
   }
 

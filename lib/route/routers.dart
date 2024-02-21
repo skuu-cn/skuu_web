@@ -1,6 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:skuu_web/route/router_hander.dart';
+import 'package:skuu/route/router_hander.dart';
 
 class Routes {
   static late FluroRouter router;

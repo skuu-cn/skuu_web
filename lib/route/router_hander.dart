@@ -1,8 +1,8 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:skuu_web/pages/friends/chat_pagev2.dart'
+import 'package:skuu/pages/friends/chat_pagev2.dart'
     deferred as chat_pagev2;
-import 'package:skuu_web/pages/lookart/look_art_page.dart'
+import 'package:skuu/pages/lookart/look_art_page.dart'
     deferred as look_art_page;
 
 import '../cache/deferred_widget.dart';

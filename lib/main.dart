@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:skuu_web/pages/index/home.dart';
-import 'package:skuu_web/route/routers.dart';
-import 'package:skuu_web/themes/skuu_theme_data.dart';
+import 'package:skuu/pages/index/home.dart';
+import 'package:skuu/route/routers.dart';
+import 'package:skuu/themes/skuu_theme_data.dart';
 
 
 void main() {

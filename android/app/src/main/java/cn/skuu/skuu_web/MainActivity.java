@@ -1,4 +1,4 @@
-package cn.skuu.skuu_web;
+package cn.skuu.skuu;
 
 import io.flutter.embedding.android.FlutterActivity;
 

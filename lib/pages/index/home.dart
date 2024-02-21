@@ -1,14 +1,14 @@
 import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skuu_web/constant/color_constant.dart';
-import 'package:skuu_web/constant/constant.dart';
-import 'package:skuu_web/pages/drawer_page.dart';
-import 'package:skuu_web/pages/me/myku_page.dart';
-import 'package:skuu_web/pages/me/myteams.dart';
-import 'package:skuu_web/pages/me/myworks.dart';
-import 'package:skuu_web/pages/tool/tool_page.dart';
-import 'package:skuu_web/route/routers.dart';
+import 'package:skuu/constant/color_constant.dart';
+import 'package:skuu/constant/constant.dart';
+import 'package:skuu/pages/drawer_page.dart';
+import 'package:skuu/pages/me/myku_page.dart';
+import 'package:skuu/pages/me/myteams.dart';
+import 'package:skuu/pages/me/myworks.dart';
+import 'package:skuu/pages/tool/tool_page.dart';
+import 'package:skuu/route/routers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../component/AnimatedBottomBar.dart';

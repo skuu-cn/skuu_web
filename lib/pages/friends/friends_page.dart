@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lpinyin/lpinyin.dart';
-import 'package:skuu_web/constant/constant.dart';
-import 'package:skuu_web/pages/friends/user_detail_page.dart';
+import 'package:skuu/constant/constant.dart';
+import 'package:skuu/pages/friends/user_detail_page.dart';
 
 import '../../bean/contact.dart';
 import '../../component/azlist/az_common.dart';

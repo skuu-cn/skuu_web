@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "cn.skuu" "\0"
-            VALUE "FileDescription", "skuu_web" "\0"
+            VALUE "FileDescription", "skuu" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "skuu_web" "\0"
+            VALUE "InternalName", "skuu" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 cn.skuu. All rights reserved." "\0"
-            VALUE "OriginalFilename", "skuu_web.exe" "\0"
-            VALUE "ProductName", "skuu_web" "\0"
+            VALUE "OriginalFilename", "skuu.exe" "\0"
+            VALUE "ProductName", "skuu" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

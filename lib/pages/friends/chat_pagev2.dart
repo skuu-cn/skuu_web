@@ -2,7 +2,7 @@ import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skuu_web/constant/constant.dart';
+import 'package:skuu/constant/constant.dart';
 
 import '../../demo/chat/chat_data.dart';
 

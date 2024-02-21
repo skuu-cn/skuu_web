@@ -19,54 +19,48 @@ class MykuPage extends StatefulWidget {
 
 class _MykuPage extends State<MykuPage> {
   List<String> _items = <String>[];
-  List<ToolItemBean> toolItemBeans = [];
+  List<ToolItemBean> allToolItemBeans = [];
 
   @override
   void initState() {
     super.initState();
-    toolItemBeans.add(ToolItemBean(
+
+    allToolItemBeans.add(ToolItemBean(
         imageUrl: "imgs/date.svg",
         title: "日历",
-        subTitle: "时间日历",
-        desc: "时间日历",
+        subTitle: "查询工具",
+        desc: "时间日历，八字，时事新闻",
         indexLetter: "rili",
         clickUrl: Routes.calendarToolPageUrl));
 
-    toolItemBeans.add(ToolItemBean(
+    allToolItemBeans.add(ToolItemBean(
         imageUrl: "imgs/date.svg",
         title: "时间转换",
         subTitle: "文本工具",
         desc: "时间和时间戳的互相转换",
         indexLetter: "shijian",
         clickUrl: Routes.dateToolPageUrl));
-    toolItemBeans.add(ToolItemBean(
+    allToolItemBeans.add(ToolItemBean(
         imageUrl: "imgs/URL_args.svg",
         title: "URL编码/解码",
         subTitle: "文本工具",
         desc: "URL编码/解码互相转换",
         indexLetter: "url",
         clickUrl: Routes.urlToolPageUrl));
-    toolItemBeans.add(ToolItemBean(
+    allToolItemBeans.add(ToolItemBean(
         imageUrl: "imgs/ip.svg",
         title: "IP查询",
-        subTitle: "地址工具",
+        subTitle: "查询工具",
         desc: "IP查询，定位",
         indexLetter: "ip",
-        clickUrl: Routes.urlToolPageUrl));
-    toolItemBeans.add(ToolItemBean(
-        imageUrl: "imgs/phone.svg",
-        title: "手机号查询1",
-        subTitle: "地址工具",
-        desc: "手机号查询，定位",
-        indexLetter: "phone",
-        clickUrl: Routes.urlToolPageUrl));
-    toolItemBeans.add(ToolItemBean(
-        imageUrl: "imgs/phone.svg",
-        title: "手机号查询2",
-        subTitle: "地址工具",
-        desc: "手机号查询，定位",
-        indexLetter: "phone",
-        clickUrl: Routes.urlToolPageUrl));
+        clickUrl: Routes.ipToolPageUrl));
+    allToolItemBeans.add(ToolItemBean(
+        imageUrl: "imgs/idcard.svg",
+        title: "身份证查询",
+        subTitle: "查询工具",
+        desc: "身份证信息查询",
+        indexLetter: "id",
+        clickUrl: Routes.idToolPageUrl));
 
     _items = [
       '日历',
@@ -176,20 +170,22 @@ class _MykuPage extends State<MykuPage> {
         itemBuilder: (BuildContext context, int index) {
           return InkWell(
             onTap: () {
-              Routes.navigateTo(context, toolItemBeans[index].clickUrl);
+              Routes.navigateTo(context, allToolItemBeans[index].clickUrl);
             },
             child: Container(
               height: 80,
               // color: Colors.primaries[index % Colors.primaries.length],
               alignment: Alignment.center,
               child: Text(
-                toolItemBeans[index].title,
+                allToolItemBeans[index].title +
+                    ' - ' +
+                    allToolItemBeans[index].subTitle,
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
           );
         },
-        itemCount: toolItemBeans.length,
+        itemCount: allToolItemBeans.length,
         separatorBuilder: (BuildContext context, int index) {
           return index % 2 == 0 ? divider1 : divider2;
         },

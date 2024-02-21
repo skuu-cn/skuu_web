@@ -1,7 +1,7 @@
-import 'package:skuu_web/generated/json/base/json_field.dart';
-import 'package:skuu_web/generated/json/ip_bean_entity.g.dart';
+import 'package:skuu/generated/json/base/json_field.dart';
+import 'package:skuu/generated/json/ip_bean_entity.g.dart';
 import 'dart:convert';
-export 'package:skuu_web/generated/json/ip_bean_entity.g.dart';
+export 'package:skuu/generated/json/ip_bean_entity.g.dart';
 
 @JsonSerializable()
 class IpBeanEntity {

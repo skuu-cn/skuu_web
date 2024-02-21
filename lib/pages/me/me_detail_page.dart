@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skuu_web/constant/constant.dart';
-import 'package:skuu_web/pages/friends/friend_detail.dart';
-import 'package:skuu_web/pages/video/myvideo_long_item.dart';
+import 'package:skuu/constant/constant.dart';
+import 'package:skuu/pages/friends/friend_detail.dart';
+import 'package:skuu/pages/video/myvideo_long_item.dart';
 
 import '../../constant/color_constant.dart';
 

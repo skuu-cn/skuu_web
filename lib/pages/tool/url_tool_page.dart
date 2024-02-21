@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skuu_web/constant/color_constant.dart';
+import 'package:skuu/constant/color_constant.dart';
 
 class UrlToolPage extends StatefulWidget {
   UrlToolPage({super.key});

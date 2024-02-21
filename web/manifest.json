@@ -1,6 +1,6 @@
 {
-    "name": "skuu_web",
-    "short_name": "skuu_web",
+    "name": "skuu",
+    "short_name": "skuu",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

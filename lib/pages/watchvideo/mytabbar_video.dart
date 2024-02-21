@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:skuu_web/pages/friends/chat_pagev2.dart';
+import 'package:skuu/pages/friends/chat_pagev2.dart';
 
 import 'component_item.dart';
 import 'wait_play_video_list.dart';

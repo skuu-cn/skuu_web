@@ -3,7 +3,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skuu_web/constant/color_constant.dart';
+import 'package:skuu/constant/color_constant.dart';
 
 import '../../component/comment_second_item.dart';
 import '../../component/level_icon.dart';

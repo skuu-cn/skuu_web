@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skuu_web/bean/ip_bean_entity.dart';
-import 'package:skuu_web/constant/color_constant.dart';
+import 'package:skuu/bean/ip_bean_entity.dart';
+import 'package:skuu/constant/color_constant.dart';
 
 import '../../bean/idCard_bean_entity.dart';
 

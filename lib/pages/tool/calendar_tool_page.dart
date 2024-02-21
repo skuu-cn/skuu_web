@@ -26,7 +26,7 @@ class _CalendarToolPage extends State<CalendarToolPage>
   DateTime selectDate = DateTime.now();
   late TabController _tabController;
   late ScrollController _scrollviewController;
-  final _tabs = <String>['今日', '古今', '农历', '阳历', '佛历', '道历'];
+  final _tabs = <String>['今日热榜', '往日', '农历', '阳历', '佛历', '道历'];
   final _tabViews = [];
   List<dynamic> hot = [];
   late Widget calendar;
@@ -79,6 +79,7 @@ class _CalendarToolPage extends State<CalendarToolPage>
                 titleTextStyle: const TextStyle(color: Colors.amber),
                 bottom: TabBar(
                   controller: _tabController,
+                  isScrollable: true,
                   tabs: _tabs.map((String name) => Tab(text: name)).toList(),
                   labelColor: Colors.green,
                   unselectedLabelColor: Colors.grey,

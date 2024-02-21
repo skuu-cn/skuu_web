@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:skuu_web/demo/chat/quick_replies_sample.dart';
-import 'package:skuu_web/demo/chat/send_on_enter.dart';
-import 'package:skuu_web/demo/chat/typing_users_sample.dart';
+import 'package:skuu/demo/chat/quick_replies_sample.dart';
+import 'package:skuu/demo/chat/send_on_enter.dart';
+import 'package:skuu/demo/chat/typing_users_sample.dart';
 
 import 'avatar.dart';
 import 'basic.dart';

@@ -24,7 +24,7 @@ class ToolItem extends StatelessWidget {
               title: Text(toolItemBean.title,
                   style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text(toolItemBean.subTitle,
-                  style: TextStyle(color: Colors.deepOrangeAccent)),
+                  style: TextStyle(color: Colors.green)),
             ),
             ListTile(
               title:

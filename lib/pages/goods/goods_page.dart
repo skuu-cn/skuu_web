@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:skuu_web/pages/goods/goods_item.dart';
+import 'package:skuu/pages/goods/goods_item.dart';
 
 import '../me/mywork_item2.dart';
 
