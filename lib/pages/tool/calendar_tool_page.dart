@@ -74,7 +74,12 @@ class _CalendarToolPage extends State<CalendarToolPage>
                 backgroundColor: Colors.white,
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.parallax,
-                  background: calendar,
+                  background: Center(
+                    child: SizedBox(
+                      width: 500,
+                      child: calendar,
+                    ),
+                  ),
                 ),
                 titleTextStyle: const TextStyle(color: Colors.amber),
                 bottom: TabBar(

@@ -4,8 +4,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:skuu/pages/index/home.dart';
+import 'package:skuu/pages/tool/tool_page.dart';
 import 'package:skuu/route/routers.dart';
 import 'package:skuu/themes/skuu_theme_data.dart';
+
+import 'demo/flickvideo/flick_video_player.dart';
+
 
 
 void main() {
@@ -36,7 +40,7 @@ class MyApp extends StatelessWidget {
             Locale('en', ''),
             Locale('zh', ''),
           ],
-          // home:  IpToolPage(),
+          // home:  FlickVideoPlayer(),
         );
       },
     );

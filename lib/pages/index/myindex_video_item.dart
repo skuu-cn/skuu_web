@@ -4,10 +4,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:skuu/constant/constant.dart';
 
+import '../../component/index_video_player/index_video_player.dart';
 import '../../component/level_icon.dart';
 import '../../component/myshare_page.dart';
 import '../../component/myvideo_play.dart';
 import '../../constant/color_constant.dart';
+import '../../demo/flickvideo/web_video_player/web_video_player.dart';
 import '../../route/routers.dart';
 
 //首页-视频
@@ -128,14 +130,15 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
           ),
           Expanded(
             flex: 9,
-            child: AspectRatio(
-              aspectRatio: 15 / 9,
-              child: MyVideo(
-                url:
-                    'https://cloud.video.taobao.com//play/u/153810888/p/2/e/6/t/1/395124651263.mp4',
-                color: Colors.black,
-              ),
-            ),
+            child: IndexVideoPlayer(),
+            // child: AspectRatio(
+            //   aspectRatio: 15 / 9,
+            //   child: MyVideo(
+            //     url:
+            //         'https://cloud.video.taobao.com//play/u/153810888/p/2/e/6/t/1/395124651263.mp4',
+            //     color: Colors.black,
+            //   ),
+            // ),
           ),
           Row(
             children: <Widget>[

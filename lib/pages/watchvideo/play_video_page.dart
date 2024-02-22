@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:skuu/constant/constant.dart';
+import 'package:skuu/demo/flickvideo/web_video_player/web_video_player.dart';
 import 'package:skuu/pages/watchvideo/component_item.dart';
 import 'package:skuu/pages/watchvideo/wait_play_video_list.dart';
 
@@ -82,14 +83,15 @@ class _PlayVideoPage extends State<PlayVideoPage>
                 delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 if (index == 0)
-                  return AspectRatio(
-                    aspectRatio: 16 / 10,
-                    child: MyVideo(
-                      url:
-                          'https://cloud.video.taobao.com//play/u/153810888/p/2/e/6/t/1/266102583124.mp4',
-                      color: Colors.black,
-                    ),
-                  );
+                  // return AspectRatio(
+                  //   aspectRatio: 16 / 10,
+                  //   child: MyVideo(
+                  //     url:
+                  //         'https://cloud.video.taobao.com//play/u/153810888/p/2/e/6/t/1/266102583124.mp4',
+                  //     color: Colors.black,
+                  //   ),
+                  // );
+                  return WebVideoPlayer();
                 if (index == 1)
                   return Container(
                     alignment: Alignment.centerLeft,
@@ -156,81 +158,81 @@ class _PlayVideoPage extends State<PlayVideoPage>
           ListView(
             children: [
               ListTile(
-                leading: Image.asset(
-                  'imgs/img_default.png',
-                  width: 60,
-                  height: 60,
-                ),
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {},
-                          child: Text(
-                            '哒哒哒哒',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(color: Colors.black, fontSize: 20),
-                            // textScaleFactor: 1.5,
-                          ),
-                        ),
-                        Image.asset(
-                          'imgs/img_default.png',
-                          width: 20,
-                          height: 20,
-                        ),
-                      ],
-                    ),
-                    Container(
-                      height: 2,
-                    ),
-                    Text(
-                      '粉丝 32 KW ',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(color: Colors.black87, fontSize: 15),
-                    ),
-                    Container(
-                      height: 2,
-                    ),
-                    Container(
-                      height: 1,
-                      color: Colors.grey,
-                    ),
-                  ],
-                ),
-                trailing: Padding(
-                  padding: EdgeInsets.only(right: 10),
-                  child: ElevatedButton(
-                    style: _care
-                        ? ElevatedButton.styleFrom(
-                      minimumSize: const Size(20, 35),
-                      padding: EdgeInsets.only(left: 10, right: 10),
-                    )
-                        : ElevatedButton.styleFrom(
-                      minimumSize: const Size(20, 35),
-                      padding: EdgeInsets.only(left: 13, right: 13),
-                      backgroundColor: ColorConstant.ThemeGreen,
-                    ),
-                    child: _care
-                        ? Text(
-                      "已关注",
-                      style:
-                      const TextStyle(fontSize: 10, color: Colors.grey),
-                    )
-                        : Text(
-                      "关注",
-                      style: const TextStyle(
-                          fontSize: 10, color: Colors.white),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _care = !_care;
-                      });
-                    },
+                  leading: Image.asset(
+                    'imgs/img_default.png',
+                    width: 60,
+                    height: 60,
                   ),
-                )
-              ),
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          InkWell(
+                            onTap: () {},
+                            child: Text(
+                              '哒哒哒哒',
+                              textAlign: TextAlign.left,
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20),
+                              // textScaleFactor: 1.5,
+                            ),
+                          ),
+                          Image.asset(
+                            'imgs/img_default.png',
+                            width: 20,
+                            height: 20,
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 2,
+                      ),
+                      Text(
+                        '粉丝 32 KW ',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(color: Colors.black87, fontSize: 15),
+                      ),
+                      Container(
+                        height: 2,
+                      ),
+                      Container(
+                        height: 1,
+                        color: Colors.grey,
+                      ),
+                    ],
+                  ),
+                  trailing: Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: ElevatedButton(
+                      style: _care
+                          ? ElevatedButton.styleFrom(
+                              minimumSize: const Size(20, 35),
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                            )
+                          : ElevatedButton.styleFrom(
+                              minimumSize: const Size(20, 35),
+                              padding: EdgeInsets.only(left: 13, right: 13),
+                              backgroundColor: ColorConstant.ThemeGreen,
+                            ),
+                      child: _care
+                          ? Text(
+                              "已关注",
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.grey),
+                            )
+                          : Text(
+                              "关注",
+                              style: const TextStyle(
+                                  fontSize: 10, color: Colors.white),
+                            ),
+                      onPressed: () {
+                        setState(() {
+                          _care = !_care;
+                        });
+                      },
+                    ),
+                  )),
               Padding(
                 padding: EdgeInsets.only(left: 10, right: 10),
                 child: SelectableText.rich(TextSpan(text: text)),
