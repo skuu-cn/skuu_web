@@ -17,6 +17,7 @@ import '../friends/friends_page.dart';
 import '../me/me_detail_page.dart';
 import '../video/myvideo_long_item.dart';
 import '../video/myvideo_short_item.dart';
+import '../video/short_video_player/homepage/short_video_homepage.dart';
 import 'home_item_page.dart';
 import 'help_img_item.dart';
 import 'help_item_page.dart';
@@ -85,40 +86,42 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       appBar: getAppbar(),
       drawer: const DrawerPage(),
       body: getTabBar(_tabTitle, tabBoby).values.first,
-      floatingActionButton: CircularMenu(
-        toggleButtonColor: ColorConstant.ThemeGreen,
-        items: [
-          CircularMenuItem(
-              color: ColorConstant.ThemeGreen,
-              icon: Icons.add,
-              onTap: () {
-                // callback
-              }),
-          CircularMenuItem(
-              color: ColorConstant.ThemeGreen,
-              icon: Icons.layers,
-              onTap: () {
-                setState(() {
-                  Constant.LOOK_MODE = false;
-                });
-              }),
-          CircularMenuItem(
-              color: ColorConstant.ThemeGreen,
-              icon: Icons.layers_clear,
-              onTap: () {
-                setState(() {
-                  Constant.LOOK_MODE = true;
-                });
-              }),
-          CircularMenuItem(
-              color: ColorConstant.ThemeGreen,
-              icon: Icons.settings,
-              onTap: () {
-                //callback
-              }),
-        ],
-        alignment: Alignment.bottomRight,
-      ),
+      floatingActionButton: _selected != 0
+          ? null
+          : CircularMenu(
+              toggleButtonColor: ColorConstant.ThemeGreen,
+              items: [
+                CircularMenuItem(
+                    color: ColorConstant.ThemeGreen,
+                    icon: Icons.add,
+                    onTap: () {
+                      // callback
+                    }),
+                CircularMenuItem(
+                    color: ColorConstant.ThemeGreen,
+                    icon: Icons.layers,
+                    onTap: () {
+                      setState(() {
+                        Constant.LOOK_MODE = false;
+                      });
+                    }),
+                CircularMenuItem(
+                    color: ColorConstant.ThemeGreen,
+                    icon: Icons.layers_clear,
+                    onTap: () {
+                      setState(() {
+                        Constant.LOOK_MODE = true;
+                      });
+                    }),
+                CircularMenuItem(
+                    color: ColorConstant.ThemeGreen,
+                    icon: Icons.settings,
+                    onTap: () {
+                      //callback
+                    }),
+              ],
+              alignment: Alignment.bottomRight,
+            ),
       bottomNavigationBar: Constant.LOOK_MODE
           ? null
           : AnimatedBottomBar(
@@ -293,7 +296,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               //   builder: () => myvideo_long_item.MyVideoLongItem(),
               // ),
               MyVideoLongItem(),
-              MyVideoShortItem(),
+              ShortVideoHomePage(),
               // AppDeferredWidget(
               //   libraryLoader: myvideo_short_item.loadLibrary,
               //   builder: () => myvideo_short_item.MyVideoShortItem(),

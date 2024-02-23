@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-import '../../../feed_player/multi_manager/flick_multi_manager.dart';
-import '../../../feed_player/portrait_controls.dart';
+import 'flick_multi_manager.dart';
+import 'portrait_controls.dart';
+
+
 
 class FlickMultiPlayer extends StatefulWidget {
   const FlickMultiPlayer(
@@ -24,6 +26,8 @@ class FlickMultiPlayer extends StatefulWidget {
 
 class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
   late FlickManager flickManager;
+  final double iconSize = 30;
+  final double fontSize = 14;
 
   @override
   void initState() {
@@ -69,7 +73,6 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
                       fit: BoxFit.cover,
                     ),
                   ),
-
                   Positioned(
                     right: 10,
                     top: 10,

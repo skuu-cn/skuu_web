@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-import '../../feed_player/multi_manager/flick_multi_manager.dart';
-import '../../utils/mock_data.dart';
+import '../../../../demo/flickvideo/utils/mock_data.dart';
 import '../data/mock_data.dart';
 import '../services/video_service.dart';
 import './multi_manager/flick_multi_player.dart';
+import 'multi_manager/flick_multi_manager.dart';
 
 class ShortVideoPlayer extends StatefulWidget {
   const ShortVideoPlayer({Key? key}) : super(key: key);

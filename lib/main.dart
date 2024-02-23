@@ -8,7 +8,10 @@ import 'package:skuu/pages/tool/tool_page.dart';
 import 'package:skuu/route/routers.dart';
 import 'package:skuu/themes/skuu_theme_data.dart';
 
+import 'demo/flickvideo/feed_player/feed_player.dart';
 import 'demo/flickvideo/flick_video_player.dart';
+import 'demo/flickvideo/short_video_player/homepage/short_video_homepage.dart';
+import 'demo/flickvideo/short_video_player/short_video_player/short_video_player.dart';
 
 
 
@@ -40,7 +43,7 @@ class MyApp extends StatelessWidget {
             Locale('en', ''),
             Locale('zh', ''),
           ],
-          // home:  FlickVideoPlayer(),
+          // home: ShortVideoHomePage()
         );
       },
     );

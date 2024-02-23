@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import './multi_manager/flick_multi_manager.dart';
 import './multi_manager/flick_multi_player.dart';
@@ -39,7 +40,7 @@ class _FeedPlayerState extends State<FeedPlayer> {
           itemCount: items.length,
           itemBuilder: (context, index) {
             return Container(
-                height: 400,
+                height: 0.5.sh,
                 margin: EdgeInsets.all(2),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
