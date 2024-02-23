@@ -21,33 +21,40 @@ class SkuuThemeData {
 
   static ThemeData themeData(ColorScheme colorScheme, Color focusColor) {
     return ThemeData(
-      colorScheme: colorScheme,
-      textTheme: _textTheme,
-      appBarTheme: AppBarTheme(
-        backgroundColor: ColorConstant.lightBlue,
-        elevation: 0,
-      ),
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      iconTheme: IconThemeData(color: colorScheme.onPrimary),
-      canvasColor: colorScheme.background,
-      scaffoldBackgroundColor: colorScheme.background,
-      highlightColor: Colors.transparent,
-      focusColor: focusColor,
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Colors.lightGreen,
-        // height: 50
-      ),
-      floatingActionButtonTheme:
-          FloatingActionButtonThemeData(shape: CircleBorder(), elevation: 5),
-      snackBarTheme: SnackBarThemeData(
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.lightGreen,
-        width: 400,
-        insetPadding: EdgeInsets.only(bottom:0.2.sh,left: 200.w),
-        contentTextStyle: _textTheme.titleMedium!.apply(color: _darkFillColor),
-      ),
-      // elevatedButtonTheme: elevatedButtonTheme
-    );
+        colorScheme: colorScheme,
+        textTheme: _textTheme,
+        appBarTheme: AppBarTheme(
+          backgroundColor: ColorConstant.lightBlue,
+          elevation: 0,
+        ),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        iconTheme: IconThemeData(color: colorScheme.onPrimary),
+        canvasColor: colorScheme.background,
+        scaffoldBackgroundColor: colorScheme.background,
+        highlightColor: Colors.transparent,
+        focusColor: focusColor,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.lightGreen,
+          // height: 50
+        ),
+        floatingActionButtonTheme:
+            FloatingActionButtonThemeData(shape: CircleBorder(), elevation: 5),
+        snackBarTheme: SnackBarThemeData(
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.lightGreen,
+          width: 400,
+          insetPadding: EdgeInsets.only(bottom: 0.2.sh, left: 200.w),
+          contentTextStyle:
+              _textTheme.titleMedium!.apply(color: _darkFillColor),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+          ),
+        )
+        // elevatedButtonTheme: elevatedButtonTheme
+        );
   }
 
   // static const ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(

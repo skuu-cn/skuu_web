@@ -100,7 +100,7 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
                       ? Text(
                           "已关注",
                           style:
-                              const TextStyle(fontSize: 10, color: Colors.grey),
+                              const TextStyle(fontSize: 10, color: ColorConstant.ThemeGreen),
                         )
                       : Text(
                           "关注",

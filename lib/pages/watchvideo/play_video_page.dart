@@ -6,9 +6,9 @@ import 'package:skuu/demo/flickvideo/web_video_player/web_video_player.dart';
 import 'package:skuu/pages/watchvideo/component_item.dart';
 import 'package:skuu/pages/watchvideo/wait_play_video_list.dart';
 
+import '../../component/video_player_detail/detail_video_player.dart';
 import '../../constant/color_constant.dart';
 import 'mytabbar_video.dart';
-import '../../component/myvideo_play.dart';
 
 class PlayVideoPage extends StatefulWidget {
   @override
@@ -91,7 +91,7 @@ class _PlayVideoPage extends State<PlayVideoPage>
                   //     color: Colors.black,
                   //   ),
                   // );
-                  return WebVideoPlayer();
+                  return DetailVideoPlayer();
                 if (index == 1)
                   return Container(
                     alignment: Alignment.centerLeft,

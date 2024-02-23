@@ -109,8 +109,8 @@ class _MyImgItem extends State<MyImgItem> {
                   child: _care
                       ? Text(
                           "已关注",
-                          style:
-                              const TextStyle(fontSize: 10, color: Colors.grey),
+                          style: const TextStyle(
+                              fontSize: 10, color: ColorConstant.ThemeGreen),
                         )
                       : Text(
                           "关注",
