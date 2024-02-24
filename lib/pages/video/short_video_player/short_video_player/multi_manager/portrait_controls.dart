@@ -2,6 +2,7 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:skuu/route/routers.dart';
 import 'package:spring/spring.dart';
 
 import '../../../../../component/level_icon.dart';
@@ -43,7 +44,7 @@ class _FeedPlayerPortraitControls extends State<FeedPlayerPortraitControls> {
   Widget build(BuildContext context) {
     FlickDisplayManager displayManager =
         Provider.of<FlickDisplayManager>(context);
-    var wid = (180.w > 80 ? 80 : 180.w) / 2 ;
+    var wid = (180.w > 80 ? 80 : 180.w) / 2;
     return Container(
       color: Colors.transparent,
       padding: EdgeInsets.only(left: 10, top: 10),
@@ -63,7 +64,12 @@ class _FeedPlayerPortraitControls extends State<FeedPlayerPortraitControls> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Routes.navigateTo(context, Routes.userDetail, params: {
+                      'userId': ['88'],
+                      'showAppBar': [true]
+                    });
+                  },
                   child: Text(
                     '@ 3000万粉丝',
                     style: TextStyle(fontSize: 15),
@@ -166,7 +172,7 @@ class _FeedPlayerPortraitControls extends State<FeedPlayerPortraitControls> {
                   Spacer(),
                   Container(
                     width: wid + 12,
-                    height: wid + 22,
+                    height: wid + 32,
                     child: Stack(
                       children: [
                         Positioned(
@@ -180,7 +186,13 @@ class _FeedPlayerPortraitControls extends State<FeedPlayerPortraitControls> {
                                 borderRadius: BorderRadius.circular(1000)),
                             child: Padding(
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Routes.navigateTo(context, Routes.userDetail,
+                                      params: {
+                                        'userId': ['88'],
+                                        'showAppBar': [true]
+                                      });
+                                },
                                 child: ClipOval(
                                   child: Image.asset(
                                     'imgs/defbak.png',
@@ -191,46 +203,24 @@ class _FeedPlayerPortraitControls extends State<FeedPlayerPortraitControls> {
                             ),
                           ),
                         ),
-                        Positioned(
-                          bottom: 0,
-                          child: Container(
-                            width: wid + 12,
-                            child: Center(
-                              child: ElevatedButton(
-                                style: _care
-                                    ? ElevatedButton.styleFrom(
-                                        minimumSize: const Size(20, 23),
-                                        padding:
-                                            EdgeInsets.only(left: 3, right: 3),
-                                      )
-                                    : ElevatedButton.styleFrom(
-                                        minimumSize: const Size(20, 23),
-                                        padding:
-                                            EdgeInsets.only(left: 3, right: 3),
-                                        backgroundColor:
-                                            ColorConstant.ThemeGreen,
-                                      ),
-                                child: _care
-                                    ? Text(
-                                        "已关注",
-                                        style: const TextStyle(
-                                            fontSize: 13,
-                                            color: ColorConstant.ThemeGreen),
-                                      )
-                                    : Text(
-                                        "关注",
-                                        style: const TextStyle(
-                                            fontSize: 13, color: Colors.white),
-                                      ),
-                                onPressed: () {
-                                  setState(() {
-                                    _care = !_care;
-                                  });
-                                },
+                        if (!_care)
+                          Positioned(
+                            bottom: 0,
+                            child: Container(
+                              width: wid + 12,
+                              child: Center(
+                                child: IconButton(
+                                  icon:
+                                      Icon(Icons.add_circle, color: Colors.red),
+                                  onPressed: () {
+                                    setState(() {
+                                      _care = !_care;
+                                    });
+                                  },
+                                ),
                               ),
                             ),
-                          ),
-                        )
+                          )
                       ],
                     ),
                   ),
