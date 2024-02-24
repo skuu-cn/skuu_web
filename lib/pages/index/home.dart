@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skuu/constant/color_constant.dart';
 import 'package:skuu/constant/constant.dart';
 import 'package:skuu/pages/drawer_page.dart';
+import 'package:skuu/pages/goods/goods_page.dart';
 import 'package:skuu/pages/me/myku_page.dart';
 import 'package:skuu/pages/me/myteams.dart';
 import 'package:skuu/pages/me/myworks.dart';
@@ -277,7 +278,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               HomeItemPage(),
               HomeItemPage(),
               MyWorks(),
-              MyTeams(),
+              GoodsPage(),
               HelpItemPage(),
               HelpItemPage(),
               ToolPage()
