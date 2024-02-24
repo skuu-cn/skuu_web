@@ -34,7 +34,8 @@ class _MyVideoLongItem extends State<MyVideoLongItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Material(
+        child: Padding(
       padding: EdgeInsets.all(0),
       child: GridView.builder(
           // controller: ScrollController(),
@@ -49,6 +50,6 @@ class _MyVideoLongItem extends State<MyVideoLongItem> {
               id: index,
             );
           }),
-    );
+    ));
   }
 }

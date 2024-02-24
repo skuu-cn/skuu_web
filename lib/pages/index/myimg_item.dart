@@ -110,12 +110,12 @@ class _MyImgItem extends State<MyImgItem> {
                       ? Text(
                           "已关注",
                           style: const TextStyle(
-                              fontSize: 10, color: ColorConstant.ThemeGreen),
+                              fontSize: 13, color: ColorConstant.ThemeGreen),
                         )
                       : Text(
                           "关注",
                           style: const TextStyle(
-                              fontSize: 10, color: Colors.white),
+                              fontSize: 13, color: Colors.white),
                         ),
                   onPressed: () {
                     setState(() {

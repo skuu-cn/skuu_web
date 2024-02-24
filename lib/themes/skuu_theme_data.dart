@@ -28,7 +28,7 @@ class SkuuThemeData {
           elevation: 0,
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        iconTheme: IconThemeData(color: colorScheme.onPrimary),
+        // iconTheme: IconThemeData(color: colorScheme.onPrimary),
         canvasColor: colorScheme.background,
         scaffoldBackgroundColor: colorScheme.background,
         highlightColor: Colors.transparent,
@@ -52,7 +52,9 @@ class SkuuThemeData {
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10))),
           ),
-        )
+        ),
+        popupMenuTheme: PopupMenuThemeData(surfaceTintColor:Colors.white),
+        tabBarTheme: TabBarTheme(labelColor: ColorConstant.ThemeGreen)
         // elevatedButtonTheme: elevatedButtonTheme
         );
   }

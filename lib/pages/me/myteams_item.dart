@@ -32,7 +32,7 @@ class _MyTeamsItem extends State<MyTeamsItem> {
   @override
   void initState() {
     super.initState();
-    name = "十元商场";
+    name = "丽泽天地";
     _items.addAll([
       '1',
       '1',

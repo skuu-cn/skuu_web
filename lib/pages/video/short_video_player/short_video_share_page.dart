@@ -32,7 +32,7 @@ class _ShortVideoSharePage extends State<ShortVideoSharePage> {
         padding: EdgeInsets.only(top: 10, bottom: 10),
         child: InkWell(
           child: SvgPicture.asset(
-              width: (180.w > 100 ? 80 : 180.w) / 2, 'imgs/forward.svg'),
+              width: (180.w > 80 ? 80 : 180.w) / 2, 'imgs/forward.svg'),
           onTap: () {
             showModalBottomSheet(
                 constraints: BoxConstraints(maxHeight: 350.h),

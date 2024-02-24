@@ -99,13 +99,13 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
                   child: _care
                       ? Text(
                           "已关注",
-                          style:
-                              const TextStyle(fontSize: 10, color: ColorConstant.ThemeGreen),
+                          style: const TextStyle(
+                              fontSize: 13, color: ColorConstant.ThemeGreen),
                         )
                       : Text(
                           "关注",
                           style: const TextStyle(
-                              fontSize: 10, color: Colors.white),
+                              fontSize: 13, color: Colors.white),
                         ),
                   onPressed: () {
                     setState(() {
@@ -182,19 +182,31 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
                   return <PopupMenuEntry<String>>[
                     PopupMenuItem<String>(
                       value: '0',
-                      child: Text('收藏'),
+                      child: Text(
+                        '收藏',
+                        style: TextStyle(color: Colors.black54),
+                      ),
                     ),
                     PopupMenuItem<String>(
                       value: '1',
-                      child: Text('举报'),
+                      child: Text(
+                        '举报',
+                        style: TextStyle(color: Colors.black54),
+                      ),
                     ),
                     PopupMenuItem<String>(
                       value: '2',
-                      child: Text('不感兴趣'),
+                      child: Text(
+                        '不感兴趣',
+                        style: TextStyle(color: Colors.black54),
+                      ),
                     ),
                     PopupMenuItem<String>(
                       value: '3',
-                      child: Text('加入播放队列'),
+                      child: Text(
+                        '加入播放队列',
+                        style: TextStyle(color: Colors.black54),
+                      ),
                     ),
                   ];
                 },

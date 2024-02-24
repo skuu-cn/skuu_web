@@ -8,8 +8,9 @@ import '../../constant/color_constant.dart';
 
 class UserDetailPage extends StatefulWidget {
   final int userId;
+  final bool showAppBar;
 
-  UserDetailPage(this.userId, {super.key});
+  UserDetailPage(this.userId, this.showAppBar, {super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -50,158 +51,179 @@ class _UserDetailPage extends State<UserDetailPage>
 
   @override
   Widget build(BuildContext context) {
-    return NestedScrollView(
-        controller: _scrollviewController,
-        headerSliverBuilder: (context, boxIsScrolled) {
-          return [
-            SliverAppBar(
-              pinned: true,
-              floating: true,
-              elevation: 0.5,
-              forceElevated: true,
-              expandedHeight: 0.5.sh,
-              automaticallyImplyLeading: false,
-              backgroundColor: Colors.white,
-              flexibleSpace: FlexibleSpaceBar(
-                  collapseMode: CollapseMode.pin, //视差效果
-                  background: Column(
-                    children: [
-                      Stack(
-                        alignment: Alignment.topCenter,
-                        children: <Widget>[
-                          Container(
-                            height: 0.3.sh,
-                            child: _buildPageView(),
-                          ),
-                          _buildIndicator(),
-                        ],
-                      ),
-                      Container(
-                        color: Colors.white,
-                        height: 0.2.sh - 50,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
+    return Scaffold(
+        appBar: widget.showAppBar
+            ? AppBar(
+                title: Text('用户详情'),
+              )
+            : null,
+        body: NestedScrollView(
+            controller: _scrollviewController,
+            headerSliverBuilder: (context, boxIsScrolled) {
+              return [
+                SliverAppBar(
+                  pinned: true,
+                  floating: true,
+                  elevation: 0.5,
+                  forceElevated: true,
+                  expandedHeight: 0.5.sh,
+                  automaticallyImplyLeading: false,
+                  backgroundColor: Colors.white,
+                  flexibleSpace: FlexibleSpaceBar(
+                      collapseMode: CollapseMode.pin, //视差效果
+                      background: Column(
+                        children: [
+                          Stack(
+                            alignment: Alignment.topCenter,
                             children: <Widget>[
-                              InkWell(
-                                onTap: () {},
-                                child: Image.asset(
-                                  'imgs/user_default.png',
-                                ),
-                              ),
                               Container(
-                                width: 10,
+                                height: 0.3.sh,
+                                child: _buildPageView(),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      InkWell(
-                                        onTap: () {},
-                                        child: AutoSizeText(
-                                          '名称：' + widget.userId.toString(),
-                                          style: const TextStyle(fontSize: 25),
-                                          minFontSize: 10,
-                                          overflow: TextOverflow.fade,
-                                          maxLines: 1,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    height: 2,
-                                    color: Colors.white,
-                                  ),
-                                  const Text(
-                                    '@Skuu.com',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 15),
-                                  ),
-                                  Container(
-                                    height: 2,
-                                    color: Colors.white,
-                                  ),
-                                  const Text(
-                                    '关注 32 KW  活跃 333 KW',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 15),
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              Padding(
-                                padding: EdgeInsets.only(right: 10),
-                                child: ElevatedButton(
-                                  style: _care
-                                      ? ElevatedButton.styleFrom(
-                                    minimumSize: const Size(20, 35),
-                                    padding: EdgeInsets.only(left: 10, right: 10),
-                                  )
-                                      : ElevatedButton.styleFrom(
-                                    minimumSize: const Size(20, 35),
-                                    padding: EdgeInsets.only(left: 13, right: 13),
-                                    backgroundColor: ColorConstant.ThemeGreen,
-                                  ),
-                                  child: _care
-                                      ? Text(
-                                    "已关注",
-                                    style:
-                                    const TextStyle(fontSize: 10, color: Colors.grey),
-                                  )
-                                      : Text(
-                                    "关注",
-                                    style: const TextStyle(
-                                        fontSize: 10, color: Colors.white),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _care = !_care;
-                                    });
-                                  },
-                                ),
-                              )
+                              _buildIndicator(),
                             ],
                           ),
+                          Container(
+                            color: Colors.white,
+                            height: 0.2.sh - 50,
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Row(
+                                      children: <Widget>[
+                                        InkWell(
+                                          onTap: () {},
+                                          child: Image.asset(
+                                            'imgs/user_default.png',
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 10,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Expanded(
+                                              child: SelectableText(
+                                                '名称：' +
+                                                    widget.userId.toString(),
+                                                style: TextStyle(
+                                                    // color: Colors.grey,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20,
+                                                    overflow:
+                                                        TextOverflow.ellipsis),
+                                                maxLines: 1,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: SelectableText(
+                                                '@Skuu.com',
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15,
+                                                    overflow:
+                                                        TextOverflow.ellipsis),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: const Text(
+                                                '关注 32 KW ◉ 活跃 333 KW',
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15,
+                                                    overflow:
+                                                        TextOverflow.ellipsis),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(right: 10),
+                                      child: ElevatedButton(
+                                        style: _care
+                                            ? ElevatedButton.styleFrom(
+                                                minimumSize: const Size(20, 35),
+                                                padding: EdgeInsets.only(
+                                                    left: 10, right: 10),
+                                              )
+                                            : ElevatedButton.styleFrom(
+                                                minimumSize: const Size(20, 35),
+                                                padding: EdgeInsets.only(
+                                                    left: 13, right: 13),
+                                                backgroundColor:
+                                                    ColorConstant.ThemeGreen,
+                                              ),
+                                        child: _care
+                                            ? Text(
+                                                "已关注",
+                                                style: const TextStyle(
+                                                    fontSize: 13,
+                                                    color: Colors.grey),
+                                              )
+                                            : Text(
+                                                "关注",
+                                                style: const TextStyle(
+                                                    fontSize: 13,
+                                                    color: Colors.white),
+                                              ),
+                                        onPressed: () {
+                                          setState(() {
+                                            _care = !_care;
+                                          });
+                                        },
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )),
+                  bottom: TabBar(
+                      indicatorColor: Colors.grey,
+                      controller: _tabController,
+                      labelColor: Colors.black,
+                      unselectedLabelColor: Colors.grey,
+                      isScrollable: false,
+                      tabs: [
+                        Tab(
+                          text: "视频",
                         ),
-                      ),
-                    ],
-                  )),
-              bottom: TabBar(
-                  indicatorColor: Colors.grey,
-                  controller: _tabController,
-                  labelColor: Colors.black,
-                  unselectedLabelColor: Colors.grey,
-                  isScrollable: false,
-                  tabs: [
-                    Tab(
-                      text: "视频",
-                    ),
-                    Tab(
-                      text: "短视频",
-                    ),
-                    Tab(
-                      text: "社区",
-                    ),
-                    Tab(
-                      text: "简介",
-                    )
-                  ]),
-            ),
-          ];
-        },
-        body: TabBarView(controller: _tabController,
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-          MyVideoLongItem(),
-          MyVideoLongItem(),
-          MyVideoLongItem(),
-          FriendDetail(
-            title: '名称：' + widget.userId.toString(),
-          ),
-        ]));
+                        Tab(
+                          text: "播放列表",
+                        ),
+                        Tab(
+                          text: "社区",
+                        ),
+                        Tab(
+                          text: "简介",
+                        )
+                      ]),
+                ),
+              ];
+            },
+            body: TabBarView(
+                controller: _tabController,
+                // physics: NeverScrollableScrollPhysics(),
+                children: [
+                  MyVideoLongItem(),
+                  MyVideoLongItem(),
+                  MyVideoLongItem(),
+                  FriendDetail(
+                    title: '名称：' + widget.userId.toString(),
+                  ),
+                ])));
   }
 
   Widget _buildPageView() {

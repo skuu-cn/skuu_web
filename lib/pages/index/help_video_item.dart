@@ -98,12 +98,12 @@ class _HelpVideoItem extends State<HelpVideoItem> {
                       ? Text(
                           "已关注",
                           style:
-                              const TextStyle(fontSize: 10, color: Colors.grey),
+                              const TextStyle(fontSize: 13, color: Colors.grey),
                         )
                       : Text(
                           "关注",
                           style: const TextStyle(
-                              fontSize: 10, color: Colors.white),
+                              fontSize: 13, color: Colors.white),
                         ),
                   onPressed: () {
                     setState(() {

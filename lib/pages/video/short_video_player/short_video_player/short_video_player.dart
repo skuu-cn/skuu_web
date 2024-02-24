@@ -50,7 +50,7 @@ class ShortVideoPlayerState extends State<ShortVideoPlayer> {
         itemBuilder: (context, index) {
           return Container(
               height: 800,
-              margin: const EdgeInsets.all(2),
+              // margin: const EdgeInsets.all(2),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: FlickMultiPlayer(

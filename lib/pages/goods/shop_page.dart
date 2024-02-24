@@ -1,18 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:skuu/pages/goods/goods_item.dart';
-
-import '../me/mywork_item2.dart';
+import 'package:skuu/pages/goods/shop_item.dart';
 
 //商品列表页
-class GoodsPage extends StatefulWidget {
+class ShopPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _GoodsPage();
+    return _ShopPage();
   }
 }
 
-class _GoodsPage extends State<GoodsPage> {
+class _ShopPage extends State<ShopPage> {
   final List<String> _items = [];
 
   @override
@@ -35,7 +32,7 @@ class _GoodsPage extends State<GoodsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("商品列表"),),
+      appBar: AppBar(title: Text("店铺列表"),),
       backgroundColor: Colors.black12,
       body: Padding(
         padding: EdgeInsets.all(1),
@@ -47,7 +44,7 @@ class _GoodsPage extends State<GoodsPage> {
                 childAspectRatio:3/2),
             itemCount: _items.length,
             itemBuilder: (context, index) {
-              return GoodsItem();
+              return ShopItem();
             }),
       ),
     );

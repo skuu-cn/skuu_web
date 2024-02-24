@@ -5,18 +5,18 @@ import 'package:skuu/constant/constant.dart';
 
 import '../../route/routers.dart';
 
-class GoodsItem extends StatefulWidget {
-  GoodsItem({this.id = 0});
+class ShopItem extends StatefulWidget {
+  ShopItem({this.id = 0});
 
   final int id;
 
   @override
   State<StatefulWidget> createState() {
-    return _GoodsItem();
+    return _ShopItem();
   }
 }
 
-class _GoodsItem extends State<GoodsItem> {
+class _ShopItem extends State<ShopItem> {
   late String name;
   double imgHover = 60;
   final List<String> _items = [];
@@ -93,8 +93,8 @@ class _GoodsItem extends State<GoodsItem> {
                                 '热度 45W $SPLIT_O 关注 123KW',
                                 textAlign: TextAlign.left,
                                 overflow: TextOverflow.ellipsis,
-                                style:
-                                    TextStyle(color: Colors.grey, fontSize: 12),
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 12),
                               ),
                             ),
                           ],
@@ -110,25 +110,25 @@ class _GoodsItem extends State<GoodsItem> {
                     children: <Widget>[
                       _care
                           ? IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _care = false;
-                                });
-                              },
-                              icon: Icon(
-                                Icons.check_box,
-                                color: Colors.black54,
-                              ))
+                          onPressed: () {
+                            setState(() {
+                              _care = false;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.check_box,
+                            color: Colors.black54,
+                          ))
                           : IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _care = true;
-                                });
-                              },
-                              icon: Icon(
-                                Icons.add_box,
-                                color: Colors.black54,
-                              )),
+                          onPressed: () {
+                            setState(() {
+                              _care = true;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.add_box,
+                            color: Colors.black54,
+                          )),
                       PopupMenuButton(
                         tooltip: "更多",
                         icon: Icon(

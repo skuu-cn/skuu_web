@@ -43,10 +43,10 @@ class _FeedPlayerPortraitControls extends State<FeedPlayerPortraitControls> {
   Widget build(BuildContext context) {
     FlickDisplayManager displayManager =
         Provider.of<FlickDisplayManager>(context);
-    var wid = (180.w > 80 ? 80 : 180.w) / 2 + 12;
+    var wid = (180.w > 80 ? 80 : 180.w) / 2 ;
     return Container(
       color: Colors.transparent,
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.only(left: 10, top: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[

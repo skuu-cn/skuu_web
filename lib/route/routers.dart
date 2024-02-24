@@ -50,7 +50,6 @@ class Routes {
     router.define(homeItemPageUrl, handler: urlHomeItemPageHandler);
     router.define(homeAppbarItemPageUrl, handler: urlHomeAppBarItemPageHandler);
     router.define(goodsPageUrl, handler: urlGoodsPageHandler);
-    router.define(goodsItemUrl, handler: goodsItemHandler);
     router.define(goodsDetailPageUrl, handler: goodsDetailPageHandler);
     router.define(calendarToolPageUrl, handler: calendarToolPageHandler);
   }
@@ -59,17 +58,17 @@ class Routes {
   static Future navigateTo(BuildContext context, String path,
       {Map<String, List<dynamic>>? params,
       TransitionType transition = TransitionType.native}) {
-    String query = "";
+    var query = "";
     if (params != null) {
       int index = 0;
       for (var key in params.keys) {
-        var value = Uri.encodeComponent(params[key]!.first);
+        var value = Uri.encodeComponent(params[key]!.first.toString());
         if (index == 0) {
           query = "?";
         } else {
           query = query + "\&";
         }
-        query += "$key=$value";
+        query += '$key=$value';
         index++;
       }
     }

@@ -173,7 +173,7 @@ class _FriendsPage extends State<FriendsPage> {
         Expanded(
           flex: 5,
           child: UserDetailPage(
-            indexSel,
+            indexSel,false
           ),
         ),
     ]);
@@ -228,7 +228,8 @@ class _FriendsPage extends State<FriendsPage> {
         });
         if (1.sw < Constant.CHAT_TWO_VIEW_WIDTH)
           Routes.navigateTo(context, Routes.userDetail, params: {
-            'userId': [indexSel.toString()]
+            'userId': [indexSel.toString()],
+            'showAppBar':[true]
           });
       },
     );

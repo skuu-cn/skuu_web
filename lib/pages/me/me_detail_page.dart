@@ -26,7 +26,7 @@ class _MeDetailPage extends State<MeDetailPage>
   final List<String> _pageViews = [];
   late int _curPageView = 0;
   bool _care = true;
-  String split_o =  Constant.SPLIT_O;
+  String split_o = Constant.SPLIT_O;
 
   @override
   void initState() {
@@ -81,92 +81,106 @@ class _MeDetailPage extends State<MeDetailPage>
                       Container(
                         color: Colors.white,
                         height: 0.2.sh - 50,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
-                            children: <Widget>[
-                              InkWell(
-                                onTap: () {},
-                                child: Image.asset(
-                                  'imgs/user_default.png',
-                                ),
-                              ),
-                              Container(
-                                width: 10,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      InkWell(
-                                        onTap: () {},
-                                        child: AutoSizeText(
-                                          '名称：' + widget.userId.toString(),
-                                          style: const TextStyle(fontSize: 25),
-                                          minFontSize: 10,
-                                          overflow: TextOverflow.fade,
-                                          maxLines: 1,
-                                        ),
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Row(
+                                  children: <Widget>[
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Image.asset(
+                                        'imgs/user_default.png',
                                       ),
-                                    ],
-                                  ),
-                                  Container(
-                                    height: 2,
-                                    color: Colors.white,
-                                  ),
-                                  const Text(
-                                    '@Skuu.com',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 15),
-                                  ),
-                                  Container(
-                                    height: 2,
-                                    color: Colors.white,
-                                  ),
-                                  const Text(
-                                    '关注 32 KW ◉ 活跃 333 KW',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 15),
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              Padding(
-                                padding: EdgeInsets.only(right: 10),
-                                child: ElevatedButton(
-                                  style: _care
-                                      ? ElevatedButton.styleFrom(
-                                    minimumSize: const Size(20, 35),
-                                    padding: EdgeInsets.only(left: 10, right: 10),
-                                  )
-                                      : ElevatedButton.styleFrom(
-                                    minimumSize: const Size(20, 35),
-                                    padding: EdgeInsets.only(left: 13, right: 13),
-                                    backgroundColor: ColorConstant.ThemeGreen,
-                                  ),
-                                  child: _care
-                                      ? Text(
-                                    "已关注",
-                                    style:
-                                    const TextStyle(fontSize: 10, color: Colors.grey),
-                                  )
-                                      : Text(
-                                    "关注",
-                                    style: const TextStyle(
-                                        fontSize: 10, color: Colors.white),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _care = !_care;
-                                    });
-                                  },
+                                    ),
+                                    Container(
+                                      width: 10,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: SelectableText(
+                                            '名称：' +
+                                                widget.userId.toString(),
+                                            style: TextStyle(
+                                              // color: Colors.grey,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                                overflow:
+                                                TextOverflow.ellipsis),
+                                            maxLines: 1,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: SelectableText(
+                                            '@Skuu.com',
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 15,
+                                                overflow:
+                                                TextOverflow.ellipsis),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: const Text(
+                                            '关注 32 KW ◉ 活跃 333 KW',
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 15,
+                                                overflow:
+                                                TextOverflow.ellipsis),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            ),
+                            Align(
+                                alignment: Alignment.centerRight,
+                                child: Padding(
+                                  padding: EdgeInsets.only(right: 10),
+                                  child: ElevatedButton(
+                                    style: _care
+                                        ? ElevatedButton.styleFrom(
+                                      minimumSize: const Size(20, 35),
+                                      padding: EdgeInsets.only(
+                                          left: 10, right: 10),
+                                    )
+                                        : ElevatedButton.styleFrom(
+                                      minimumSize: const Size(20, 35),
+                                      padding: EdgeInsets.only(
+                                          left: 13, right: 13),
+                                      backgroundColor:
+                                      ColorConstant.ThemeGreen,
+                                    ),
+                                    child: _care
+                                        ? Text(
+                                      "已关注",
+                                      style: const TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.grey),
+                                    )
+                                        : Text(
+                                      "关注",
+                                      style: const TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.white),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _care = !_care;
+                                      });
+                                    },
+                                  ),
+                                )),
+                          ],
                         ),
                       ),
                     ],
@@ -195,8 +209,7 @@ class _MeDetailPage extends State<MeDetailPage>
             ),
           ];
         },
-        body: TabBarView(controller: _tabController,
-            children: [
+        body: TabBarView(controller: _tabController, children: [
           MyVideoLongItem(),
           MyVideoLongItem(),
           MyVideoLongItem(),

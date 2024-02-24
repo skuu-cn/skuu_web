@@ -1,31 +1,27 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:skuu/pages/friends/chat_pagev2.dart'
-    deferred as chat_pagev2;
+import 'package:skuu/pages/friends/chat_pagev2.dart' deferred as chat_pagev2;
 import 'package:skuu/pages/lookart/look_art_page.dart'
     deferred as look_art_page;
 
 import '../cache/deferred_widget.dart';
-import '../component/watch_article.dart' deferred as watch_article;
 import '../pages/friends/friend_detail.dart' deferred as friend_detail;
 import '../pages/friends/user_detail_page.dart' deferred as user_detail_page;
+import '../pages/goods/goods_detail_page.dart' deferred as goods_detail_page;
+import '../pages/goods/shop_page.dart' deferred as shop_page;
 import '../pages/index/home.dart';
-import '../pages/lookart/look_art_page.dart';
+import '../pages/index/home_appbar_item_page.dart'
+    deferred as home_appbar_item_page;
+import '../pages/index/home_item_page.dart' deferred as home_item_page;
 import '../pages/meleft/mycare_page.dart' deferred as mycare_page;
 import '../pages/meleft/mycollect_page.dart' deferred as mycollect_page;
 import '../pages/search/search_page.dart' deferred as search_page;
+import '../pages/tool/calendar_tool_page.dart' deferred as calendar_tool_page;
 import '../pages/tool/date_tool_page.dart' deferred as date_tool_pagedef;
-import '../pages/tool/url_tool_page.dart' deferred as url_tool_pagedef;
 import '../pages/tool/id_tool_page.dart' deferred as id_tool_pagedef;
 import '../pages/tool/ip_tool_page.dart' deferred as ip_tool_pagedef;
+import '../pages/tool/url_tool_page.dart' deferred as url_tool_pagedef;
 import '../pages/watchvideo/play_video_page.dart' deferred as play_video_page;
-import '../pages/index/home_item_page.dart' deferred as home_item_page;
-import '../pages/index/home_appbar_item_page.dart'
-    deferred as home_appbar_item_page;
-import '../pages/goods/goods_page.dart' deferred as goods_page;
-import '../pages/goods/goods_detail_page.dart' deferred as goods_detail_page;
-import '../pages/goods/goods_item.dart' deferred as goods_item;
-import '../pages/tool/calendar_tool_page.dart' deferred as calendar_tool_page;
 
 var rootHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
@@ -93,10 +89,12 @@ var searchPagehandle = Handler(
 });
 var userDetailPage = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
-  var userId = params['userId']!.first;
+  var userId = params['userId']!.firstOrNull;
+  var showAppBar = params['showAppBar']!.firstOrNull;
   return AppDeferredWidget(
     libraryLoader: user_detail_page.loadLibrary,
-    builder: () => user_detail_page.UserDetailPage(int.parse(userId)),
+    builder: () => user_detail_page.UserDetailPage(
+        int.parse(userId), bool.parse(showAppBar)),
   );
 });
 
@@ -117,19 +115,19 @@ var urlToolPageHandler = Handler(
 
 var idToolPageHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
-      return AppDeferredWidget(
-        libraryLoader: id_tool_pagedef.loadLibrary,
-        builder: () => id_tool_pagedef.IdToolPage(),
-      );
-    });
+  return AppDeferredWidget(
+    libraryLoader: id_tool_pagedef.loadLibrary,
+    builder: () => id_tool_pagedef.IdToolPage(),
+  );
+});
 
 var ipToolPageHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
-      return AppDeferredWidget(
-        libraryLoader: ip_tool_pagedef.loadLibrary,
-        builder: () => ip_tool_pagedef.IpToolPage(),
-      );
-    });
+  return AppDeferredWidget(
+    libraryLoader: ip_tool_pagedef.loadLibrary,
+    builder: () => ip_tool_pagedef.IpToolPage(),
+  );
+});
 
 var urlHomeItemPageHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
@@ -150,8 +148,8 @@ var urlHomeAppBarItemPageHandler = Handler(
 var urlGoodsPageHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
   return AppDeferredWidget(
-    libraryLoader: goods_page.loadLibrary,
-    builder: () => goods_page.GoodsPage(),
+    libraryLoader: shop_page.loadLibrary,
+    builder: () => shop_page.ShopPage(),
   );
 });
 
@@ -160,14 +158,6 @@ var goodsDetailPageHandler = Handler(
   return AppDeferredWidget(
     libraryLoader: goods_detail_page.loadLibrary,
     builder: () => goods_detail_page.GoodsDetailPage(),
-  );
-});
-
-var goodsItemHandler = Handler(
-    handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
-  return AppDeferredWidget(
-    libraryLoader: goods_item.loadLibrary,
-    builder: () => goods_item.GoodsItem(),
   );
 });
 
