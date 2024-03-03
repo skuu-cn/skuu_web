@@ -5,6 +5,7 @@ import 'package:skuu/constant/color_constant.dart';
 import 'package:skuu/constant/constant.dart';
 import 'package:skuu/pages/drawer_page.dart';
 import 'package:skuu/pages/goods/goods_page.dart';
+import 'package:skuu/pages/index/filter_page.dart';
 import 'package:skuu/pages/me/myku_page.dart';
 import 'package:skuu/pages/me/myteams.dart';
 import 'package:skuu/pages/me/myworks.dart';
@@ -19,6 +20,8 @@ import '../me/me_detail_page.dart';
 import '../video/myvideo_long_item.dart';
 import '../video/myvideo_short_item.dart';
 import '../video/short_video_player/homepage/short_video_homepage.dart';
+import 'goods_filter_page.dart';
+import 'goods_filter_pagev2.dart';
 import 'home_item_page.dart';
 import 'help_img_item.dart';
 import 'help_item_page.dart';
@@ -116,8 +119,17 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     }),
                 CircularMenuItem(
                     color: ColorConstant.ThemeGreen,
-                    icon: Icons.settings,
+                    icon: Icons.filter_alt,
                     onTap: () {
+                      showModalBottomSheet(
+                          constraints: BoxConstraints(maxHeight: 0.8.sh),
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (BuildContext build) {
+                            if (_controller.index == 4)
+                              return GoodsFilterPageV2();
+                            return FilterPage();
+                          });
                       //callback
                     }),
               ],
