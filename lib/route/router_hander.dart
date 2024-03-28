@@ -1,3 +1,4 @@
+import 'package:file_selector/file_selector.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:skuu/pages/friends/chat_pagev2.dart' deferred as chat_pagev2;
@@ -22,6 +23,7 @@ import '../pages/tool/id_tool_page.dart' deferred as id_tool_pagedef;
 import '../pages/tool/ip_tool_page.dart' deferred as ip_tool_pagedef;
 import '../pages/tool/url_tool_page.dart' deferred as url_tool_pagedef;
 import '../pages/watchvideo/play_video_page.dart' deferred as play_video_page;
+import '../pages/public/public_page.dart' deferred as public_page;
 
 var rootHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
@@ -166,5 +168,12 @@ var calendarToolPageHandler = Handler(
   return AppDeferredWidget(
     libraryLoader: calendar_tool_page.loadLibrary,
     builder: () => calendar_tool_page.CalendarToolPage(),
+  );
+});
+var publishPageUrlHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+  return AppDeferredWidget(
+    libraryLoader: public_page.loadLibrary,
+    builder: () => public_page.PublicPage(),
   );
 });

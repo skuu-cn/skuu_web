@@ -73,13 +73,72 @@ class _FilterPage extends State<FilterPage> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: ColorConstant.lightBlue),
                       onPressed: () {
-                        commonNamesSel.add(value);
+                        setState(() {
+                          if (commonNamesSel.contains(value)) {
+                            commonNamesSel.remove(value);
+                          } else {
+                            commonNamesSel.add(value);
+                          }
+                        });
                       },
                       icon: commonNamesSel.contains(value)
-                          ? Icon(Icons.cancel)
-                          : Icon(Icons.add_circle),
+                          ? Icon(Icons.offline_pin)
+                          : Icon(
+                              Icons.add_circle,
+                              color: Colors.green,
+                            ),
                       label: Text(value))
               ],
+            ),
+            Spacer(),
+            Container(
+              height: 60,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            commonNamesSel.clear();
+                          });
+                        },
+                        child: Container(
+                          child: Center(
+                            child: Text(
+                              '重置',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  bottomLeft: Radius.circular(20))),
+                          // color: Colors.red,
+                        )),
+                  ),
+                  Expanded(
+                    child: InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(20),
+                                  bottomRight: Radius.circular(20))),
+                          child: Center(
+                            child: Text(
+                              '完成',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          // color: Colors.red,
+                        )),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

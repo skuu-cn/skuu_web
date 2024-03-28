@@ -43,7 +43,6 @@ class _GoodsFilterPageV2 extends State<GoodsFilterPageV2> {
     '仅看有货',
   ];
 
-  List sortListSel = [];
   Map<int, List> sel = Map();
 
   //右侧GridView中的项目数量，后续使用可以使用项目中的list数量，这里仅作为测试
@@ -302,7 +301,13 @@ class _GoodsFilterPageV2 extends State<GoodsFilterPageV2> {
                     children: [
                       Expanded(
                         child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              setState(() {
+                                for (int i = 0; i < sortList.length; i++) {
+                                  sel[i] = [];
+                                }
+                              });
+                            },
                             child: Container(
                               child: Center(
                                 child: Text(
@@ -319,20 +324,25 @@ class _GoodsFilterPageV2 extends State<GoodsFilterPageV2> {
                             )),
                       ),
                       Expanded(
-                          child: Container(
-                        child: Center(
-                          child: Text(
-                            '完成',
-                            style: TextStyle(color: Colors.white),
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(20),
+                                  bottomRight: Radius.circular(20))),
+                          child: Center(
+                            child: Text(
+                              '完成',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
-                        ),
-                        decoration: BoxDecoration(
-                            color: Colors.redAccent,
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20))),
-                        // color: Colors.red,
-                      )),
+                          // color: Colors.red,
+                        )),
+                      ),
                     ],
                   ),
                 ),

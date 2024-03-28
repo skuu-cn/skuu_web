@@ -1,4 +1,5 @@
 import 'package:circular_menu/circular_menu.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skuu/constant/color_constant.dart';
@@ -9,11 +10,13 @@ import 'package:skuu/pages/index/filter_page.dart';
 import 'package:skuu/pages/me/myku_page.dart';
 import 'package:skuu/pages/me/myteams.dart';
 import 'package:skuu/pages/me/myworks.dart';
+import 'package:skuu/pages/public/public_page.dart';
 import 'package:skuu/pages/tool/tool_page.dart';
 import 'package:skuu/route/routers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../component/AnimatedBottomBar.dart';
+import '../../component/mybutton.dart';
 import '../friends/chat_page_list.dart';
 import '../friends/friends_page.dart';
 import '../me/me_detail_page.dart';
@@ -99,7 +102,43 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     color: ColorConstant.ThemeGreen,
                     icon: Icons.add,
                     onTap: () {
-                      // callback
+                      showModalBottomSheet(
+                          constraints: BoxConstraints(maxHeight: 350.h),
+                          context: context,
+                          builder: (BuildContext build) {
+                            return Center(
+                                child: SizedBox(
+                              width: 1.sw,
+                              height: 350.h,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  MyFlatButton(
+                                    text: '发布动态',
+                                    img: 'imgs/wechat.png',
+                                    textColor: Colors.black54,
+                                    onPress: () => {
+                                      Navigator.pop(context),
+                                      Routes.navigateTo(
+                                          context, Routes.publishPageUrl),
+                                    },
+                                  ),
+                                  MyFlatButton(
+                                    text: '发布视频',
+                                    img: 'imgs/qq.png',
+                                    textColor: Colors.black54,
+                                    onPress: () => {},
+                                  ),
+                                  MyFlatButton(
+                                    text: '发布商品',
+                                    img: 'imgs/send_friend.png',
+                                    textColor: Colors.black54,
+                                    onPress: () => {},
+                                  ),
+                                ],
+                              ),
+                            ));
+                          });
                     }),
                 CircularMenuItem(
                     color: ColorConstant.ThemeGreen,

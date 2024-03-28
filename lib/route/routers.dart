@@ -25,6 +25,7 @@ class Routes {
   static String goodsItemUrl = "/goods_item_page";
   static String goodsDetailPageUrl = "/goods_detail_page";
   static String calendarToolPageUrl = "/calendar_tool_page";
+  static String publishPageUrl = "/publish_page";
 
   static void configureRoutes(FluroRouter fluroRouter) {
     router = fluroRouter;
@@ -52,6 +53,7 @@ class Routes {
     router.define(goodsPageUrl, handler: urlGoodsPageHandler);
     router.define(goodsDetailPageUrl, handler: goodsDetailPageHandler);
     router.define(calendarToolPageUrl, handler: calendarToolPageHandler);
+    router.define(publishPageUrl, handler: publishPageUrlHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配
