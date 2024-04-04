@@ -35,6 +35,14 @@ class _MykuPage extends State<MykuPage> {
 
     allToolItemBeans.add(ToolItemBean(
         imageUrl: "imgs/date.svg",
+        title: "AI小助手",
+        subTitle: "谷歌Gemini AI",
+        desc: "文本回答",
+        indexLetter: "ai",
+        clickUrl: Routes.aiPageUrl));
+
+    allToolItemBeans.add(ToolItemBean(
+        imageUrl: "imgs/date.svg",
         title: "时间转换",
         subTitle: "文本工具",
         desc: "时间和时间戳的互相转换",

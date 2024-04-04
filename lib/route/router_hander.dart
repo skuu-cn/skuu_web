@@ -29,6 +29,7 @@ import '../pages/public/public_video_page.dart' deferred as public_video_page;
 import '../pages/public/public_short_video_page.dart'
     deferred as public_short_video_page;
 import '../pages/public/public_goods_page.dart' deferred as public_goods_page;
+import '../pages/tool/ai_page.dart' deferred as ai_page;
 
 var rootHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
@@ -203,3 +204,11 @@ var publishGoodsPageUrlHandler = Handler(
     builder: () => public_goods_page.PublicGoodsPage(),
   );
 });
+
+var aiPageUrlHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+      return AppDeferredWidget(
+        libraryLoader: ai_page.loadLibrary,
+        builder: () => ai_page.AiPage(),
+      );
+    });

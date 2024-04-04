@@ -6,6 +6,7 @@ import 'package:skuu/constant/constant.dart';
 import 'package:skuu/pages/friends/chat_pagev2.dart';
 
 import '../../route/routers.dart';
+import 'chat_pagev3.dart';
 
 void main() => runApp(MyApp());
 
@@ -74,7 +75,7 @@ class _ChatPageList extends State<ChatPageList> {
           flex: 5,
           child: Container(
             color: Colors.greenAccent,
-            child: ChatPageV2(chatId: index),
+            child: ChatPage(chatId: index),
           ),
         ),
     ]);

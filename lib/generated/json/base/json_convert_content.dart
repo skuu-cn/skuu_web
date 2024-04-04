@@ -8,6 +8,7 @@ import 'package:skuu/bean/address_entity.dart';
 import 'package:skuu/bean/idCard_bean_entity.dart';
 import 'package:skuu/bean/id_bean_entity.dart';
 import 'package:skuu/bean/ip_bean_entity.dart';
+import 'package:skuu/bean/message_entity.dart';
 
 JsonConvert jsonConvert = JsonConvert();
 
@@ -168,6 +169,14 @@ class JsonConvert {
       return data.map<IpBeanData>((Map<String, dynamic> e) =>
           IpBeanData.fromJson(e)).toList() as M;
     }
+    if (<MessageEntity>[] is M) {
+      return data.map<MessageEntity>((Map<String, dynamic> e) =>
+          MessageEntity.fromJson(e)).toList() as M;
+    }
+    if (<MessageAuthor>[] is M) {
+      return data.map<MessageAuthor>((Map<String, dynamic> e) =>
+          MessageAuthor.fromJson(e)).toList() as M;
+    }
 
     debugPrint("$M not found");
 
@@ -196,6 +205,8 @@ class JsonConvertClassCollection {
     (IdBeanData).toString(): IdBeanData.fromJson,
     (IpBeanEntity).toString(): IpBeanEntity.fromJson,
     (IpBeanData).toString(): IpBeanData.fromJson,
+    (MessageEntity).toString(): MessageEntity.fromJson,
+    (MessageAuthor).toString(): MessageAuthor.fromJson,
   };
 
   bool containsKey(String type) {

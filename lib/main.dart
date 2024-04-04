@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:skuu/pages/friends/chat_pagev3.dart';
 import 'package:skuu/pages/goods/goods_page.dart';
 import 'package:skuu/pages/index/home.dart';
 import 'package:skuu/pages/public/public_dynamic_page.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
             Locale('en', ''),
             Locale('zh', ''),
           ],
-          // home: PublicPage()
+          // home: ChatPage()
         );
       },
     );

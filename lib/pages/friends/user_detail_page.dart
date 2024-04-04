@@ -150,41 +150,69 @@ class _UserDetailPage extends State<UserDetailPage>
                                 Align(
                                     alignment: Alignment.centerRight,
                                     child: Padding(
-                                      padding: EdgeInsets.only(right: 10),
-                                      child: ElevatedButton(
-                                        style: _care
-                                            ? ElevatedButton.styleFrom(
-                                                minimumSize: const Size(20, 35),
-                                                padding: EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                              )
-                                            : ElevatedButton.styleFrom(
+                                        padding: EdgeInsets.only(right: 10),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            ElevatedButton(
+                                              style: _care
+                                                  ? ElevatedButton.styleFrom(
+                                                      minimumSize:
+                                                          const Size(20, 35),
+                                                      padding: EdgeInsets.only(
+                                                          left: 10, right: 10),
+                                                    )
+                                                  : ElevatedButton.styleFrom(
+                                                      minimumSize:
+                                                          const Size(20, 35),
+                                                      padding: EdgeInsets.only(
+                                                          left: 13, right: 13),
+                                                      backgroundColor:
+                                                          ColorConstant
+                                                              .ThemeGreen,
+                                                    ),
+                                              child: _care
+                                                  ? Text(
+                                                      "已关注",
+                                                      style: const TextStyle(
+                                                          fontSize: 13,
+                                                          color: Colors.grey),
+                                                    )
+                                                  : Text(
+                                                      "关注",
+                                                      style: const TextStyle(
+                                                          fontSize: 13,
+                                                          color: Colors.white),
+                                                    ),
+                                              onPressed: () {
+                                                setState(() {
+                                                  _care = !_care;
+                                                });
+                                              },
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
                                                 minimumSize: const Size(20, 35),
                                                 padding: EdgeInsets.only(
                                                     left: 13, right: 13),
                                                 backgroundColor:
                                                     ColorConstant.ThemeGreen,
                                               ),
-                                        child: _care
-                                            ? Text(
-                                                "已关注",
-                                                style: const TextStyle(
-                                                    fontSize: 13,
-                                                    color: Colors.grey),
-                                              )
-                                            : Text(
-                                                "关注",
+                                              child: Text(
+                                                "发消息",
                                                 style: const TextStyle(
                                                     fontSize: 13,
                                                     color: Colors.white),
                                               ),
-                                        onPressed: () {
-                                          setState(() {
-                                            _care = !_care;
-                                          });
-                                        },
-                                      ),
-                                    )),
+                                              onPressed: () {
+
+                                              },
+                                            ),
+                                          ],
+                                        ))),
                               ],
                             ),
                           ),
