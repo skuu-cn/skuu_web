@@ -10,7 +10,7 @@ import 'package:skuu/pages/index/filter_page.dart';
 import 'package:skuu/pages/me/myku_page.dart';
 import 'package:skuu/pages/me/myteams.dart';
 import 'package:skuu/pages/me/myworks.dart';
-import 'package:skuu/pages/public/public_page.dart';
+import 'package:skuu/pages/public/public_dynamic_page.dart';
 import 'package:skuu/pages/tool/tool_page.dart';
 import 'package:skuu/route/routers.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -115,25 +115,43 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                 children: [
                                   MyFlatButton(
                                     text: '发布动态',
-                                    img: 'imgs/wechat.png',
+                                    img: 'imgs/dongtai.png',
                                     textColor: Colors.black54,
                                     onPress: () => {
                                       Navigator.pop(context),
                                       Routes.navigateTo(
-                                          context, Routes.publishPageUrl),
+                                          context, Routes.publishDynamicPageUrl),
+                                    },
+                                  ),
+                                  MyFlatButton(
+                                    text: '发布短视频',
+                                    img: 'imgs/fabu-shorts.png',
+                                    textColor: Colors.black54,
+                                    onPress: () => {
+                                      Navigator.pop(context),
+                                      Routes.navigateTo(
+                                          context, Routes.publishShortVideoPageUrl),
                                     },
                                   ),
                                   MyFlatButton(
                                     text: '发布视频',
-                                    img: 'imgs/qq.png',
+                                    img: 'imgs/fabu-video.png',
                                     textColor: Colors.black54,
-                                    onPress: () => {},
+                                    onPress: () => {
+                                      Navigator.pop(context),
+                                      Routes.navigateTo(
+                                          context, Routes.publishVideoPageUrl),
+                                    },
                                   ),
                                   MyFlatButton(
                                     text: '发布商品',
-                                    img: 'imgs/send_friend.png',
+                                    img: 'imgs/fabu-shangpin.png',
                                     textColor: Colors.black54,
-                                    onPress: () => {},
+                                    onPress: () => {
+                                      Navigator.pop(context),
+                                      Routes.navigateTo(
+                                          context, Routes.publishGoodsPageUrl),
+                                    },
                                   ),
                                 ],
                               ),
@@ -167,8 +185,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                           builder: (BuildContext build) {
                             if (_controller.index == 4)
                               return GoodsFilterPageV2();
-                            return FilterPage();
-                          });
+                            return FilterPage([]);
+                          }).then((value) => {print(value)});
                       //callback
                     }),
               ],

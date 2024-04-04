@@ -1,43 +1,65 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skuu/bean/address_entity.dart';
 
 import '../../component/video_player_public/public_video_player.dart';
 import '../../constant/color_constant.dart';
+import '../index/filter_page.dart';
 
-class PublicPage extends StatefulWidget {
-  PublicPage();
+class PublicDynamicPage extends StatefulWidget {
+  PublicDynamicPage();
 
   @override
   State<StatefulWidget> createState() {
-    return _PublicPage();
+    return _PublicDynamicPage();
   }
 }
 
-class _PublicPage extends State<PublicPage> {
+class _PublicDynamicPage extends State<PublicDynamicPage> {
   //菜单和路由
-  Map<String, String> map = Map();
   final publishController = TextEditingController();
 
   late List<XFile> files = [];
   List<XFile> videoFiles = [];
+  List<AddressEntity> addressList = [];
+  List<String> whoCanSee = [];
+
+  late AddressEntity? selAddressEntity = null;
+  late String? whoCanSeeSel = '';
+  late List<String> huatiSel = [];
 
   @override
   void initState() {
     super.initState();
-    map["动态"] = "";
-    map[""] = "";
-    map[""] = "";
+    loadAddressData();
+    whoCanSee.addAll([
+      '公开',
+      '私密',
+      '仅好友可看',
+    ]);
+  }
+
+  void loadAddressData() async {
+    //加载联系人列表
+    rootBundle.loadString('mock/address.json').then((value) {
+      List list = json.decode(value);
+      list.forEach((v) {
+        addressList.add(AddressEntity.fromJson(v));
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('发布作品'), actions: [
+        appBar: AppBar(title: Text('发布动态'), actions: [
           ElevatedButton(
             onPressed: () {},
             child: Text(
@@ -45,8 +67,6 @@ class _PublicPage extends State<PublicPage> {
               style: TextStyle(color: Colors.white),
             ),
             style: ElevatedButton.styleFrom(
-              // minimumSize: const Size(20, 35),
-              // padding: EdgeInsets.only(left: 13, right: 13),
               backgroundColor: ColorConstant.ThemeGreen,
             ),
           ),
@@ -244,10 +264,83 @@ class _PublicPage extends State<PublicPage> {
               endIndent: 20,
             ),
             InkWell(
-              onTap: (){},
+              onTap: () {
+                showModalBottomSheet(
+                    constraints: BoxConstraints(maxHeight: 0.8.sh),
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (BuildContext build) {
+                      return Padding(
+                        padding: EdgeInsets.only(top: 50.h),
+                        child: ListView.separated(
+                          itemCount: addressList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            AddressEntity addressEntity = addressList[index];
+                            String detail = addressEntity.detail;
+                            String distance = addressEntity.distance;
+                            return ListTile(
+                              title: Text(addressEntity.name),
+                              subtitle: index == 0
+                                  ? null
+                                  : Text(
+                                      '$detail | $distance',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                              trailing:
+                                  selAddressEntity?.name == addressEntity.name
+                                      ? Icon(Icons.check)
+                                      : null,
+                              onTap: () {
+                                setState(() {
+                                  selAddressEntity = addressEntity;
+                                  Navigator.pop(context);
+                                });
+                              },
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              Divider(height: 1.0, color: Colors.grey),
+                        ),
+                      );
+                    });
+              },
+              child: selAddressEntity == null
+                  ? ListTile(
+                      leading: Icon(Icons.add_location),
+                      title: Text('所在位置'),
+                      trailing: Icon(Icons.chevron_right),
+                    )
+                  : ListTile(
+                      leading: Icon(Icons.add_location),
+                      title: Text(selAddressEntity!.name),
+                      trailing: Icon(Icons.chevron_right),
+                    ),
+            ),
+            Divider(
+              height: 1,
+              color: Colors.black12,
+              indent: 20,
+              endIndent: 20,
+            ),
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                    constraints: BoxConstraints(maxHeight: 0.8.sh),
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (BuildContext build) {
+                      return FilterPage(huatiSel);
+                    }).then((value) {
+                  if (value != null) {
+                    setState(() {
+                      huatiSel = value;
+                    });
+                  }
+                });
+              },
               child: ListTile(
-                leading: Icon(Icons.add_location),
-                title: Text('所在位置'),
+                leading: Icon(Icons.tag),
+                title: huatiSel.isEmpty ? Text('话题') : Text(huatiSel.join(",")),
                 trailing: Icon(Icons.chevron_right),
               ),
             ),
@@ -258,24 +351,39 @@ class _PublicPage extends State<PublicPage> {
               endIndent: 20,
             ),
             InkWell(
-              onTap: (){},
+              onTap: () {
+                showModalBottomSheet(
+                    constraints: BoxConstraints(minHeight: 0.8.sh),
+                    context: context,
+                    builder: (BuildContext build) {
+                      return Padding(
+                        padding: EdgeInsets.only(top: 50.h),
+                        child: ListView.separated(
+                          itemCount: whoCanSee.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ListTile(
+                              title: Text(whoCanSee[index]),
+                              trailing: whoCanSeeSel == whoCanSee[index]
+                                  ? Icon(Icons.check)
+                                  : null,
+                              onTap: () {
+                                setState(() {
+                                  whoCanSeeSel = whoCanSee[index];
+                                  Navigator.pop(context);
+                                });
+                              },
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              Divider(height: 1.0, color: Colors.grey),
+                        ),
+                      );
+                    });
+              },
               child: ListTile(
-                leading: Icon(Icons.alternate_email),
-                title: Text('提醒谁看'),
-                trailing: Icon(Icons.chevron_right),
-              ),
-            ),
-            Divider(
-              height: 1,
-              color: Colors.black12,
-              indent: 20,
-              endIndent: 20,
-            ),
-            InkWell(
-              onTap: (){},
-              child: ListTile(
-                leading: Icon(Icons.people_outline),
-                title: Text('谁可以看'),
+                leading: Icon(Icons.perm_identity),
+                title:
+                    whoCanSeeSel!.isEmpty ? Text('谁可以看') : Text(whoCanSeeSel!),
                 trailing: Icon(Icons.chevron_right),
               ),
             ),

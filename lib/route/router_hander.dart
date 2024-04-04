@@ -23,7 +23,12 @@ import '../pages/tool/id_tool_page.dart' deferred as id_tool_pagedef;
 import '../pages/tool/ip_tool_page.dart' deferred as ip_tool_pagedef;
 import '../pages/tool/url_tool_page.dart' deferred as url_tool_pagedef;
 import '../pages/watchvideo/play_video_page.dart' deferred as play_video_page;
-import '../pages/public/public_page.dart' deferred as public_page;
+import '../pages/public/public_dynamic_page.dart'
+    deferred as public_dynamic_page;
+import '../pages/public/public_video_page.dart' deferred as public_video_page;
+import '../pages/public/public_short_video_page.dart'
+    deferred as public_short_video_page;
+import '../pages/public/public_goods_page.dart' deferred as public_goods_page;
 
 var rootHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
@@ -170,10 +175,31 @@ var calendarToolPageHandler = Handler(
     builder: () => calendar_tool_page.CalendarToolPage(),
   );
 });
-var publishPageUrlHandler = Handler(
+var publishDynamicPageUrlHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
   return AppDeferredWidget(
-    libraryLoader: public_page.loadLibrary,
-    builder: () => public_page.PublicPage(),
+    libraryLoader: public_dynamic_page.loadLibrary,
+    builder: () => public_dynamic_page.PublicDynamicPage(),
+  );
+});
+var publishVideoPageUrlHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+  return AppDeferredWidget(
+    libraryLoader: public_video_page.loadLibrary,
+    builder: () => public_video_page.PublicVideoPage(),
+  );
+});
+var publishShortVideoPageUrlHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+  return AppDeferredWidget(
+    libraryLoader: public_short_video_page.loadLibrary,
+    builder: () => public_short_video_page.PublicShortVideoPage(),
+  );
+});
+var publishGoodsPageUrlHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+  return AppDeferredWidget(
+    libraryLoader: public_goods_page.loadLibrary,
+    builder: () => public_goods_page.PublicGoodsPage(),
   );
 });

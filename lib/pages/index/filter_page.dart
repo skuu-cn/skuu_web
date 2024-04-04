@@ -1,10 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constant/color_constant.dart';
 
 class FilterPage extends StatefulWidget {
+  List<String> commonNamesSel = [];
+
+  FilterPage(this.commonNamesSel);
+
   @override
   State<StatefulWidget> createState() {
     return _FilterPage();
@@ -13,7 +15,6 @@ class FilterPage extends StatefulWidget {
 
 class _FilterPage extends State<FilterPage> {
   List<String> commonNames = [];
-  List<String> commonNamesSel = [];
 
   @override
   void initState() {
@@ -74,14 +75,14 @@ class _FilterPage extends State<FilterPage> {
                           backgroundColor: ColorConstant.lightBlue),
                       onPressed: () {
                         setState(() {
-                          if (commonNamesSel.contains(value)) {
-                            commonNamesSel.remove(value);
+                          if (widget.commonNamesSel.contains(value)) {
+                            widget.commonNamesSel.remove(value);
                           } else {
-                            commonNamesSel.add(value);
+                            widget.commonNamesSel.add(value);
                           }
                         });
                       },
-                      icon: commonNamesSel.contains(value)
+                      icon: widget.commonNamesSel.contains(value)
                           ? Icon(Icons.offline_pin)
                           : Icon(
                               Icons.add_circle,
@@ -99,7 +100,7 @@ class _FilterPage extends State<FilterPage> {
                     child: InkWell(
                         onTap: () {
                           setState(() {
-                            commonNamesSel.clear();
+                            widget.commonNamesSel.clear();
                           });
                         },
                         child: Container(
@@ -120,7 +121,7 @@ class _FilterPage extends State<FilterPage> {
                   Expanded(
                     child: InkWell(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.pop(context, widget.commonNamesSel);
                         },
                         child: Container(
                           decoration: BoxDecoration(
