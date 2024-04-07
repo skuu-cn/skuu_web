@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
@@ -11,7 +11,6 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
@@ -114,19 +113,18 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void _handleFileSelection() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.any,
-    );
+    final XFile? file = await openFile(acceptedTypeGroups: <XTypeGroup>[]);
 
-    if (result != null && result.files.single.path != null) {
+    if (file != null) {
+      final bytes = await file.readAsBytes();
       final message = types.FileMessage(
         author: _user,
         createdAt: DateTime.now().millisecondsSinceEpoch,
         id: const Uuid().v4(),
-        mimeType: lookupMimeType(result.files.single.path!),
-        name: result.files.single.name,
-        size: result.files.single.size,
-        uri: result.files.single.path!,
+        mimeType: lookupMimeType(file.path),
+        name: file.name,
+        size: bytes.length,
+        uri: file.path,
       );
 
       _addMessage(message);
@@ -134,14 +132,22 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void _handleImageSelection() async {
-    final result = await ImagePicker().pickImage(
-      imageQuality: 70,
-      maxWidth: 1440,
-      source: ImageSource.gallery,
+    // #docregion MultiOpen
+    const XTypeGroup jpgsTypeGroup = XTypeGroup(
+      label: 'JPEGs',
+      extensions: <String>['jpg', 'jpeg'],
     );
+    const XTypeGroup pngTypeGroup = XTypeGroup(
+      label: 'PNGs',
+      extensions: <String>['png'],
+    );
+    final XFile? file = await openFile(acceptedTypeGroups: <XTypeGroup>[
+      jpgsTypeGroup,
+      pngTypeGroup,
+    ]);
 
-    if (result != null) {
-      final bytes = await result.readAsBytes();
+    if (file != null) {
+      final bytes = await file.readAsBytes();
       final image = await decodeImageFromList(bytes);
 
       final message = types.ImageMessage(
@@ -149,9 +155,9 @@ class _ChatPageState extends State<ChatPage> {
         createdAt: DateTime.now().millisecondsSinceEpoch,
         height: image.height.toDouble(),
         id: const Uuid().v4(),
-        name: result.name,
+        name: file.name,
         size: bytes.length,
-        uri: result.path,
+        uri: file.path,
         width: image.width.toDouble(),
       );
 
@@ -233,16 +239,17 @@ class _ChatPageState extends State<ChatPage> {
         .sendMessage(
       Content.text(message.text),
     )
-        .then((a) {
+        .then((response) {
       _loading = false;
       final responseMessage = types.TextMessage(
           author: _aiUser,
           createdAt: DateTime.now().millisecondsSinceEpoch,
           id: const Uuid().v4(),
-          text: MarkdownBody(data: a.text!).data,
+          text: MarkdownBody(data: response.text!).data,
           type: MessageType.text);
       _addMessage(responseMessage);
     });
+
   }
 
   void _loadMessages() async {
@@ -299,15 +306,15 @@ class _ChatPageState extends State<ChatPage> {
               ),
             ),
           ),
-          if(_loading)
-          Positioned.fill(
-            child: Center(
-              child: CircularProgressIndicator(
-                color: Colors.blue,
-                backgroundColor: Colors.white,
+          if (_loading)
+            Positioned.fill(
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: Colors.blue,
+                  backgroundColor: Colors.white,
+                ),
               ),
             ),
-          ),
         ],
       ));
 }

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -25,7 +26,9 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 const String _apiKey = 'AIzaSyAt0ShYb9fCcUs3urCNiVn5KU0DVLKg0WQ';
 
 class AiPage extends StatefulWidget {
-  const AiPage({super.key,});
+  const AiPage({
+    super.key,
+  });
 
   @override
   State<AiPage> createState() => _AiPage();
@@ -102,7 +105,7 @@ class _ChatWidgetState extends State<ChatWidget> {
           Radius.circular(14),
         ),
         borderSide: BorderSide(
-          color: Theme.of(context).colorScheme.secondary,
+          color: Colors.grey,
         ),
       ),
       focusedBorder: OutlineInputBorder(
@@ -110,7 +113,7 @@ class _ChatWidgetState extends State<ChatWidget> {
           Radius.circular(14),
         ),
         borderSide: BorderSide(
-          color: Theme.of(context).colorScheme.secondary,
+          color: Colors.grey,
         ),
       ),
     );
@@ -121,29 +124,6 @@ class _ChatWidgetState extends State<ChatWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: _apiKey.isNotEmpty
-                ? ListView.builder(
-                    controller: _scrollController,
-                    itemBuilder: (context, idx) {
-                      final content = _generatedContent[idx];
-                      return MessageWidget(
-                        text: content.text,
-                        image: content.image,
-                        isFromUser: content.fromUser,
-                      );
-                    },
-                    itemCount: _generatedContent.length,
-                  )
-                : ListView(
-                    children: const [
-                      Text(
-                        'No API key found. Please provide an API Key using '
-                        "'--dart-define' to set the 'API_KEY' declaration.",
-                      ),
-                    ],
-                  ),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 25,
@@ -164,7 +144,7 @@ class _ChatWidgetState extends State<ChatWidget> {
                 IconButton(
                   onPressed: !_loading
                       ? () async {
-                          // _sendImagePrompt(_textController.text);
+                          _sendImagePrompt(_textController.text);
                         }
                       : null,
                   icon: Icon(
@@ -189,6 +169,29 @@ class _ChatWidgetState extends State<ChatWidget> {
               ],
             ),
           ),
+          Expanded(
+            child: _apiKey.isNotEmpty
+                ? ListView.builder(
+                    controller: _scrollController,
+                    itemBuilder: (context, idx) {
+                      final content = _generatedContent[idx];
+                      return MessageWidget(
+                        text: content.text,
+                        image: content.image,
+                        isFromUser: content.fromUser,
+                      );
+                    },
+                    itemCount: _generatedContent.length,
+                  )
+                : ListView(
+                    children: const [
+                      Text(
+                        'No API key found. Please provide an API Key using '
+                        "'--dart-define' to set the 'API_KEY' declaration.",
+                      ),
+                    ],
+                  ),
+          ),
         ],
       ),
     );
@@ -199,24 +202,30 @@ class _ChatWidgetState extends State<ChatWidget> {
       _loading = true;
     });
     try {
-      ByteData catBytes = await rootBundle.load('imgs/defbak.png');
-      ByteData sconeBytes = await rootBundle.load('imgs/defbak1.png');
+      const XTypeGroup jpgsTypeGroup = XTypeGroup(
+        label: 'JPEGs',
+        extensions: <String>['jpg', 'jpeg'],
+      );
+      const XTypeGroup pngTypeGroup = XTypeGroup(
+        label: 'PNGs',
+        extensions: <String>['png'],
+      );
+      final XFile? file = await openFile(acceptedTypeGroups: <XTypeGroup>[
+        jpgsTypeGroup,
+        pngTypeGroup,
+      ]);
+      // ByteData catBytes = await rootBundle.load('imgs/defbak.png');
+      // ByteData sconeBytes = await rootBundle.load('imgs/defbak1.png');
       final content = [
         Content.multi([
           TextPart(message),
           // The only accepted mime types are image/*.
-          DataPart('image/jpeg', catBytes.buffer.asUint8List()),
-          DataPart('image/jpeg', sconeBytes.buffer.asUint8List()),
+          DataPart('image/jpeg', await file!.readAsBytes()),
         ])
       ];
       _generatedContent.add((
-        image: Image.asset("imgs/defbak.png"),
+        image: Image.memory(await file.readAsBytes()),
         text: message,
-        fromUser: true
-      ));
-      _generatedContent.add((
-        image: Image.asset("imgs/defbak.png"),
-        text: null,
         fromUser: true
       ));
 

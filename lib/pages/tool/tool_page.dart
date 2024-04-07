@@ -27,7 +27,7 @@ class _ToolPage extends State<ToolPage> {
     super.initState();
 
     allToolItemBeans.add(ToolItemBean(
-        imageUrl: "imgs/date.svg",
+        imageUrl: "imgs/rili.svg",
         title: "日历",
         subTitle: "查询工具",
         desc: "时间日历，八字，时事新闻",
@@ -35,7 +35,7 @@ class _ToolPage extends State<ToolPage> {
         clickUrl: Routes.calendarToolPageUrl));
 
     allToolItemBeans.add(ToolItemBean(
-        imageUrl: "imgs/date.svg",
+        imageUrl: "imgs/ai.svg",
         title: "AI小助手",
         subTitle: "谷歌Gemini AI",
         desc: "文本回答",
