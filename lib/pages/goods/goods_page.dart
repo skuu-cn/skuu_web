@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import 'package:flukit/example/routes/swiper.dart';
-import 'package:flukit/flukit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -49,6 +47,11 @@ class _GoodsPage extends State<GoodsPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var count = (1.sw / 250).ceil();
     return SingleChildScrollView(
@@ -91,12 +94,7 @@ class _GoodsPage extends State<GoodsPage> {
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Expanded(
           // height: item * 2 / 3,
-          child: Swiper(
-            children: _pageViews,
-            autoStart: false,
-            indicator: NumberSwiperIndicator(),
-            indicatorAlignment: AlignmentDirectional.topEnd,
-          ),
+          child: _pageViews[0],
         ),
         Padding(
           padding: EdgeInsets.only(left: 10.w, top: 5),
