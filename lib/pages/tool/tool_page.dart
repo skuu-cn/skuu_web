@@ -70,6 +70,13 @@ class _ToolPage extends State<ToolPage> {
         desc: "身份证信息查询",
         indexLetter: "id",
         clickUrl: Routes.idToolPageUrl));
+    allToolItemBeans.add(ToolItemBean(
+        imageUrl: "imgs/erweima.svg",
+        title: "二维码工具",
+        subTitle: "文本工具",
+        desc: "二维码工具",
+        indexLetter: "erweima",
+        clickUrl: Routes.qrCodePageUrl));
     showToolItemBeans = allToolItemBeans;
   }
 

@@ -20,6 +20,7 @@ import '../pages/search/search_page.dart' deferred as search_page;
 import '../pages/tool/calendar_tool_page.dart' deferred as calendar_tool_page;
 import '../pages/tool/date_tool_page.dart' deferred as date_tool_pagedef;
 import '../pages/tool/id_tool_page.dart' deferred as id_tool_pagedef;
+import '../pages/tool/qr_code_page.dart' deferred as qr_code_pagedef;
 import '../pages/tool/ip_tool_page.dart' deferred as ip_tool_pagedef;
 import '../pages/tool/url_tool_page.dart' deferred as url_tool_pagedef;
 import '../pages/watchvideo/play_video_page.dart' deferred as play_video_page;
@@ -126,6 +127,13 @@ var idToolPageHandler = Handler(
   return AppDeferredWidget(
     libraryLoader: id_tool_pagedef.loadLibrary,
     builder: () => id_tool_pagedef.IdToolPage(),
+  );
+});
+var qrCodePageHandler = Handler(
+    handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {
+  return AppDeferredWidget(
+    libraryLoader: qr_code_pagedef.loadLibrary,
+    builder: () => qr_code_pagedef.QrCodePage(),
   );
 });
 

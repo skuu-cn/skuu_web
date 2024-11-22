@@ -18,6 +18,7 @@ class Routes {
   static String dateToolPageUrl = "/data_tool_page";
   static String urlToolPageUrl = "/url_tool_page";
   static String idToolPageUrl = "/id_tool_page";
+  static String qrCodePageUrl = "/qr_code_page";
   static String ipToolPageUrl = "/ip_tool_page";
   static String homeItemPageUrl = "/home_item_page";
   static String homeAppbarItemPageUrl = "/home_appbar_item_page";
@@ -51,6 +52,7 @@ class Routes {
     router.define(dateToolPageUrl, handler: dateToolPageHandler);
     router.define(urlToolPageUrl, handler: urlToolPageHandler);
     router.define(idToolPageUrl, handler: idToolPageHandler);
+    router.define(qrCodePageUrl, handler: qrCodePageHandler);
     router.define(ipToolPageUrl, handler: ipToolPageHandler);
     router.define(homeItemPageUrl, handler: urlHomeItemPageHandler);
     router.define(homeAppbarItemPageUrl, handler: urlHomeAppBarItemPageHandler);
