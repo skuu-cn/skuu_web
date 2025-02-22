@@ -20,6 +20,12 @@ class _HomeItemPage extends State<HomeItemPage> {
   int colCount = 2;
   bool ifHelpOrShare = false;
 
+
+  @override
+  bool get wantKeepAlive {
+    return true;
+  }
+
   @override
   void initState() {
     super.initState();

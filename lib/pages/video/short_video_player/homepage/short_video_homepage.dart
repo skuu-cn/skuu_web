@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+
 import '../data/mock_data.dart';
 import '../services/video_service.dart';
 import '../short_video_player/short_video_player.dart';
@@ -13,7 +14,7 @@ class ShortVideoHomePage extends StatefulWidget {
   State<ShortVideoHomePage> createState() => _ShortVideoHomePageState();
 }
 
-class _ShortVideoHomePageState extends State<ShortVideoHomePage> {
+class _ShortVideoHomePageState extends State<ShortVideoHomePage>{
   bool isDownloading = false;
   @override
   void initState() {
@@ -50,4 +51,8 @@ class _ShortVideoHomePageState extends State<ShortVideoHomePage> {
           : const ShortVideoPlayer(),
     );
   }
+
+  // @override
+  // TODO: implement wantKeepAlive
+  // bool get wantKeepAlive => true;
 }

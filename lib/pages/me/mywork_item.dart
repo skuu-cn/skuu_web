@@ -1,9 +1,4 @@
-import 'dart:html';
-
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyWorkItem extends StatefulWidget {
   MyWorkItem({this.id = 0});

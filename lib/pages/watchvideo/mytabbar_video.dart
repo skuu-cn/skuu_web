@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:skuu/pages/friends/chat_pagev2.dart';
 
 import 'component_item.dart';
 import 'wait_play_video_list.dart';
-import '../../component/mycomponent_view.dart';
 
 //控制评论和下一个播放
 class MyTabBarVideo extends StatefulWidget {

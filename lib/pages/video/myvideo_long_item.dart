@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'myvideo_img_item.dart';
 
@@ -12,8 +10,9 @@ class MyVideoLongItem extends StatefulWidget {
   }
 }
 
-class _MyVideoLongItem extends State<MyVideoLongItem> {
+class _MyVideoLongItem extends State<MyVideoLongItem>{
   final List<String> _items = [];
+
 
   @override
   void initState() {
@@ -52,4 +51,7 @@ class _MyVideoLongItem extends State<MyVideoLongItem> {
           }),
     ));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

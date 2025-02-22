@@ -6,8 +6,6 @@ import 'package:skuu/route/routers.dart';
 import 'package:spring/spring.dart';
 
 import '../../../../../component/level_icon.dart';
-import '../../../../../component/myshare_page.dart';
-import '../../../../../constant/color_constant.dart';
 import '../../../../../constant/constant.dart';
 import '../../short_video_share_page.dart';
 import 'flick_multi_manager.dart';

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:skuu/constant/constant.dart';
-import 'package:skuu/demo/flickvideo/web_video_player/web_video_player.dart';
 import 'package:skuu/pages/watchvideo/component_item.dart';
 import 'package:skuu/pages/watchvideo/wait_play_video_list.dart';
 

@@ -1,9 +1,6 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skuu/constant/constant.dart';
-import 'package:skuu/pages/friends/chat_pagev2.dart';
 
 import '../../route/routers.dart';
 import 'chat_pagev3.dart';

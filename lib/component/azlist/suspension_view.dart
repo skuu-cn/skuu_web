@@ -1,6 +1,8 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'dart:math' as math;
+
 import 'az_common.dart';
 
 const double kSusItemHeight = 40;

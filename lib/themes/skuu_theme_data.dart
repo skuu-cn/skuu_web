@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:chinese_font_library/chinese_font_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,8 +22,9 @@ class SkuuThemeData {
 
   static ThemeData themeData(ColorScheme colorScheme, Color focusColor) {
     return ThemeData(
+        // fontFamily: "AlibabaPuHuiTi",
         colorScheme: colorScheme,
-        textTheme: _textTheme,
+        textTheme: _textTheme.useSystemChineseFont(Brightness.light),
         appBarTheme: AppBarTheme(
           backgroundColor: ColorConstant.lightBlue,
           elevation: 0,
@@ -44,8 +46,9 @@ class SkuuThemeData {
           backgroundColor: Colors.lightGreen,
           width: 400,
           insetPadding: EdgeInsets.only(bottom: 0.2.sh, left: 200.w),
-          contentTextStyle:
-              _textTheme.titleMedium!.apply(color: _darkFillColor),
+          contentTextStyle: _textTheme.titleMedium!
+              .apply(color: _darkFillColor)
+              .useSystemChineseFont(),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -53,7 +56,7 @@ class SkuuThemeData {
                 borderRadius: BorderRadius.all(Radius.circular(10))),
           ),
         ),
-        popupMenuTheme: PopupMenuThemeData(surfaceTintColor:Colors.white),
+        popupMenuTheme: PopupMenuThemeData(surfaceTintColor: Colors.white),
         tabBarTheme: TabBarTheme(labelColor: ColorConstant.ThemeGreen)
         // elevatedButtonTheme: elevatedButtonTheme
         );
@@ -113,5 +116,27 @@ class SkuuThemeData {
     bodyMedium: GoogleFonts.montserrat(fontWeight: _regular, fontSize: 16.0),
     titleLarge: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 16.0),
     labelLarge: GoogleFonts.montserrat(fontWeight: _semiBold, fontSize: 14.0),
+  );
+  static final TextTheme _textTheme1 = TextTheme(
+    headlineMedium:
+        TextStyle(fontFamily: "AlibabaPuHuiTi", fontWeight: _bold, fontSize: 20.0),
+    bodySmall: TextStyle(
+        fontFamily: "AlibabaPuHuiTi", fontWeight: _semiBold, fontSize: 16.0),
+    headlineSmall: TextStyle(
+        fontFamily: "AlibabaPuHuiTi", fontWeight: _medium, fontSize: 16.0),
+    titleMedium: TextStyle(
+        fontFamily: "AlibabaPuHuiTi", fontWeight: _medium, fontSize: 16.0),
+    labelSmall: TextStyle(
+        fontFamily: "AlibabaPuHuiTi", fontWeight: _medium, fontSize: 12.0),
+    bodyLarge: TextStyle(
+        fontFamily: "AlibabaPuHuiTi", fontWeight: _regular, fontSize: 14.0),
+    titleSmall: TextStyle(
+        fontFamily: "AlibabaPuHuiTi", fontWeight: _medium, fontSize: 14.0),
+    bodyMedium: TextStyle(
+        fontFamily: "AlibabaPuHuiTi", fontWeight: _regular, fontSize: 16.0),
+    titleLarge:
+        TextStyle(fontFamily: "AlibabaPuHuiTi", fontWeight: _bold, fontSize: 16.0),
+    labelLarge: TextStyle(
+        fontFamily: "AlibabaPuHuiTi", fontWeight: _semiBold, fontSize: 14.0),
   );
 }

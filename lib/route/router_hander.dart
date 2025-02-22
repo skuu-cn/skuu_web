@@ -1,4 +1,3 @@
-import 'package:file_selector/file_selector.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:skuu/pages/friends/chat_pagev2.dart' deferred as chat_pagev2;
@@ -10,31 +9,31 @@ import '../pages/friends/friend_detail.dart' deferred as friend_detail;
 import '../pages/friends/user_detail_page.dart' deferred as user_detail_page;
 import '../pages/goods/goods_detail_page.dart' deferred as goods_detail_page;
 import '../pages/goods/shop_page.dart' deferred as shop_page;
-import '../pages/index/home.dart';
+import '../pages/index/home.dart' deferred as home;
 import '../pages/index/home_appbar_item_page.dart'
     deferred as home_appbar_item_page;
 import '../pages/index/home_item_page.dart' deferred as home_item_page;
 import '../pages/meleft/mycare_page.dart' deferred as mycare_page;
 import '../pages/meleft/mycollect_page.dart' deferred as mycollect_page;
+import '../pages/public/public_dynamic_page.dart'
+    deferred as public_dynamic_page;
+import '../pages/public/public_goods_page.dart' deferred as public_goods_page;
+import '../pages/public/public_short_video_page.dart'
+    deferred as public_short_video_page;
+import '../pages/public/public_video_page.dart' deferred as public_video_page;
 import '../pages/search/search_page.dart' deferred as search_page;
+import '../pages/tool/ai_page.dart' deferred as ai_page;
 import '../pages/tool/calendar_tool_page.dart' deferred as calendar_tool_page;
 import '../pages/tool/date_tool_page.dart' deferred as date_tool_pagedef;
 import '../pages/tool/id_tool_page.dart' deferred as id_tool_pagedef;
-import '../pages/tool/qr_code_page.dart' deferred as qr_code_pagedef;
 import '../pages/tool/ip_tool_page.dart' deferred as ip_tool_pagedef;
+import '../pages/tool/qr_code_page.dart' deferred as qr_code_pagedef;
 import '../pages/tool/url_tool_page.dart' deferred as url_tool_pagedef;
 import '../pages/watchvideo/play_video_page.dart' deferred as play_video_page;
-import '../pages/public/public_dynamic_page.dart'
-    deferred as public_dynamic_page;
-import '../pages/public/public_video_page.dart' deferred as public_video_page;
-import '../pages/public/public_short_video_page.dart'
-    deferred as public_short_video_page;
-import '../pages/public/public_goods_page.dart' deferred as public_goods_page;
-import '../pages/tool/ai_page.dart' deferred as ai_page;
 
 var rootHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
-  return MyHomePage();
+  return home.MyHomePage();
 });
 var chathandle = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<dynamic>> params) {

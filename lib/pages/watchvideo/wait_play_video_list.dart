@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../constant/constant.dart';
 
 // 模板,方便快速创建一个StatefulWidget
 class WaitPlayVideoList extends StatefulWidget {

@@ -59,6 +59,9 @@ dependencies:
   path_provider: ^2.0.15
   wakelock: ^0.6.2
   qr_flutter: ^4.1.0
+  chinese_font_library: ^1.2.0
+  get: ^4.7.2
+  logger: ^2.3.0
 
 dev_dependencies:
   flutter_webrtc: ^0.9.11
@@ -78,8 +81,10 @@ flutter:
   assets:
     - mock/
     - imgs/
-  plugin:
-    platforms:
-      android:
-        package: com.shinow.qrscan
-        pluginClass: QrscanPlugin
+
+#此处会导致无法为macos生成podfile
+#  plugin:
+#    platforms:
+#      android:
+#        package: com.shinow.qrscan
+#        pluginClass: QrscanPlugin

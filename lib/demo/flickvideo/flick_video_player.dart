@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:skuu/demo/flickvideo/short_video_player/homepage/short_video_homepage.dart';

@@ -3,13 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:skuu/constant/color_constant.dart';
-import 'package:skuu/constant/constant.dart';
 
-import 'help_video_item.dart';
 import 'help_img_item.dart';
-import 'myimg_item.dart';
-import 'myindex_video_item.dart';
+import 'help_video_item.dart';
 
 //互助页面
 class HelpItemPage extends StatefulWidget {

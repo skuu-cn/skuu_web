@@ -3,8 +3,6 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../bean/contact.dart';
-
 class Utils {
   static String getImgPath(String name, {String format = 'png'}) {
     return 'imgs/$name.$format';

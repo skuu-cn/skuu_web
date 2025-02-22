@@ -1,6 +1,8 @@
-import 'package:skuu/generated/json/base/json_field.dart';
-import 'package:skuu/generated/json/address_entity.g.dart';
 import 'dart:convert';
+
+import 'package:skuu/generated/json/address_entity.g.dart';
+import 'package:skuu/generated/json/base/json_field.dart';
+
 export 'package:skuu/generated/json/address_entity.g.dart';
 
 @JsonSerializable()

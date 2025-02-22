@@ -1,5 +1,5 @@
-import 'package:skuu/generated/json/base/json_convert_content.dart';
 import 'package:skuu/bean/ip_bean_entity.dart';
+import 'package:skuu/generated/json/base/json_convert_content.dart';
 
 IpBeanEntity $IpBeanEntityFromJson(Map<String, dynamic> json) {
   final IpBeanEntity ipBeanEntity = IpBeanEntity();

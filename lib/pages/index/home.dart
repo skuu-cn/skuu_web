@@ -1,5 +1,4 @@
 import 'package:circular_menu/circular_menu.dart';
-import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skuu/constant/color_constant.dart';
@@ -8,9 +7,7 @@ import 'package:skuu/pages/drawer_page.dart';
 import 'package:skuu/pages/goods/goods_page.dart';
 import 'package:skuu/pages/index/filter_page.dart';
 import 'package:skuu/pages/me/myku_page.dart';
-import 'package:skuu/pages/me/myteams.dart';
 import 'package:skuu/pages/me/myworks.dart';
-import 'package:skuu/pages/public/public_dynamic_page.dart';
 import 'package:skuu/pages/tool/tool_page.dart';
 import 'package:skuu/route/routers.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,13 +18,10 @@ import '../friends/chat_page_list.dart';
 import '../friends/friends_page.dart';
 import '../me/me_detail_page.dart';
 import '../video/myvideo_long_item.dart';
-import '../video/myvideo_short_item.dart';
 import '../video/short_video_player/homepage/short_video_homepage.dart';
-import 'goods_filter_page.dart';
 import 'goods_filter_pagev2.dart';
-import 'home_item_page.dart';
-import 'help_img_item.dart';
 import 'help_item_page.dart';
+import 'home_item_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -87,6 +81,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       //导航栏
@@ -119,8 +119,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                     textColor: Colors.black54,
                                     onPress: () => {
                                       Navigator.pop(context),
-                                      Routes.navigateTo(
-                                          context, Routes.publishDynamicPageUrl),
+                                      Routes.navigateTo(context,
+                                          Routes.publishDynamicPageUrl),
                                     },
                                   ),
                                   MyFlatButton(
@@ -129,8 +129,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                     textColor: Colors.black54,
                                     onPress: () => {
                                       Navigator.pop(context),
-                                      Routes.navigateTo(
-                                          context, Routes.publishShortVideoPageUrl),
+                                      Routes.navigateTo(context,
+                                          Routes.publishShortVideoPageUrl),
                                     },
                                   ),
                                   MyFlatButton(
@@ -316,8 +316,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           child: TabBarView(
         controller: _controller,
         physics: (_selected == 2 && 1.sw >= Constant.CHAT_TWO_VIEW_WIDTH)
-            ? NeverScrollableScrollPhysics()
-            : AlwaysScrollableScrollPhysics(), //禁止滑动
+            ? const NeverScrollableScrollPhysics()
+            : const AlwaysScrollableScrollPhysics(), //禁止滑动
         children: tabBoby,
       ))
     };

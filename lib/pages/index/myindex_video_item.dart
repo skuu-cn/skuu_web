@@ -7,9 +7,7 @@ import 'package:skuu/constant/constant.dart';
 import '../../component/index_video_player/index_video_player.dart';
 import '../../component/level_icon.dart';
 import '../../component/myshare_page.dart';
-import '../../component/myvideo_play.dart';
 import '../../constant/color_constant.dart';
-import '../../demo/flickvideo/web_video_player/web_video_player.dart';
 import '../../route/routers.dart';
 
 //首页-视频

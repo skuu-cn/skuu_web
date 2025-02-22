@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../constant/color_constant.dart';
-
 class DateToolPage extends StatefulWidget {
   const DateToolPage({super.key});
 

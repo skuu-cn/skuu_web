@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+
 import '../../../../demo/flickvideo/utils/mock_data.dart';
 import '../data/mock_data.dart';
 import '../services/video_service.dart';

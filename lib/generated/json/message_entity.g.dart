@@ -1,5 +1,5 @@
-import 'package:skuu/generated/json/base/json_convert_content.dart';
 import 'package:skuu/bean/message_entity.dart';
+import 'package:skuu/generated/json/base/json_convert_content.dart';
 
 MessageEntity $MessageEntityFromJson(Map<String, dynamic> json) {
   final MessageEntity messageEntity = MessageEntity();

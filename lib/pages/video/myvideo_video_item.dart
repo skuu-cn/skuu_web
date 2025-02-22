@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../constant/color_constant.dart';
-import '../../route/routers.dart';
 import '../../component/myshare_page.dart';
 import '../../component/myvideo_play.dart';
+import '../../constant/color_constant.dart';
+import '../../route/routers.dart';
 
 class MyVideoVideoItem extends StatefulWidget {
   MyVideoVideoItem({this.id = 0});

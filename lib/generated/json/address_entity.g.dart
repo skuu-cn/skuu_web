@@ -1,5 +1,5 @@
-import 'package:skuu/generated/json/base/json_convert_content.dart';
 import 'package:skuu/bean/address_entity.dart';
+import 'package:skuu/generated/json/base/json_convert_content.dart';
 
 AddressEntity $AddressEntityFromJson(Map<String, dynamic> json) {
   final AddressEntity addressEntity = AddressEntity();

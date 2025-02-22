@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skuu/bean/ip_bean_entity.dart';
 import 'package:skuu/constant/color_constant.dart';
 
-import '../../bean/idCard_bean_entity.dart';
-
 class IpToolPage extends StatefulWidget {
   IpToolPage({super.key});
 

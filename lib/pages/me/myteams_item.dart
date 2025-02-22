@@ -1,12 +1,8 @@
-import 'dart:html';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constant/constant.dart';
 import '../../route/routers.dart';
-import '../drawer_page.dart';
 
 class MyTeamsItem extends StatefulWidget {
   MyTeamsItem({this.id = 0});
