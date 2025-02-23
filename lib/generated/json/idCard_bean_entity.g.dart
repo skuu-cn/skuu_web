@@ -1,5 +1,5 @@
-import 'package:skuu/bean/idCard_bean_entity.dart';
 import 'package:skuu/generated/json/base/json_convert_content.dart';
+import 'package:skuu/app/data/models/idCard_bean_entity.dart';
 
 IdCardBeanEntity $IdCardBeanEntityFromJson(Map<String, dynamic> json) {
   final IdCardBeanEntity idCardBeanEntity = IdCardBeanEntity();

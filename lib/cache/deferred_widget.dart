@@ -59,10 +59,8 @@ class _AppDeferredWidgetState extends State<AppDeferredWidget> {
   }
 
   void _onLibraryLoaded() {
-    setState(() {
       _loadedBuilder = widget.builder;
       _loadedChild = _loadedBuilder?.call();
-    });
   }
 
   @override

@@ -220,9 +220,7 @@ class _ChatWidgetState extends State<ChatWidget> {
   }
 
   Future<void> _sendImagePrompt(String message) async {
-    setState(() {
       _loading = true;
-    });
     try {
       ByteData catBytes = await rootBundle.load('assets/images/cat.jpg');
       ByteData sconeBytes = await rootBundle.load('assets/images/scones.jpg');
@@ -253,29 +251,21 @@ class _ChatWidgetState extends State<ChatWidget> {
         _showError('No response from API.');
         return;
       } else {
-        setState(() {
           _loading = false;
           _scrollDown();
-        });
       }
     } catch (e) {
       _showError(e.toString());
-      setState(() {
         _loading = false;
-      });
     } finally {
       _textController.clear();
-      setState(() {
         _loading = false;
-      });
       _textFieldFocus.requestFocus();
     }
   }
 
   Future<void> _sendChatMessage(String message) async {
-    setState(() {
       _loading = true;
-    });
 
     try {
       _generatedContent.add((image: null, text: message, fromUser: true));
@@ -289,10 +279,8 @@ class _ChatWidgetState extends State<ChatWidget> {
         _showError('No response from API.');
         return;
       } else {
-        setState(() {
           _loading = false;
           _scrollDown();
-        });
       }
     } catch (e) {
       _showError(e.toString());
