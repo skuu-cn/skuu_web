@@ -17,11 +17,13 @@ import 'package:skuu/app/pages/public/public_goods_page.dart';
 import 'package:skuu/app/pages/public/public_short_video_page.dart';
 import 'package:skuu/app/pages/public/public_video_page.dart';
 import 'package:skuu/app/pages/tool/ai_page.dart';
+import 'package:skuu/app/pages/tool/bindings/tool_binding.dart';
 import 'package:skuu/app/pages/tool/calendar_tool_page.dart';
 import 'package:skuu/app/pages/tool/date_tool_page.dart';
 import 'package:skuu/app/pages/tool/id_tool_page.dart';
 import 'package:skuu/app/pages/tool/ip_tool_page.dart';
 import 'package:skuu/app/pages/tool/qr_code_page.dart';
+import 'package:skuu/app/pages/tool/thumbnail_page.dart';
 import 'package:skuu/app/pages/tool/url_tool_page.dart';
 
 import '../pages/index/views/my_home_page.dart';
@@ -166,6 +168,11 @@ class AppPages {
       name: Routes.aiPageUrl,
       page: () => AiPage(),
       binding: MyHomeBinding(),
-    )
+    ),
+    GetPage(
+      name: Routes.thumbnailPageUrl,
+      page: () => ThumbnailPage(),
+      binding: ToolBing(),
+    ),
   ];
 }

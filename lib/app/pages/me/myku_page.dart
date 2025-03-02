@@ -70,7 +70,13 @@ class _MykuPage extends State<MykuPage> {
         desc: "身份证信息查询",
         indexLetter: "id",
         clickUrl: Routes.idToolPageUrl));
-
+    allToolItemBeans.add(ToolItemBean(
+        imageUrl: "imgs/jietu.svg",
+        title: "视频工具",
+        subTitle: "视频工具",
+        desc: "视频截取图片",
+        indexLetter: "video",
+        clickUrl: Routes.thumbnailPageUrl));
     _items = [
       '日历',
       '时间转换',

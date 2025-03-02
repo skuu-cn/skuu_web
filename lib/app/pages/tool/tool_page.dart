@@ -77,6 +77,13 @@ class _ToolPage extends State<ToolPage> {
         desc: "二维码工具",
         indexLetter: "erweima",
         clickUrl: Routes.qrCodePageUrl));
+    allToolItemBeans.add(ToolItemBean(
+        imageUrl: "imgs/jietu.svg",
+        title: "视频工具",
+        subTitle: "视频工具",
+        desc: "视频截取图片",
+        indexLetter: "video",
+        clickUrl: Routes.thumbnailPageUrl));
     showToolItemBeans = allToolItemBeans;
   }
 
