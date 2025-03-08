@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class CustomVideoProgressBar extends StatefulWidget {
   final VideoPlayerController controller;
 
-  const CustomVideoProgressBar({Key? key, required this.controller}) : super(key: key);
+  const CustomVideoProgressBar({Key? key, required this.controller})
+      : super(key: key);
 
   @override
   _CustomVideoProgressBarState createState() => _CustomVideoProgressBarState();
@@ -63,11 +65,15 @@ class _CustomVideoProgressBarState extends State<CustomVideoProgressBar> {
         //   valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
         // ),
         // 进度条
+
+        Text(formatDuration(_progress.milliseconds.inSeconds) +
+            '/' +
+            formatDuration(duration.milliseconds.inSeconds)),
         Slider(
           value: _progress,
           min: 0.0,
           max: duration,
-          inactiveColor:Colors.grey,
+          inactiveColor: Colors.grey,
           onChangeStart: _onDragStart,
           onChanged: (value) {
             setState(() {
@@ -78,5 +84,19 @@ class _CustomVideoProgressBarState extends State<CustomVideoProgressBar> {
         ),
       ],
     );
+  }
+
+  String formatDuration(int seconds) {
+    // 计算小时、分钟和秒
+    int hours = seconds ~/ 3600; // 1 小时 = 3600 秒
+    int minutes = (seconds % 3600) ~/ 60; // 1 分钟 = 60 秒
+    int remainingSeconds = seconds % 60;
+
+    // 格式化时间为 HH:MM:SS
+    String hoursStr = hours.toString().padLeft(2, '0'); // 补零
+    String minutesStr = minutes.toString().padLeft(2, '0'); // 补零
+    String secondsStr = remainingSeconds.toString().padLeft(2, '0'); // 补零
+
+    return '$hoursStr:$minutesStr:$secondsStr';
   }
 }

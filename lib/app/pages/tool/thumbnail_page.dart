@@ -14,6 +14,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:skuu/app/pages/tool/widgets/custom_video_progress_bar.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:html' as html;
+import 'package:image/image.dart' as img;
 
 import 'controllers/tool_controller.dart';
 
@@ -250,22 +251,34 @@ class _ThumbnailPage extends State<ThumbnailPage> {
                         CustomVideoProgressBar(
                           controller: _controller,
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              _controller.value.isPlaying
-                                  ? _controller.pause()
-                                  : _controller.play();
-                            });
-                          },
-                          child: Icon(_controller.value.isPlaying
-                              ? Icons.pause
-                              : Icons.play_arrow),
+                        Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _controller.value.isPlaying
+                                      ? _controller.pause()
+                                      : _controller.play();
+                                });
+                              },
+                              child: Icon(_controller.value.isPlaying
+                                  ? Icons.pause
+                                  : Icons.play_arrow),
+                            ),
+                            Spacer(),
+                            ElevatedButton(
+                              onPressed: () {
+                                authCreate(toolController.curStyle);
+                              },
+                              child: Text('自动填充'),
+                            ),
+                          ],
                         ),
                         Container(
                           height: 10,
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ElevatedButton(
                               child: Text("横版封面一"),
@@ -273,12 +286,14 @@ class _ThumbnailPage extends State<ThumbnailPage> {
                                 toolController.setStyle(1);
                               },
                             ),
+                            Spacer(),
                             ElevatedButton(
                               child: Text("横版封面二"),
                               onPressed: () {
                                 toolController.setStyle(2);
                               },
                             ),
+                            Spacer(),
                             ElevatedButton(
                               child: Text("竖版封面"),
                               onPressed: () {
@@ -368,6 +383,62 @@ class _ThumbnailPage extends State<ThumbnailPage> {
       return null;
     } finally {
       await controller.dispose();
+    }
+  }
+
+  void authCreate(int index) {
+    int seconds = _controller.value.duration.inMilliseconds; // 获取秒数
+
+    if (index == 1) {
+      int per = (seconds / 6).toInt();
+      for (int i = 1; i <= 5; i++) {
+        print(per * i);
+        GenThumbnailImage tmp = GenThumbnailImage(
+          thumbnailRequest: ThumbnailRequest(
+            video: _video.text,
+            thumbnailPath: null,
+            imageFormat: _format,
+            maxHeight: 0,
+            maxWidth: 0,
+            timeMs: per * i,
+            quality: 100,
+            attachHeaders: _attachHeaders,
+          ),
+        );
+        toolController.setGenThumbnailImage(i, tmp);
+      }
+    } else if (index == 2) {
+      int per = (seconds / 11).toInt();
+      for (int i = 1; i <= 10; i++) {
+        GenThumbnailImage tmp = GenThumbnailImage(
+          thumbnailRequest: ThumbnailRequest(
+            video: _video.text,
+            thumbnailPath: null,
+            imageFormat: _format,
+            maxHeight: 0,
+            maxWidth: 0,
+            timeMs: per * i,
+            quality: 100,
+            attachHeaders: _attachHeaders,
+          ),
+        );
+        toolController.setGenThumbnailImage(i, tmp);
+      }
+    } else {
+      print((seconds / 2).toInt());
+      GenThumbnailImage tmp = GenThumbnailImage(
+        thumbnailRequest: ThumbnailRequest(
+          video: _video.text,
+          thumbnailPath: null,
+          imageFormat: _format,
+          maxHeight: 0,
+          maxWidth: 0,
+          timeMs: (seconds / 2).toInt(),
+          quality: 100,
+          attachHeaders: _attachHeaders,
+        ),
+      );
+      toolController.setGenThumbnailImage(1, tmp);
     }
   }
 
@@ -1081,66 +1152,62 @@ class _ThumbnailPage extends State<ThumbnailPage> {
     } else {
       return ClipRect(
           child: Align(
-            alignment: Alignment.topCenter,
-            heightFactor: 0.625,
-            child: Container(
-                width: 400,
-                height: 800,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.white, Color(0xfcfcfc)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+        alignment: Alignment.topCenter,
+        heightFactor: 0.625,
+        child: Container(
+          width: 400,
+          height: 800,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.white, Color(0xfcfcfc)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Column(
+            children: [
+              Container(
+                height: 30,
+              ),
+              Container(
+                decoration: BoxDecoration(boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3), // 阴影颜色
+                    offset: Offset(3, 3), // 阴影偏移量，正值表示向右和向下
+                    blurRadius: 10, // 阴影模糊半径
+                    spreadRadius: 2, // 阴影扩散半径
+                  ),
+                ]),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Container(
+                    height: 441,
+                    width: 211,
+                    decoration:
+                        BoxDecoration(color: Colors.blueAccent, boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3), // 阴影颜色
+                        // color: Colors.black, // 阴影颜色
+                        offset: Offset(3, 3), // 阴影偏移量，正值表示向右和向下
+                        blurRadius: 15, // 阴影模糊半径
+                        spreadRadius: 2, // 阴影扩散半径
+                      ),
+                    ]),
+                    child: toolController.imgMap[1] == null
+                        ? IconButton(
+                            onPressed: () {},
+                            icon: Text(
+                              '添加到此1',
+                              style: TextStyle(color: Colors.white),
+                            ))
+                        : toolController.imgMap[1],
                   ),
                 ),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 30,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.3), // 阴影颜色
-                              offset: Offset(3, 3), // 阴影偏移量，正值表示向右和向下
-                              blurRadius: 10, // 阴影模糊半径
-                              spreadRadius: 2, // 阴影扩散半径
-                            ),
-                          ]
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Container(
-                          height: 441,
-                          width: 211,
-                          decoration: BoxDecoration(
-                              color: Colors.blueAccent,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.3), // 阴影颜色
-                                  // color: Colors.black, // 阴影颜色
-                                  offset: Offset(3, 3), // 阴影偏移量，正值表示向右和向下
-                                  blurRadius: 15, // 阴影模糊半径
-                                  spreadRadius: 2, // 阴影扩散半径
-                                ),
-                              ]
-                          ),
-                          child: toolController.imgMap[1] == null
-                              ? IconButton(
-                              onPressed: () {},
-                              icon: Text(
-                                '添加到此1',
-                                style: TextStyle(color: Colors.white),
-                              ))
-                              : toolController.imgMap[1],
-                        ),
-                      ),
-                    ),
-
-                  ],
-                ),),
-          ));
+              ),
+            ],
+          ),
+        ),
+      ));
     }
   }
 
@@ -1149,16 +1216,20 @@ class _ThumbnailPage extends State<ThumbnailPage> {
       // 1️⃣ 获取 RenderRepaintBoundary
       RenderRepaintBoundary boundary = _globalKey.currentContext!
           .findRenderObject() as RenderRepaintBoundary;
-      ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+      ui.Image image = await boundary.toImage(pixelRatio: 2.0);
       ByteData? byteData =
           await image.toByteData(format: ui.ImageByteFormat.png);
       Uint8List pngBytes = byteData!.buffer.asUint8List();
 
+      img.Image? rawImage = img.decodeImage(pngBytes);
+      // 质量90%
+      Uint8List jpgBytes = img.encodeJpg(rawImage!, quality: 90);
+
       // 2️⃣ 触发 Web 下载
-      final blob = html.Blob([pngBytes]);
+      final blob = html.Blob([jpgBytes]);
       final url = html.Url.createObjectUrlFromBlob(blob);
       final anchor = html.AnchorElement(href: url)
-        ..setAttribute("download", "screenshot.png")
+        ..setAttribute("download", "screenshot.jpg")
         ..click();
       html.Url.revokeObjectUrl(url);
     } catch (e) {
