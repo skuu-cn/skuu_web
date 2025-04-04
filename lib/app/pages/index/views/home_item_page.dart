@@ -3,10 +3,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:skuu/app/pages/index/controllers/my_home_controller.dart';
 
 import 'myimg_item.dart';
 import 'myindex_video_item.dart';
-
 
 //首页
 class HomeItemPage extends StatefulWidget {
@@ -20,6 +22,9 @@ class _HomeItemPage extends State<HomeItemPage> {
   final List<String> _items = [];
   int colCount = 2;
   bool ifHelpOrShare = false;
+  late double scrollOffset = 0;
+  MyHomeController myHomeController = Get.put(MyHomeController());
+  ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
@@ -39,6 +44,12 @@ class _HomeItemPage extends State<HomeItemPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
 //    double width = MediaQuery.of(context).size.width;
 //    int count = getColCount(width);
@@ -53,11 +64,30 @@ class _HomeItemPage extends State<HomeItemPage> {
           // ignore: missing_required_param
           child: NotificationListener<ScrollNotification>(
             onNotification: (ScrollNotification notification) {
+              switch (notification.runtimeType) {
+                // case ScrollStartNotification:
+                //   if (scrollController.offset == 0) {
+                //     myHomeController.changeShowSearch(true);
+                //   }
+                //   break;
+                // case ScrollUpdateNotification:
+                //   print("正在滚动"+scrollController.offset.toString());
+                //   break;
+                case ScrollEndNotification:
+                  double curOffset = scrollController.offset;
+                  myHomeController.changeShowSearch(curOffset < scrollOffset);
+                  scrollOffset = curOffset;
+                  break;
+                // case OverscrollNotification:
+                //   print("滚动到边界"+scrollController.offset.toString());
+                //   break;
+              }
               return false;
             },
             child: MasonryGridView.count(
               itemCount: _items.length,
               crossAxisCount: colCount,
+              controller: scrollController,
               mainAxisSpacing: 4.0,
               crossAxisSpacing: 4.0,
               itemBuilder: (BuildContext context, int index) {
@@ -110,7 +140,8 @@ class _HomeItemPage extends State<HomeItemPage> {
     if (colCount > 1) {
       widthItem = 0.5.sw;
     }
-    length = '长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。'.length.toDouble();
+    length =
+        '长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。'.length.toDouble();
     length = length * 22;
     double lineCount = (length / widthItem).ceilToDouble();
     double wordHeight = (lineCount > 3 ? 3 : lineCount) * 30 + 102;

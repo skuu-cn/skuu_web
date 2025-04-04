@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:skuu/app/pages/drawer_page.dart';
 import 'package:skuu/app/pages/index/controllers/my_home_controller.dart';
 import 'package:skuu/app/pages/index/views/widgets/public_sheets.dart';
+import 'package:skuu/app/pages/index/views/widgets/slide_transition_x.dart';
 import 'package:skuu/constant/color_constant.dart';
 import 'package:skuu/constant/constant.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -131,9 +132,7 @@ class _MyHomePage extends State<MyHomePage> with TickerProviderStateMixin {
   }
 
   PreferredSizeWidget getAppbar() {
-    if (controller.selected == 0 &&
-        controller.hasSearch &&
-        !Constant.LOOK_MODE) {
+    if (controller.selected == 0) {
       return getAppbar1();
     } else {
       return getAppbar2();
@@ -179,6 +178,83 @@ class _MyHomePage extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 
+  Widget animatedTitle() {
+    return AnimatedSwitcher(
+      duration: Duration(milliseconds: 200),
+      transitionBuilder: (Widget child, Animation<double> animation) {
+        var tween = Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0));
+        return SlideTransitionX(
+          child: child,
+          direction: AxisDirection.down, //上入下出
+          position: animation,
+        );
+      },
+      child: controller.hasSearch
+          ? InkWell(
+              onTap: () {
+                Get.toNamed(Routes.searchPage);
+              },
+              child: Container(
+                  width: 0.8.sw,
+                  height: 40,
+                  margin: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 10.w),
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white,
+                  ),
+                  child: TextButton.icon(
+                      onPressed: null,
+                      icon: const Icon(Icons.search),
+                      label: Text("英雄联盟手游"))),
+            )
+          : TabBar(
+              controller: tabController,
+              indicatorSize: TabBarIndicatorSize.label,
+              isScrollable: controller.tabTitle.length > 2 ? true : false,
+              tabs: controller.tabTitle.map((e) {
+                return Container(
+                  height: 120.h,
+                  width: 100.w,
+                  alignment: Alignment.center,
+                  child: Text(e),
+                );
+              }).toList()),
+    );
+  }
+
+  Widget animateActions() {
+    return AnimatedSwitcher(
+        duration: Duration(milliseconds: 200),
+        transitionBuilder: (Widget child, Animation<double> animation) {
+          var tween = Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0));
+          return SlideTransitionX(
+            child: child,
+            direction: AxisDirection.down, //上入下出
+            position: animation,
+          );
+        },
+        child: controller.hasSearch
+            ? Container(
+                width: 100,
+                child: TextButton(
+                  child: Text(
+                    '京ICP备2022023998号',
+                    style: TextStyle(color: Colors.grey, fontSize: 10),
+                  ),
+                  onPressed: () {
+                    _launchURL(Uri(scheme: 'https', host: 'beian.miit.gov.cn'));
+                  },
+                ),
+              )
+            : IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  Get.toNamed(Routes.searchPage);
+                },
+              ));
+  }
+
   PreferredSizeWidget getAppbar1() {
     return AppBar(
       leading: Builder(
@@ -195,51 +271,9 @@ class _MyHomePage extends State<MyHomePage> with TickerProviderStateMixin {
       ),
       automaticallyImplyLeading: false,
       // centerTitle: false,
-      title: InkWell(
-        onTap: () {
-          Get.toNamed(Routes.searchPage);
-        },
-        child: Container(
-            width: 0.8.sw,
-            height: 40,
-            margin: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 10.w),
-            alignment: Alignment.centerLeft,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Colors.white,
-            ),
-            child: TextButton.icon(
-                onPressed: null,
-                icon: const Icon(Icons.search),
-                label: Text("英雄联盟手游"))),
-      ),
-      bottom: Constant.LOOK_MODE
-          ? null
-          : TabBar(
-              controller: tabController,
-              indicatorSize: TabBarIndicatorSize.label,
-              isScrollable: controller.tabTitle.length > 2 ? true : false,
-              tabs: controller.tabTitle.map((e) {
-                return Container(
-                  height: 120.h,
-                  width: 100.w,
-                  alignment: Alignment.center,
-                  child: Text(e),
-                );
-              }).toList()),
+      title: animatedTitle(),
       actions: [
-        Container(
-          width: 100,
-          child: TextButton(
-            child: Text(
-              '京ICP备2022023998号',
-              style: TextStyle(color: Colors.grey, fontSize: 10),
-            ),
-            onPressed: () {
-              _launchURL(Uri(scheme: 'https', host: 'beian.miit.gov.cn'));
-            },
-          ),
-        )
+        animateActions()
       ],
     );
   }

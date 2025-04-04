@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       rebuildFactor: (old, data) => true,
       builder: (context, child) {
         return GetMaterialApp(
-          title: 'skuu',
+          title: '千千AI',
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
           builder: (context,widget) {

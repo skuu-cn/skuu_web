@@ -90,7 +90,7 @@ class _IdToolPage extends State<IdToolPage> {
                         padding: EdgeInsets.only(left: 10, right: 10)),
                     onPressed: () async {
                       final dio = Dio();
-                      var url = 'https://skuu.cn/skuu/api/id';
+                      var url = 'https://qqai.cn/skuu/api/id';
                       var text = _controller.text;
                       if (text.isEmpty || text.length != 18) {
                         const snackBar = SnackBar(

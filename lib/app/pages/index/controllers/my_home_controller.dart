@@ -166,4 +166,11 @@ class MyHomeController extends GetxController {
     }
     update();
   }
+
+  void changeShowSearch(bool ifShow){
+    if(hasSearch != ifShow){
+      hasSearch = ifShow;
+      update();
+    }
+  }
 }
