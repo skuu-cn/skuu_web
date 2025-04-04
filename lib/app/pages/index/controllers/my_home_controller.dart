@@ -156,7 +156,7 @@ class MyHomeController extends GetxController {
         }
       case 3:
         {
-          tabTitle = ['UU库', '作品'];
+          tabTitle = ['金库', '作品'];
           tabBoby = [
             MykuPage(userId: 12),
             MeDetailPage(12),
