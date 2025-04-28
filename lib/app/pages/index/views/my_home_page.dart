@@ -239,7 +239,7 @@ class _MyHomePage extends State<MyHomePage> with TickerProviderStateMixin {
                 width: 100,
                 child: TextButton(
                   child: Text(
-                    '京ICP备2022023998号',
+                    '京ICP备2022023998号-2',
                     style: TextStyle(color: Colors.grey, fontSize: 10),
                   ),
                   onPressed: () {

@@ -9,9 +9,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skuu/app/data/models/address_entity.dart';
 
-import '../../../constant/color_constant.dart';
-import '../../components/video_player_public/public_video_player.dart';
-import '../index/views/filter_page.dart';
+import '../../../../constant/color_constant.dart';
+import '../../../components/video_player_public/public_video_player.dart';
+import '../../index/views/filter_page.dart';
+
 
 class PublicGoodsPage extends StatefulWidget {
   PublicGoodsPage();

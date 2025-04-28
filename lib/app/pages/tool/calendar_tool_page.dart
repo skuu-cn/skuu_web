@@ -7,6 +7,7 @@ import 'package:lunar/calendar/Lunar.dart';
 import 'package:lunar/calendar/Solar.dart';
 import 'package:lunar/calendar/Tao.dart';
 import 'package:lunar/calendar/util/HolidayUtil.dart';
+import 'package:skuu/constant/api_constant.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CalendarToolPage extends StatefulWidget {
@@ -111,7 +112,7 @@ class _CalendarToolPage extends State<CalendarToolPage>
     var month =
         date.month.truncate() > 9 ? date.month : '0' + date.month.toString();
     var day = date.day > 9 ? date.day : '0' + date.day.toString();
-    var url = 'https://qqai.cn/skuu/api/dayHistory/news?day=$year$month$day';
+    var url = ApiConstant.DAY_HISTORY_NEWS_URL + '?day=$year$month$day';
     final dio = Dio();
     return FutureBuilder(
       future: dio.get(url),
@@ -175,7 +176,7 @@ class _CalendarToolPage extends State<CalendarToolPage>
     var month =
         date.month.truncate() > 9 ? date.month : '0' + date.month.toString();
     var day = date.day > 9 ? date.day : '0' + date.day.toString();
-    var url = 'https://qqai.cn/skuu/api/dayHot/news?date=$year$month$day';
+    var url = ApiConstant.DAYHOT_NEWS_URL + '?date=$year$month$day';
     final dio = Dio();
     return FutureBuilder(
       future: dio.get(url),

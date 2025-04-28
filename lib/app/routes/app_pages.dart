@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:skuu/app/components/watch_article.dart';
 import 'package:skuu/app/pages/friends/chat_pagev2.dart';
-import 'package:skuu/app/pages/friends/chat_pagev3.dart';
 import 'package:skuu/app/pages/friends/friends_page.dart';
 import 'package:skuu/app/pages/friends/user_detail_page.dart';
 import 'package:skuu/app/pages/goods/goods_detail_page.dart';
@@ -12,10 +10,8 @@ import 'package:skuu/app/pages/index/views/home_item_page.dart';
 import 'package:skuu/app/pages/lookart/look_art_page.dart';
 import 'package:skuu/app/pages/meleft/mycare_page.dart';
 import 'package:skuu/app/pages/meleft/mycollect_page.dart';
-import 'package:skuu/app/pages/public/public_dynamic_page.dart';
-import 'package:skuu/app/pages/public/public_goods_page.dart';
-import 'package:skuu/app/pages/public/public_short_video_page.dart';
-import 'package:skuu/app/pages/public/public_video_page.dart';
+import 'package:skuu/app/pages/public/bindings/public_binding.dart';
+import 'package:skuu/app/pages/public/views/public_dynamic_page.dart';
 import 'package:skuu/app/pages/tool/ai_page.dart';
 import 'package:skuu/app/pages/tool/bindings/tool_binding.dart';
 import 'package:skuu/app/pages/tool/calendar_tool_page.dart';
@@ -27,6 +23,9 @@ import 'package:skuu/app/pages/tool/thumbnail_page.dart';
 import 'package:skuu/app/pages/tool/url_tool_page.dart';
 
 import '../pages/index/views/my_home_page.dart';
+import '../pages/public/views/public_goods_page.dart';
+import '../pages/public/views/public_short_video_page.dart';
+import '../pages/public/views/public_video_page.dart';
 import '../pages/search/search_page.dart';
 import '../pages/watchvideo/play_video_page.dart';
 
@@ -147,7 +146,7 @@ class AppPages {
     GetPage(
       name: Routes.publishDynamicPageUrl,
       page: () => PublicDynamicPage(),
-      binding: MyHomeBinding(),
+      binding: PublicBinding(),
     ),
     GetPage(
       name: Routes.publishVideoPageUrl,

@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skuu/constant/api_constant.dart';
 import 'package:skuu/constant/color_constant.dart';
 
 import '../../data/models/idCard_bean_entity.dart';
-
 
 class IdToolPage extends StatefulWidget {
   IdToolPage({super.key});
@@ -90,7 +90,7 @@ class _IdToolPage extends State<IdToolPage> {
                         padding: EdgeInsets.only(left: 10, right: 10)),
                     onPressed: () async {
                       final dio = Dio();
-                      var url = 'https://qqai.cn/skuu/api/id';
+                      var url = ApiConstant.API_ID;
                       var text = _controller.text;
                       if (text.isEmpty || text.length != 18) {
                         const snackBar = SnackBar(

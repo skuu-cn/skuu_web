@@ -9,20 +9,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skuu/app/data/models/address_entity.dart';
 
-import '../../../constant/color_constant.dart';
-import '../../components/video_player_public/public_video_player.dart';
-import '../index/views/filter_page.dart';
+import '../../../../constant/color_constant.dart';
+import '../../../components/video_player_public/public_video_player.dart';
+import '../../index/views/filter_page.dart';
 
-class PublicDynamicPage extends StatefulWidget {
-  PublicDynamicPage();
+class PublicVideoPage extends StatefulWidget {
+  PublicVideoPage();
 
   @override
   State<StatefulWidget> createState() {
-    return _PublicDynamicPage();
+    return _PublicVideoPage();
   }
 }
 
-class _PublicDynamicPage extends State<PublicDynamicPage> {
+class _PublicVideoPage extends State<PublicVideoPage> {
   //菜单和路由
   final publishController = TextEditingController();
 
@@ -59,7 +59,7 @@ class _PublicDynamicPage extends State<PublicDynamicPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('发布动态'), actions: [
+        appBar: AppBar(title: Text('发布视频'), actions: [
           ElevatedButton(
             onPressed: () {},
             child: Text(
@@ -77,15 +77,99 @@ class _PublicDynamicPage extends State<PublicDynamicPage> {
         body: ListView(
           padding: EdgeInsets.all(5),
           children: [
+            Padding(
+              padding: EdgeInsets.only(left: 5, right: 5, top: 5),
+              child: Wrap(
+                children: [
+                  ...files.map(
+                        (XFile file) => Container(
+                      padding: EdgeInsets.all(5),
+                      width: videoFiles.isEmpty ? 0.3.sw : 300,
+                      height: videoFiles.isEmpty ? 0.3.sw : 300,
+                      child: Stack(
+                        children: [
+                          videoFiles.isEmpty
+                              ? Positioned.fill(
+                            child: kIsWeb
+                                ? Image.network(
+                              // width: 0.3.sw,
+                              // height: 0.3.sw,
+                              file.path,
+                              fit: BoxFit.fill,
+                            )
+                                : Image.file(File(file.path)),
+                          )
+                              : Positioned.fill(
+                            child: PublicVideoPlayer(),
+                          ),
+                          Positioned(
+                            right: 0,
+                            top: 0,
+                            child: IconButton.filled(
+                                onPressed: () {
+                                  setState(() {
+                                    files.remove(file);
+                                    videoFiles.clear();
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                )),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  if (files.length < 6 && videoFiles.isEmpty)
+                    InkWell(
+                      onTap: () {
+                        // setState(() {});
+                        _openImageFile(context).then((value) => {
+                          setState(() {
+                            if (files.isNotEmpty && videoFiles.isNotEmpty) {
+                              videoFiles.clear();
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.warning,
+                                animType: AnimType.rightSlide,
+                                desc: '请上传图片',
+                                btnOkOnPress: () {},
+                              )..show();
+                              return;
+                            }
+                            if (files.length + value.length > 6) {
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.warning,
+                                animType: AnimType.rightSlide,
+                                desc: '图片超出最大限制：6个',
+                                btnOkOnPress: () {},
+                              )..show();
+                              return;
+                            }
+                            if (value.isNotEmpty) {
+                              files.addAll(value);
+                            }
+                          })
+                        });
+                      },
+                      child: Icon(
+                        Icons.add_box,
+                        size: 0.3.sw,
+                        color: Colors.black12,
+                      ),
+                    ),
+                ],
+              ),
+            ),
             TextField(
-              minLines: 5,
-              maxLines: 10,
-              controller: publishController,
+              maxLines: 1,
               style: TextStyle(fontSize: 20),
               decoration: InputDecoration(
                 ///设置输入文本框的提示文字
                 ///输入框获取焦点时 并且没有输入文字时
-                hintText: "这一刻的想法...",
+                hintText: "视频标题",
 
                 ///设置输入文本框的提示文字的样式
                 hintStyle: TextStyle(
@@ -94,11 +178,11 @@ class _PublicDynamicPage extends State<PublicDynamicPage> {
                 ),
 
                 ///输入框内的提示 输入框没有获取焦点时显示
-                labelText: "这一刻的想法...",
-                labelStyle: TextStyle(color: Colors.blue),
+                labelText: "视频标题",
+                labelStyle: TextStyle(color: Colors.black),
 
                 ///输入框获取焦点时才会显示出来 输入文本的前面
-                prefixText: "想法：",
+                prefixText: "标题：",
                 prefixStyle: TextStyle(color: Colors.deepPurple),
 
                 ///输入文字后面的小图标
@@ -135,7 +219,7 @@ class _PublicDynamicPage extends State<PublicDynamicPage> {
                   ///用来配置边框的样式
                   borderSide: BorderSide(
                     ///设置边框的颜色
-                    color: Colors.blue,
+                    color: Colors.grey,
 
                     ///设置边框的粗细
                     width: 2.0,
@@ -171,92 +255,102 @@ class _PublicDynamicPage extends State<PublicDynamicPage> {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 5, right: 5, top: 5),
-              child: Wrap(
-                children: [
-                  ...files.map(
-                    (XFile file) => Container(
-                      padding: EdgeInsets.all(5),
-                      width: videoFiles.isEmpty ? 0.3.sw : 300,
-                      height: videoFiles.isEmpty ? 0.3.sw : 300,
-                      child: Stack(
-                        children: [
-                          videoFiles.isEmpty
-                              ? Positioned.fill(
-                                  child: kIsWeb
-                                      ? Image.network(
-                                          // width: 0.3.sw,
-                                          // height: 0.3.sw,
-                                          file.path,
-                                          fit: BoxFit.fill,
-                                        )
-                                      : Image.file(File(file.path)),
-                                )
-                              : Positioned.fill(
-                                  child: PublicVideoPlayer(),
-                                ),
-                          Positioned(
-                            right: 0,
-                            top: 0,
-                            child: IconButton.filled(
-                                onPressed: () {
-                                  setState(() {
-                                    files.remove(file);
-                                    videoFiles.clear();
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.close,
-                                  color: Colors.white,
-                                )),
-                          ),
-                        ],
-                      ),
-                    ),
+            SizedBox(height: 5,),
+            TextField(
+              minLines: 5,
+              maxLines: 10,
+              controller: publishController,
+              style: TextStyle(fontSize: 20),
+              decoration: InputDecoration(
+                ///设置输入文本框的提示文字
+                ///输入框获取焦点时 并且没有输入文字时
+                hintText: "视频介绍",
+
+                ///设置输入文本框的提示文字的样式
+                hintStyle: TextStyle(
+                  color: Colors.grey,
+                  textBaseline: TextBaseline.ideographic,
+                ),
+
+                ///输入框内的提示 输入框没有获取焦点时显示
+                labelText: "视频介绍",
+                labelStyle: TextStyle(color: Colors.black),
+
+                ///输入框获取焦点时才会显示出来 输入文本的前面
+                prefixText: "介绍：",
+                prefixStyle: TextStyle(color: Colors.deepPurple),
+
+                ///输入文字后面的小图标
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    publishController.clear();
+                  },
+                ),
+
+                ///设置边框
+                ///   InputBorder.none 无下划线
+                ///   OutlineInputBorder 上下左右 都有边框
+                ///   UnderlineInputBorder 只有下边框  默认使用的就是下边框
+                border: OutlineInputBorder(
+                  ///设置边框四个角的弧度
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+
+                  ///用来配置边框的样式
+                  borderSide: BorderSide(
+                    ///设置边框的颜色
+                    color: Colors.red,
+
+                    ///设置边框的粗细
+                    width: 2.0,
                   ),
-                  if (files.length < 6 && videoFiles.isEmpty)
-                    InkWell(
-                      onTap: () {
-                        // setState(() {});
-                        _openImageFile(context).then((value) => {
-                              setState(() {
-                                if (files.isNotEmpty && videoFiles.isNotEmpty) {
-                                  videoFiles.clear();
-                                  AwesomeDialog(
-                                    context: context,
-                                    dialogType: DialogType.warning,
-                                    animType: AnimType.rightSlide,
-                                    desc: '请上传图片',
-                                    btnOkOnPress: () {},
-                                  )..show();
-                                  return;
-                                }
-                                if (files.length + value.length > 6) {
-                                  AwesomeDialog(
-                                    context: context,
-                                    dialogType: DialogType.warning,
-                                    animType: AnimType.rightSlide,
-                                    desc: '图片超出最大限制：6个',
-                                    btnOkOnPress: () {},
-                                  )..show();
-                                  return;
-                                }
-                                if (value.isNotEmpty) {
-                                  files.addAll(value);
-                                }
-                              })
-                            });
-                      },
-                      child: Icon(
-                        Icons.add_box,
-                        size: 0.3.sw,
-                        color: Colors.black12,
-                      ),
-                    ),
-                ],
+                ),
+
+                ///设置输入框可编辑时的边框样式
+                enabledBorder: OutlineInputBorder(
+                  ///设置边框四个角的弧度
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+
+                  ///用来配置边框的样式
+                  borderSide: BorderSide(
+                    ///设置边框的颜色
+                    color: Colors.grey,
+
+                    ///设置边框的粗细
+                    width: 2.0,
+                  ),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  ///设置边框四个角的弧度
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+
+                  ///用来配置边框的样式
+                  borderSide: BorderSide(
+                    ///设置边框的颜色
+                    color: Colors.red,
+
+                    ///设置边框的粗细
+                    width: 2.0,
+                  ),
+                ),
+
+                ///用来配置输入框获取焦点时的颜色
+                focusedBorder: OutlineInputBorder(
+                  ///设置边框四个角的弧度
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+
+                  ///用来配置边框的样式
+                  borderSide: BorderSide(
+                    ///设置边框的颜色
+                    color: Colors.green,
+
+                    ///设置边框的粗细
+                    width: 2.0,
+                  ),
+                ),
               ),
             ),
+
             Divider(
               height: 1,
               color: Colors.black12,
@@ -306,12 +400,12 @@ class _PublicDynamicPage extends State<PublicDynamicPage> {
               },
               child: selAddressEntity == null
                   ? ListTile(
-                      leading: Icon(Icons.add_location),
-                      title: Text('所在位置'),
+                      leading: Icon(Icons.video_library),
+                      title: Text('剧集'),
                       trailing: Icon(Icons.chevron_right),
                     )
                   : ListTile(
-                      leading: Icon(Icons.add_location),
+                      leading: Icon(Icons.category),
                       title: Text(selAddressEntity!.name),
                       trailing: Icon(Icons.chevron_right),
                     ),
@@ -331,16 +425,16 @@ class _PublicDynamicPage extends State<PublicDynamicPage> {
                     builder: (BuildContext build) {
                       return FilterPage(huatiSel);
                     }).then((value) {
-                  if (value != null) {
-                    setState(() {
-                      huatiSel = value;
-                    });
-                  }
+                      if(value != null){
+                        setState(() {
+                          huatiSel = value;
+                        });
+                      }
                 });
               },
               child: ListTile(
-                leading: Icon(Icons.tag),
-                title: huatiSel.isEmpty ? Text('话题') : Text(huatiSel.join(",")),
+                leading: Icon(Icons.category),
+                title: huatiSel.isEmpty ? Text('分类') : Text(huatiSel.join(",")),
                 trailing: Icon(Icons.chevron_right),
               ),
             ),
@@ -407,8 +501,8 @@ class _PublicDynamicPage extends State<PublicDynamicPage> {
       extensions: <String>['mp3', 'mp4'],
     );
     final List<XFile> files = await openFiles(acceptedTypeGroups: <XTypeGroup>[
-      jpgsTypeGroup,
-      pngTypeGroup,
+      // jpgsTypeGroup,
+      // pngTypeGroup,
       videoTypeGroup
     ]);
     // #enddocregion MultiOpen
