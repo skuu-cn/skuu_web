@@ -33,7 +33,7 @@ class _IpToolPage extends State<IpToolPage> {
 
   initData() async {
     final dio = Dio();
-    var url = 'https://qqai.cn/skuu/api/ip';
+    var url = 'https://qqai.cn/api/ip';
     var text = 'local';
     Response response = await dio.post(url, data: {"ip": text});
     IpBeanEntity ipBeanEntity = IpBeanEntity.fromJson(response.data);
@@ -108,7 +108,7 @@ class _IpToolPage extends State<IpToolPage> {
                         padding: EdgeInsets.only(left: 10, right: 10)),
                     onPressed: () async {
                       final dio = Dio();
-                      var url = 'https://qqai.cn/skuu/api/ip';
+                      var url = 'https://qqai.cn/api/ip';
                       var text = _controller.text;
                       if (text.isEmpty) {
                         const snackBar = SnackBar(
