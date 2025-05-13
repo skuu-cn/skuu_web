@@ -3,12 +3,13 @@ import 'dart:convert';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/address_entity.dart';
 
-class PublicDynamicController extends GetxController {
+class FabuDynamicController extends GetxController {
   //菜单和路由
   final publishController = TextEditingController();
 
@@ -32,7 +33,7 @@ class PublicDynamicController extends GetxController {
     super.onInit();
   }
 
-  void setWhoCanSee(String who){
+  void setWhoCanSee(String who) {
     whoCanSeeSel = who;
     update();
   }
@@ -97,5 +98,11 @@ class PublicDynamicController extends GetxController {
       files.addAll(value);
     }
     update();
+  }
+
+  @override
+  void onClose() {
+    // publishController.dispose();
+    super.onClose();
   }
 }

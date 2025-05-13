@@ -28,6 +28,7 @@ abstract class Routes {
   static const String calendarToolPageUrl = "/calendar_tool_page";
   static const String publishDynamicPageUrl = "/publish_dynamic_page";
   static const String publishVideoPageUrl = "/publish_video_page";
+  static const String publishZuoPinPageUrl = '/publish_zuopin_page';
   static const String publishGoodsPageUrl = "/publish_goods_page";
   static const String publishShortVideoPageUrl = "/publish_short_video_page";
   static const String aiPageUrl = "/ai_page";

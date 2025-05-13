@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:skuu/app/pages/drawer_page.dart';
 import 'package:skuu/app/pages/index/controllers/my_home_controller.dart';
-import 'package:skuu/app/pages/index/views/widgets/public_sheets.dart';
 import 'package:skuu/app/pages/index/views/widgets/slide_transition_x.dart';
 import 'package:skuu/constant/color_constant.dart';
 import 'package:skuu/constant/constant.dart';
@@ -12,8 +11,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../components/AnimatedBottomBar.dart';
 import '../../../routes/app_pages.dart';
-import 'filter_page.dart';
-import 'goods_filter_pagev2.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -50,66 +47,48 @@ class _MyHomePage extends State<MyHomePage> with TickerProviderStateMixin {
                   : const AlwaysScrollableScrollPhysics(), //禁止滑动
           children: controller.tabBoby,
         )),
-        floatingActionButton: controller.selected != 0
+        floatingActionButton: 1.sw <= 500
             ? null
             : CircularMenu(
                 toggleButtonColor: ColorConstant.ThemeGreen,
                 items: [
                   CircularMenuItem(
                       color: ColorConstant.ThemeGreen,
-                      icon: Icons.add,
+                      icon: Icons.home,
                       onTap: () {
-                        showModalBottomSheet(
-                            constraints: BoxConstraints(maxHeight: 350.h),
-                            context: context,
-                            builder: (BuildContext build) {
-                              return PublicSheets();
-                            });
+                        changeIndex(0);
                       }),
                   CircularMenuItem(
                       color: ColorConstant.ThemeGreen,
-                      icon: Icons.layers,
+                      icon: Icons.slow_motion_video_sharp,
                       onTap: () {
-                        setState(() {
-                          Constant.LOOK_MODE = false;
-                        });
+                        changeIndex(1);
                       }),
                   CircularMenuItem(
                       color: ColorConstant.ThemeGreen,
-                      icon: Icons.layers_clear,
+                      icon: Icons.message,
                       onTap: () {
-                        setState(() {
-                          Constant.LOOK_MODE = true;
-                        });
+                        changeIndex(2);
                       }),
                   CircularMenuItem(
                       color: ColorConstant.ThemeGreen,
-                      icon: Icons.filter_alt,
+                      icon: Icons.people,
                       onTap: () {
-                        showModalBottomSheet(
-                            constraints: BoxConstraints(maxHeight: 0.8.sh),
-                            context: context,
-                            isScrollControlled: true,
-                            builder: (BuildContext build) {
-                              if (tabController.index == 4)
-                                return GoodsFilterPageV2();
-                              return FilterPage([]);
-                            }).then((value) => {print(value)});
-                        //callback
+                        changeIndex(3);
                       }),
                 ],
                 alignment: Alignment.bottomRight,
               ),
-        bottomNavigationBar: Constant.LOOK_MODE
-            ? null
-            : AnimatedBottomBar(
+        bottomNavigationBar: 1.sw <= 500
+            ? AnimatedBottomBar(
                 barItems: controller.barItems,
                 onBarTap: (index) {
                   changeIndex(index);
                 },
                 animationDuration: const Duration(milliseconds: 150),
                 barStyle: BarStyle(fontSize: 15.0, iconSize: 20.0),
-              ),
+              )
+            : null,
       );
     });
   }
@@ -169,6 +148,18 @@ class _MyHomePage extends State<MyHomePage> with TickerProviderStateMixin {
           }).toList()),
       actions: [
         IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () {
+            Get.toNamed(Routes.publishZuoPinPageUrl);
+            // showModalBottomSheet(
+            //     constraints: BoxConstraints(maxHeight: 350.h),
+            //     context: context,
+            //     builder: (BuildContext build) {
+            //       return PublicSheets();
+            //     });
+          },
+        ),
+        IconButton(
           icon: Icon(Icons.search),
           onPressed: () {
             Get.toNamed(Routes.searchPage);
@@ -197,7 +188,7 @@ class _MyHomePage extends State<MyHomePage> with TickerProviderStateMixin {
               child: Container(
                   width: 0.8.sw,
                   height: 40,
-                  margin: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 10.w),
+                  margin: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 10.0),
                   alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
@@ -247,11 +238,28 @@ class _MyHomePage extends State<MyHomePage> with TickerProviderStateMixin {
                   },
                 ),
               )
-            : IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {
-                  Get.toNamed(Routes.searchPage);
-                },
+            : Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.add_circle_sharp),
+                    onPressed: () {
+                      Get.toNamed(Routes.publishZuoPinPageUrl);
+
+                      // showModalBottomSheet(
+                      //     constraints: BoxConstraints(maxHeight: 350.h),
+                      //     context: context,
+                      //     builder: (BuildContext build) {
+                      //       return PublicSheets();
+                      //     });
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      Get.toNamed(Routes.searchPage);
+                    },
+                  )
+                ],
               ));
   }
 
@@ -272,9 +280,7 @@ class _MyHomePage extends State<MyHomePage> with TickerProviderStateMixin {
       automaticallyImplyLeading: false,
       // centerTitle: false,
       title: animatedTitle(),
-      actions: [
-        animateActions()
-      ],
+      actions: [animateActions()],
     );
   }
 

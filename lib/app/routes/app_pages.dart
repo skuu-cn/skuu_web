@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:skuu/app/pages/fabu/bindings/fabu_dynamic_binding.dart';
+import 'package:skuu/app/pages/fabu/bindings/fabu_video_binding.dart';
 import 'package:skuu/app/pages/friends/chat_pagev2.dart';
 import 'package:skuu/app/pages/friends/friends_page.dart';
 import 'package:skuu/app/pages/friends/user_detail_page.dart';
@@ -10,8 +12,6 @@ import 'package:skuu/app/pages/index/views/home_item_page.dart';
 import 'package:skuu/app/pages/lookart/look_art_page.dart';
 import 'package:skuu/app/pages/meleft/mycare_page.dart';
 import 'package:skuu/app/pages/meleft/mycollect_page.dart';
-import 'package:skuu/app/pages/public/bindings/public_binding.dart';
-import 'package:skuu/app/pages/public/views/public_dynamic_page.dart';
 import 'package:skuu/app/pages/tool/ai_page.dart';
 import 'package:skuu/app/pages/tool/bindings/tool_binding.dart';
 import 'package:skuu/app/pages/tool/calendar_tool_page.dart';
@@ -22,10 +22,13 @@ import 'package:skuu/app/pages/tool/qr_code_page.dart';
 import 'package:skuu/app/pages/tool/thumbnail_page.dart';
 import 'package:skuu/app/pages/tool/url_tool_page.dart';
 
+import '../pages/fabu/bindings/fabu_zuopin_binding.dart';
+import '../pages/fabu/views/fabu_dynamic_page.dart';
+import '../pages/fabu/views/fabu_goods_page.dart';
+import '../pages/fabu/views/fabu_short_video_page.dart';
+import '../pages/fabu/views/fabu_video_page.dart';
+import '../pages/fabu/views/fabu_zuopin_page.dart';
 import '../pages/index/views/my_home_page.dart';
-import '../pages/public/views/public_goods_page.dart';
-import '../pages/public/views/public_short_video_page.dart';
-import '../pages/public/views/public_video_page.dart';
 import '../pages/search/search_page.dart';
 import '../pages/watchvideo/play_video_page.dart';
 
@@ -143,24 +146,10 @@ class AppPages {
       page: () => HomeAppBarItemPage(),
       binding: MyHomeBinding(),
     ),
-    GetPage(
-      name: Routes.publishDynamicPageUrl,
-      page: () => PublicDynamicPage(),
-      binding: PublicBinding(),
-    ),
-    GetPage(
-      name: Routes.publishVideoPageUrl,
-      page: () => PublicVideoPage(),
-      binding: MyHomeBinding(),
-    ),
+
     GetPage(
       name: Routes.publishGoodsPageUrl,
-      page: () => PublicGoodsPage(),
-      binding: MyHomeBinding(),
-    ),
-    GetPage(
-      name: Routes.publishShortVideoPageUrl,
-      page: () => PublicShortVideoPage(),
+      page: () => FabuGoodsPage(),
       binding: MyHomeBinding(),
     ),
     GetPage(
@@ -172,6 +161,11 @@ class AppPages {
       name: Routes.thumbnailPageUrl,
       page: () => ThumbnailPage(),
       binding: ToolBing(),
+    ),
+    GetPage(
+      name: Routes.publishZuoPinPageUrl,
+      page: () => FabuZuoPinPage(),
+      binding: FabuZuoPinBinding(),
     ),
   ];
 }

@@ -1,3 +1,4 @@
+import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +27,8 @@ class MyHomeController extends GetxController {
   late int selected = 0;
 
   late bool hasSearch = true;
+
+  late int bottomMenuType = 1;
 
   late List<String> tabTitle = [];
 
@@ -172,5 +175,10 @@ class MyHomeController extends GetxController {
       hasSearch = ifShow;
       update();
     }
+  }
+
+  void changeMenuType(int n){
+    bottomMenuType = n;
+    update();
   }
 }
