@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skuu/constant/color_constant.dart';
@@ -230,12 +231,12 @@ class _LookArticalPage extends State<LookArticalPage>
       titleAlignment: ListTileTitleAlignment.titleHeight,
       leading: Image.asset(
         'imgs/defbak.png',
-        width: Constant.HEAD_IMG_SEZE,
-        height: Constant.HEAD_IMG_SEZE,
+        width: Constant.HEAD_IMG_SEZE.w,
+        height: Constant.HEAD_IMG_SEZE.w,
         fit: BoxFit.fill,
       ),
       title: Container(
-        padding: EdgeInsets.only(top: 10),
+        // padding: EdgeInsets.only(top: 10),
         decoration: UnderlineTabIndicator(
             borderSide: BorderSide(color: Colors.black12)),
         child: Column(
@@ -304,43 +305,46 @@ class _LookArticalPage extends State<LookArticalPage>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('新飞飞1：', style: TextStyle(color: Colors.grey)),
-                      Expanded(
-                        child: SelectableText(text),
-                      )
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('新飞飞1：', style: TextStyle(color: Colors.grey)),
-                      Expanded(
-                        child: SelectableText(text),
-                      )
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('新飞飞1：', style: TextStyle(color: Colors.grey)),
-                      Expanded(
-                        child: SelectableText(text),
-                      )
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('新飞飞1：', style: TextStyle(color: Colors.grey)),
-                      Expanded(
-                        child: SelectableText(text),
-                      )
-                    ],
-                  ),
-                  // TextButton(onPressed: ()=>{}, child: Text('查看全部30挑评论')),
+                  SelectableText.rich(TextSpan(children: [
+                    TextSpan(
+                        text: '新飞飞1',
+                        style: TextStyle(color: Colors.grey, height: 1.8),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            print('新飞飞1');
+                          }),
+                    TextSpan(text: '：'+text, style: TextStyle(height: 1.8))
+                  ])),
+                  SelectableText.rich(TextSpan(children: [
+                    TextSpan(
+                        text: '新飞飞1：',
+                        style: TextStyle(color: Colors.grey, height: 1.8),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            print('新飞飞1');
+                          }),
+                    TextSpan(text: '：'+text, style: TextStyle(height: 1.8))
+                  ])),
+                  SelectableText.rich(TextSpan(children: [
+                    TextSpan(
+                        text: '新飞飞1：',
+                        style: TextStyle(color: Colors.grey, height: 1.8),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            print('新飞飞1');
+                          }),
+                    TextSpan(text: '：'+text, style: TextStyle(height: 1.8))
+                  ])),
+                  SelectableText.rich(TextSpan(children: [
+                    TextSpan(
+                        text: '新飞飞1：',
+                        style: TextStyle(color: Colors.grey, height: 1.8),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            print('新飞飞1');
+                          }),
+                    TextSpan(text: '：'+text, style: TextStyle(height: 1.8))
+                  ])),
                   CommengSecondItem(),
                 ],
               ),

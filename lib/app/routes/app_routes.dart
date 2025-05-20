@@ -32,4 +32,5 @@ abstract class Routes {
   static const String publishGoodsPageUrl = "/publish_goods_page";
   static const String publishShortVideoPageUrl = "/publish_short_video_page";
   static const String aiPageUrl = "/ai_page";
+  static const String weatherPageUrl = "/weather";
 }

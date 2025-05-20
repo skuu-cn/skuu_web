@@ -45,19 +45,19 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar>
         },
         child: AnimatedContainer(
           // alignment: Alignment.centerRight,
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+          padding: const EdgeInsets.only(bottom: 15,top: 10,left: 10,right: 10),
           duration: widget.animationDuration,
           decoration: BoxDecoration(
               color: isSelected
                   ? item.color.withOpacity(0.15)
                   : Colors.transparent,
-              borderRadius: BorderRadius.all(Radius.circular(30))),
+              borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Row(
             children: <Widget>[
               SvgPicture.asset(
                 isSelected ? item.selectPath : item.unSelectPath,
-                width: 30,
-                height: 30,
+                width: 40,
+                height: 40,
               ),
               SizedBox(
                 width: 2.0,

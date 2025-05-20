@@ -33,6 +33,13 @@ class _ToolPage extends State<ToolPage> {
         desc: "时间日历，八字，时事新闻",
         indexLetter: "rili",
         clickUrl: Routes.calendarToolPageUrl));
+    allToolItemBeans.add(ToolItemBean(
+        imageUrl: "imgs/rili.svg",
+        title: "天气",
+        subTitle: "天气预报",
+        desc: "天气预报",
+        indexLetter: "tianqi",
+        clickUrl: Routes.weatherPageUrl));
 
     allToolItemBeans.add(ToolItemBean(
         imageUrl: "imgs/ai.svg",

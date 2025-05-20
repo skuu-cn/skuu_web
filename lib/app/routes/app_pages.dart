@@ -21,6 +21,7 @@ import 'package:skuu/app/pages/tool/ip_tool_page.dart';
 import 'package:skuu/app/pages/tool/qr_code_page.dart';
 import 'package:skuu/app/pages/tool/thumbnail_page.dart';
 import 'package:skuu/app/pages/tool/url_tool_page.dart';
+import 'package:skuu/app/pages/weather/weather_home_page.dart';
 
 import '../pages/fabu/bindings/fabu_zuopin_binding.dart';
 import '../pages/fabu/views/fabu_dynamic_page.dart';
@@ -31,6 +32,7 @@ import '../pages/fabu/views/fabu_zuopin_page.dart';
 import '../pages/index/views/my_home_page.dart';
 import '../pages/search/search_page.dart';
 import '../pages/watchvideo/play_video_page.dart';
+import '../pages/weather/bindings/weather_binding.dart';
 
 part 'app_routes.dart';
 
@@ -166,6 +168,11 @@ class AppPages {
       name: Routes.publishZuoPinPageUrl,
       page: () => FabuZuoPinPage(),
       binding: FabuZuoPinBinding(),
+    ),
+    GetPage(
+      name: Routes.weatherPageUrl,
+      page: () => WeatherHomePage(),
+      binding: WeatherBinding(),
     ),
   ];
 }

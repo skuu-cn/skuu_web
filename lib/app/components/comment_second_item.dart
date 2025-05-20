@@ -70,14 +70,15 @@ class _CommengSecondItem extends State<CommengSecondItem> {
     return ListTile(
       hoverColor: Colors.white,
       focusColor: Colors.white,
+      titleAlignment: ListTileTitleAlignment.titleHeight,
       leading: Image.asset(
         'imgs/defbak.png',
-        width: Constant.HEAD_IMG_SEZE,
-        height: Constant.HEAD_IMG_SEZE,
+        width: Constant.HEAD_IMG_SEZE.w,
+        height: Constant.HEAD_IMG_SEZE.w,
         fit: BoxFit.fill,
       ),
       title: Container(
-        padding: EdgeInsets.only(top: 10),
+        // padding: EdgeInsets.only(top: 10),
         decoration: UnderlineTabIndicator(
             borderSide: BorderSide(color: Colors.black12)),
         child: Column(
