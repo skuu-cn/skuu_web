@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_weather_bg_null_safety/bg/weather_bg.dart';
 import 'package:flutter_weather_bg_null_safety/utils/weather_type.dart';
 import 'package:get/get.dart';
 import 'package:skuu/app/pages/weather/controllers/weather_controller.dart';
 
+import '../../../constant/constant.dart';
 import '../../data/models/city_model_entity.dart';
+import '../../routes/app_pages.dart';
 
 class WeatherLeftPage extends GetView<WeatherController> {
   @override
@@ -15,7 +18,12 @@ class WeatherLeftPage extends GetView<WeatherController> {
         itemBuilder: (BuildContext context, int index) {
           return InkWell(
             onTap: () {
-              controller.changeIndexLeft(index);
+              if (1.sw <= Constant.CHAT_TWO_VIEW_WIDTH) {
+                Get.toNamed(Routes.weatherRightPageUrl);
+                controller.changeIndexLeft1(index);
+              } else {
+                controller.changeIndexLeft(index);
+              }
             },
             child: ListItemWidget(
               weatherType: controller.realTimeWeathers[index].now.weatherType,
@@ -46,7 +54,8 @@ class ListItemWidget extends StatelessWidget {
       {Key? key,
       required this.weatherType,
       required this.city,
-      required this.weatherText, required this.selected})
+      required this.weatherText,
+      required this.selected})
       : super(key: key);
 
   @override
@@ -67,7 +76,9 @@ class ListItemWidget extends StatelessWidget {
               alignment: Alignment(-0.8, 0),
               height: 100,
               child: Text(
-                selected?'👉 ${city.adm2}-${city.name}':'${city.adm2}-${city.name}',
+                selected
+                    ? '👉 ${city.adm2}-${city.name}'
+                    : '${city.adm2}-${city.name}',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,

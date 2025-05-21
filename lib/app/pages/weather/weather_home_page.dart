@@ -4,20 +4,19 @@ import 'package:get/get.dart';
 import 'package:skuu/app/pages/weather/controllers/weather_controller.dart';
 import 'package:skuu/app/pages/weather/weather_detail_view.dart';
 import 'package:skuu/app/pages/weather/weather_left_page.dart';
-
-import '../demo/weather/page_view.dart';
+import 'package:skuu/constant/constant.dart';
 
 class WeatherHomePage extends GetView<WeatherController> {
-
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<WeatherController>(builder: (_){
+    return GetBuilder<WeatherController>(builder: (_) {
       return Scaffold(
         appBar: AppBar(
           title: Row(
             children: [
+              Spacer(),
               Container(
-                  width: 0.8.sw,
+                  width: 0.7.sw,
                   height: 40,
                   margin: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 10.w),
                   alignment: Alignment.centerLeft,
@@ -38,6 +37,7 @@ class WeatherHomePage extends GetView<WeatherController> {
                   controller.getRealTimeWeather();
                 },
               ),
+              Spacer(),
             ],
           ),
         ),
@@ -45,11 +45,11 @@ class WeatherHomePage extends GetView<WeatherController> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Expanded(flex: 2, child: WeatherLeftPage()),
-            Expanded(flex: 5, child: WeatherDetailView()),
+            if (1.sw > Constant.CHAT_TWO_VIEW_WIDTH)
+              Expanded(flex: 5, child: WeatherDetailView()),
           ],
         ),
       );
     });
-
   }
 }

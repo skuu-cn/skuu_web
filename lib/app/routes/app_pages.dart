@@ -33,6 +33,8 @@ import '../pages/index/views/my_home_page.dart';
 import '../pages/search/search_page.dart';
 import '../pages/watchvideo/play_video_page.dart';
 import '../pages/weather/bindings/weather_binding.dart';
+import '../pages/weather/weather_detail_view.dart';
+import '../pages/weather/weather_left_page.dart';
 
 part 'app_routes.dart';
 
@@ -172,6 +174,16 @@ class AppPages {
     GetPage(
       name: Routes.weatherPageUrl,
       page: () => WeatherHomePage(),
+      binding: WeatherBinding(),
+    ),
+    GetPage(
+      name: Routes.weatherLeftPageUrl,
+      page: () => WeatherLeftPage(),
+      binding: WeatherBinding(),
+    ),
+    GetPage(
+      name: Routes.weatherRightPageUrl,
+      page: () => WeatherDetailView(),
       binding: WeatherBinding(),
     ),
   ];
