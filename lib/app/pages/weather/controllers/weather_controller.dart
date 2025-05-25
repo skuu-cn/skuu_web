@@ -1,24 +1,23 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_weather_bg_null_safety/utils/weather_type.dart';
 import 'package:geolocator_web/geolocator_web.dart';
 import 'package:get/get.dart';
-import 'package:skuu/app/routes/app_pages.dart';
+import 'package:intl/intl.dart';
+import 'package:skuu/app/pages/weather/views/perday_weather_view.dart';
 import 'package:skuu/app/services/base_client.dart';
 import 'package:skuu/constant/api_constant2.dart';
-import 'package:intl/intl.dart';
-import 'package:skuu/constant/constant.dart';
 
+import '../../../components/AnimatedBottomBar.dart';
 import '../../../data/models/city_model_entity.dart';
 import '../../../data/models/real_time_weather_entity.dart';
+import '../views/perhour_weather_view.dart';
 
 class WeatherController extends GetxController {
   var locationState;
-  late PageController pageController;
   int currentPage = 0;
 
   static const String _locationServicesDisabledMessage =
@@ -40,14 +39,39 @@ class WeatherController extends GetxController {
   var weatherMaps = <Map>[];
   bool ifOnHour = false;
 
+  final List<BarItem> barItems = [
+    BarItem(
+      text: "实时天气",
+      selectPath: "imgs/index-selv2.svg",
+      unSelectPath: "imgs/index.svg",
+      color: Colors.white,
+    ),
+    BarItem(
+      text: "24小时预报",
+      selectPath: "imgs/video-sel.svg",
+      unSelectPath: "imgs/video.svg",
+      color: Colors.white,
+    ),
+    BarItem(
+      text: "7天预报",
+      selectPath: "imgs/msg-selv2.svg",
+      unSelectPath: "imgs/msg.svg",
+      color: Colors.white,
+    ),
+    BarItem(
+      text: "天气指数",
+      selectPath: "imgs/me-selv2.svg",
+      unSelectPath: "imgs/me.svg",
+      color: Colors.white,
+    ),
+  ];
+  List<Widget> mainView = [
+    PerDayWeatherView(),
+    PerHourWeatherView(),
+  ];
+
   @override
   void onInit() {
-    pageController = new PageController(
-      //用来配置PageView中默认显示的页面 从0开始
-      initialPage: 0,
-      //为true是保持加载的每个页面的状态
-      keepPage: true,
-    );
     toggleListening();
     getRealTimeWeather();
 
@@ -78,18 +102,6 @@ class WeatherController extends GetxController {
   }
 
   void changeIndexLeft1(int n) {
-    // pageController.animateToPage(
-    //   n,
-    //   curve: Curves.ease,
-    //   duration: Duration(milliseconds: 200),
-    // );
-    pageController.dispose();
-    pageController = new PageController(
-      //用来配置PageView中默认显示的页面 从0开始
-      initialPage: n,
-      //为true是保持加载的每个页面的状态
-      keepPage: true,
-    );
     currentPage = n;
     update();
   }
@@ -98,12 +110,6 @@ class WeatherController extends GetxController {
     if (currentPage == n) {
       return;
     }
-    pageController.animateToPage(
-      n,
-      curve: Curves.ease,
-      duration: Duration(milliseconds: 200),
-    );
-
     currentPage = n;
     update();
   }
@@ -168,19 +174,30 @@ class WeatherController extends GetxController {
     });
   }
 
+  Future<void> _updateRealTimeWeatherMock(double lat, double lon) async {
+    await rootBundle.loadString('mock/realtime_weather.json').then((value) {
+      final Map<String, dynamic> jsonData = jsonDecode(value);
+      RealTimeWeatherEntity realTimeWeatherEntity =
+      RealTimeWeatherEntity.fromJson(jsonData);
+      realTimeWeatherEntity.now.weatherType =
+          transWeatherType(realTimeWeatherEntity);
+      realTimeWeathers.add(realTimeWeatherEntity);
+      setWeatherMap(realTimeWeatherEntity.now);
+    });
+  }
+
   void setWeatherMap(RealTimeWeatherNow now) {
     var format2 = DateFormat('HH:mm:ss');
     DateTime dateTime = DateTime.parse(now.obsTime);
     Map<String, String> map = {};
-    map["观察时间"] = format2.format(dateTime);
+    map["观察时间"] = format2.format(dateTime.toLocal());
     map["温度"] = now.temp + '°C';
     map["体感温度"] = now.feelsLike + '°C';
-    map["风向"] = now.windDir;
-    map["风速"] = now.windSpeed + "公里/小时";
+    map[now.windDir] = now.windScale + "级";
     map["相对湿度"] = now.humidity + '%';
     map["能见度"] = now.vis + '公里';
     map["过去1小时降水量"] = now.precip + '毫米';
-    map["大气压强"] = now.pressure + '百帕';
+    map["大气压强"] = now.pressure + 'hPa';
     weatherMaps.add(map);
     update();
   }
@@ -242,7 +259,7 @@ class WeatherController extends GetxController {
     await loadAddressData();
     // await _updateRealTimeWeather(position.latitude, position.longitude);
     for (CityModelLocation city in citys) {
-      await _updateRealTimeWeather(
+      await _updateRealTimeWeatherMock(
           double.parse(city.lat), double.parse(city.lon));
     }
 
@@ -292,7 +309,6 @@ class WeatherController extends GetxController {
   @override
   void onClose() {
     _positionStreamSubscription?.cancel();
-    pageController.dispose();
     super.onClose();
   }
 }

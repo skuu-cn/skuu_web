@@ -1,3 +1,5 @@
+import 'package:city_pickers/city_pickers.dart';
+import 'package:city_pickers/modal/result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -29,7 +31,17 @@ class WeatherHomePage extends GetView<WeatherController> {
                         border: InputBorder.none,
                         hintText: "快速搜索",
                         prefixIcon: Icon(Icons.search)),
-                    onChanged: (t) {},
+                    onTap: () async {
+                      // type 2
+                      Result? result2 = await CityPickers.showFullPageCityPicker(
+                        showType: ShowType.pcav,
+                        context: context,
+                      );
+                      print(result2);
+                    },
+                    // onChanged: (t) async {
+                    //
+                    // },
                   )),
               IconButton(
                 icon: Icon(Icons.location_on),
