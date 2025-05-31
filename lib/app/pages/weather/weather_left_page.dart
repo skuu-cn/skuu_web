@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:skuu/app/pages/weather/controllers/weather_controller.dart';
 
 import '../../../constant/constant.dart';
-import '../../data/models/city_model_entity.dart';
+import '../../data/models/weather_city_entity.dart';
 import '../../routes/app_pages.dart';
 
 class WeatherLeftPage extends GetView<WeatherController> {
@@ -15,6 +15,7 @@ class WeatherLeftPage extends GetView<WeatherController> {
     return GetBuilder<WeatherController>(builder: (_) {
       return ListView.separated(
         physics: BouncingScrollPhysics(),
+        itemCount: controller.leftWeathers.length,
         itemBuilder: (BuildContext context, int index) {
           return InkWell(
             onTap: () {
@@ -26,9 +27,9 @@ class WeatherLeftPage extends GetView<WeatherController> {
               }
             },
             child: ListItemWidget(
-              weatherType: controller.realTimeWeathers[index].now.weatherType,
-              city: controller.citys[index],
-              weatherText: controller.realTimeWeathers[index].now.text,
+              weatherType: controller.leftWeathers[index].now.weatherType,
+              city: controller.weatherCitys[index],
+              weatherText: controller.leftWeathers[index].now.text,
               selected: controller.currentPage == index,
             ),
           );
@@ -38,7 +39,6 @@ class WeatherLeftPage extends GetView<WeatherController> {
             height: 5,
           );
         },
-        itemCount: controller.realTimeWeathers.length,
       );
     });
   }
@@ -46,7 +46,7 @@ class WeatherLeftPage extends GetView<WeatherController> {
 
 class ListItemWidget extends StatelessWidget {
   final WeatherType weatherType;
-  final CityModelLocation city;
+  final WeatherCityData city;
   final String weatherText;
   final bool selected;
 
@@ -77,8 +77,8 @@ class ListItemWidget extends StatelessWidget {
               height: 100,
               child: Text(
                 selected
-                    ? '👉 ${city.adm2}-${city.name}'
-                    : '${city.adm2}-${city.name}',
+                    ? '👉 ${city.province}-${city.county}'
+                    : '${city.province}-${city.county}',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,

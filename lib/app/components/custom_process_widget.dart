@@ -11,6 +11,7 @@ class CustomeProcess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('CustomeProcess $min,$max,$start,$end');
     return Stack(
       children: [
         Container(
@@ -24,7 +25,7 @@ class CustomeProcess extends StatelessWidget {
           builder: (context, constraints) {
             double parentWidth = constraints.maxWidth;
             return Padding(
-              padding: EdgeInsets.only(left: 30),
+              padding: EdgeInsets.only(left: getLeftPad(parentWidth)),
               child: Container(
                 height: height,
                 width: getWidth(parentWidth),
@@ -45,6 +46,13 @@ class CustomeProcess extends StatelessWidget {
       ],
     );
   }
+
+  //100/60*40
+  double getLeftPad(double parentWidth) {
+    double processWidth = parentWidth/(max - min)  * (start - min);
+    return processWidth;
+  }
+
   //100/60*40
   double getWidth(double parentWidth) {
     double processWidth = parentWidth/(max - min)  * (end - start);

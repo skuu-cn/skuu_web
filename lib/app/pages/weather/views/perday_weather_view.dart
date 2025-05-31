@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:skuu/app/pages/weather/controllers/weather_controller.dart';
 
 import '../../../components/custom_process_widget.dart';
+import '../../../data/models/day_weather_entity.dart';
+import '../../../data/models/hour_weather_entity.dart';
 
 class PerDayWeatherView extends GetView<WeatherController> {
   @override
@@ -39,7 +41,7 @@ class PerDayWeatherView extends GetView<WeatherController> {
                             height: 10,
                           ),
                           Text(
-                            '北京朝阳',
+                            '${controller.getCurWeatherCityData().province}|${controller.getCurWeatherCityData().county}',
                             style: TextStyle(
                                 fontSize: 20,
                                 color: controller.ifOnHour
@@ -47,7 +49,7 @@ class PerDayWeatherView extends GetView<WeatherController> {
                                     : Colors.white),
                           ),
                           Text(
-                            '温度：32 ℃   |  体感温度：33 ℃',
+                            '温度：${controller.getCurRealTimeWeather().now.temp} ℃   |  体感温度：${controller.getCurRealTimeWeather().now.feelsLike} ℃',
                             style: TextStyle(
                                 fontSize: 20,
                                 color: controller.ifOnHour
@@ -58,15 +60,16 @@ class PerDayWeatherView extends GetView<WeatherController> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset(
-                                'imgs/weather/100.svg',
+                                'imgs/weather/${controller.getCurRealTimeWeather().now.icon}.svg',
                                 fit: BoxFit.cover,
-                                height: 30,
-                                width: 30,
+                                height: 20,
+                                width: 20,
                                 colorFilter: ColorFilter.mode(
                                     Colors.white, BlendMode.srcIn),
                               ),
+                              SizedBox(width: 5,),
                               Text(
-                                '多云',
+                                '${controller.getCurRealTimeWeather().now.text}',
                                 style: TextStyle(
                                     fontSize: 20,
                                     color: controller.ifOnHour
@@ -81,50 +84,15 @@ class PerDayWeatherView extends GetView<WeatherController> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             spacing: 20,
-                            children: [
-                              Text(
-                                '观察时间 \n 12:00:00',
+                            children:controller.getCurCard1().entries.map((entry){
+                            return  Text(
+                                '${entry.key} \n ${entry.value}',
                                 style: TextStyle(
                                     color: controller.ifOnHour
                                         ? Colors.red
                                         : Colors.white),
-                              ),
-                              Text(
-                                '西风 \n 3级',
-                                style: TextStyle(
-                                    color: controller.ifOnHour
-                                        ? Colors.red
-                                        : Colors.white),
-                              ),
-                              Text(
-                                '湿度 \n 30%',
-                                style: TextStyle(
-                                    color: controller.ifOnHour
-                                        ? Colors.red
-                                        : Colors.white),
-                              ),
-                              Text(
-                                '能见度 \n 21公里',
-                                style: TextStyle(
-                                    color: controller.ifOnHour
-                                        ? Colors.red
-                                        : Colors.white),
-                              ),
-                              Text(
-                                '过去1小时降水量 \n 3毫米',
-                                style: TextStyle(
-                                    color: controller.ifOnHour
-                                        ? Colors.red
-                                        : Colors.white),
-                              ),
-                              Text(
-                                '大气压强 \n 1221Hpa',
-                                style: TextStyle(
-                                    color: controller.ifOnHour
-                                        ? Colors.red
-                                        : Colors.white),
-                              ),
-                            ],
+                              );
+                            }).toList()
                           )
                         ],
                       ),
@@ -162,8 +130,9 @@ class PerDayWeatherView extends GetView<WeatherController> {
                               Expanded(
                                 child: ListView(
                                   scrollDirection: Axis.horizontal,
-                                  children: [
-                                    for (int i = 0; i <= 23; i++)
+                                  children:
+                                  [
+                                    for(HourWeatherHourly item in controller.hourly)
                                       Padding(
                                         padding: EdgeInsets.only(
                                           right: 10,
@@ -172,14 +141,15 @@ class PerDayWeatherView extends GetView<WeatherController> {
                                           spacing: 10,
                                           children: [
                                             Text(
-                                              '现在',
+
+                                              '${item.fxTime}',
                                               style: TextStyle(
                                                   color: controller.ifOnHour
                                                       ? Colors.red
                                                       : Colors.white),
                                             ),
                                             SvgPicture.asset(
-                                              'imgs/weather/100.svg',
+                                              'imgs/weather/${item.icon}.svg',
                                               fit: BoxFit.cover,
                                               height: 35,
                                               width: 35,
@@ -188,7 +158,7 @@ class PerDayWeatherView extends GetView<WeatherController> {
                                                   BlendMode.srcIn),
                                             ),
                                             Text(
-                                              '28℃',
+                                              '${item.temp}℃',
                                               style: TextStyle(
                                                   color: controller.ifOnHour
                                                       ? Colors.red
@@ -237,12 +207,12 @@ class PerDayWeatherView extends GetView<WeatherController> {
                                 ],
                               ),
                               Divider(),
-                              for (int i = 0; i < 10; i++)
+                              for(DayWeatherDaily item in controller.daily)
                                 Row(
                                   spacing: 10,
                                   children: [
                                     Text(
-                                      '今天',
+                                      '${item.fxDate}',
                                       style: TextStyle(
                                           color: controller.ifOnHour
                                               ? Colors.red
@@ -252,7 +222,7 @@ class PerDayWeatherView extends GetView<WeatherController> {
                                       padding:
                                           EdgeInsets.only(left: 50, right: 50),
                                       child: SvgPicture.asset(
-                                        'imgs/weather/100.svg',
+                                        'imgs/weather/${item.iconDay}.svg',
                                         fit: BoxFit.cover,
                                         height: 30,
                                         width: 30,
@@ -261,7 +231,7 @@ class PerDayWeatherView extends GetView<WeatherController> {
                                       ),
                                     ),
                                     Text(
-                                      '18℃',
+                                      '${item.tempMin}℃',
                                       style: TextStyle(
                                           color: controller.ifOnHour
                                               ? Colors.red
@@ -269,9 +239,9 @@ class PerDayWeatherView extends GetView<WeatherController> {
                                     ),
                                     Expanded(
                                         child:
-                                            CustomeProcess(14, 32, 14, 27, 5)),
+                                            CustomeProcess(controller.getMinTemp(), controller.getMaxTemp(), double.parse(item.tempMin), double.parse(item.tempMax), 5)),
                                     Text(
-                                      '28℃',
+                                      '${item.tempMax}℃',
                                       style: TextStyle(
                                           color: controller.ifOnHour
                                               ? Colors.red
@@ -323,7 +293,7 @@ class PerDayWeatherView extends GetView<WeatherController> {
                                   // crossAxisSpacing: 3,
                                   childAspectRatio: 3,
                                 ),
-                                itemCount: 10,
+                                itemCount: controller.indicesDaily.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return ListTile(
                                     leading: Icon(
@@ -331,14 +301,14 @@ class PerDayWeatherView extends GetView<WeatherController> {
                                       color: Colors.white,
                                     ),
                                     title: Text(
-                                      '舒适度指数',
+                                      '${controller.indicesDaily[index].name}',
                                       style: TextStyle(
                                           color: controller.ifOnHour
                                               ? Colors.red
                                               : Colors.white),
                                     ),
                                     subtitle: Text(
-                                      '较舒适',
+                                      '${controller.indicesDaily[index].category}',
                                       style: TextStyle(
                                           color: controller.ifOnHour
                                               ? Colors.red

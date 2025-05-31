@@ -19,18 +19,18 @@ class WeatherDetailView extends GetView<WeatherController> {
           appBar: 1.sw > Constant.CHAT_TWO_VIEW_WIDTH
               ? null
               : AppBar(
-                  title: Text(controller.citys
+                  title: Text(controller.weatherCitys
                           .elementAt(controller.currentPage)
-                          .adm2 +
+                          .province +
                       '-' +
-                      controller.citys.elementAt(controller.currentPage).name),
+                      controller.weatherCitys.elementAt(controller.currentPage).county),
                 ),
           body: Container(
             child: Stack(
               children: [
                 WeatherBg(
                   weatherType:
-                  controller.realTimeWeathers[controller.currentPage].now.weatherType,
+                  controller.getCurRealTimeWeather().now.weatherType,
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                 ),

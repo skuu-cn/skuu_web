@@ -1,12 +1,18 @@
 import 'package:city_pickers/city_pickers.dart';
 import 'package:city_pickers/modal/result.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:skuu/app/components/my_widgets_animator.dart';
 import 'package:skuu/app/pages/weather/controllers/weather_controller.dart';
 import 'package:skuu/app/pages/weather/weather_detail_view.dart';
 import 'package:skuu/app/pages/weather/weather_left_page.dart';
 import 'package:skuu/constant/constant.dart';
+
+import '../../../config/translations/strings_enum.dart';
+import '../../components/api_error_widget.dart';
+import '../../data/models/city_menu_model_entity.dart';
 
 class WeatherHomePage extends GetView<WeatherController> {
   @override
@@ -28,21 +34,29 @@ class WeatherHomePage extends GetView<WeatherController> {
                   ),
                   child: TextField(
                     decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "快速搜索",
-                        prefixIcon: Icon(Icons.search)),
+                      border: InputBorder.none,
+                      hintText: "快速搜索",
+                      prefixIcon: Icon(Icons.search),
+                    ),
+                    controller: controller.textEditingController,
                     onTap: () async {
                       // type 2
-                      Result? result2 = await CityPickers.showFullPageCityPicker(
+                      Result? result2 =
+                          await CityPickers.showFullPageCityPicker(
                         showType: ShowType.pcav,
                         context: context,
                       );
-                      print(result2);
+                      controller.updateSelCity(result2!);
                     },
                     // onChanged: (t) async {
                     //
                     // },
                   )),
+              if (controller.textEditingController.text != '')
+                IconButton(
+                  icon: Icon(Icons.add_circle_sharp),
+                  onPressed: () {},
+                ),
               IconButton(
                 icon: Icon(Icons.location_on),
                 onPressed: () {
@@ -56,7 +70,17 @@ class WeatherHomePage extends GetView<WeatherController> {
         body: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Expanded(flex: 2, child: WeatherLeftPage()),
+            Expanded(
+                flex: 2,
+                child: MyWidgetsAnimator(
+                    apiCallStatus: controller.apiCallStatus,
+                    loadingWidget: () => const Center(child: CupertinoActivityIndicator(),),
+                    errorWidget: () => ApiErrorWidget(
+                      message: Strings.internetError.tr,
+                      retryAction: () => controller.getCityList(),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    ),
+                    successWidget: () => WeatherLeftPage())),
             if (1.sw > Constant.CHAT_TWO_VIEW_WIDTH)
               Expanded(flex: 5, child: WeatherDetailView()),
           ],
