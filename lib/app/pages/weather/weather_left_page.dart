@@ -21,7 +21,7 @@ class WeatherLeftPage extends GetView<WeatherController> {
             onTap: () {
               if (1.sw <= Constant.CHAT_TWO_VIEW_WIDTH) {
                 Get.toNamed(Routes.weatherRightPageUrl);
-                controller.changeIndexLeft1(index);
+                controller.changeIndexLeft(index);
               } else {
                 controller.changeIndexLeft(index);
               }

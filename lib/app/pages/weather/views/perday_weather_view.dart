@@ -67,7 +67,9 @@ class PerDayWeatherView extends GetView<WeatherController> {
                                 colorFilter: ColorFilter.mode(
                                     Colors.white, BlendMode.srcIn),
                               ),
-                              SizedBox(width: 5,),
+                              SizedBox(
+                                width: 5,
+                              ),
                               Text(
                                 '${controller.getCurRealTimeWeather().now.text}',
                                 style: TextStyle(
@@ -82,18 +84,18 @@ class PerDayWeatherView extends GetView<WeatherController> {
                             height: 10,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            spacing: 20,
-                            children:controller.getCurCard1().entries.map((entry){
-                            return  Text(
-                                '${entry.key} \n ${entry.value}',
-                                style: TextStyle(
-                                    color: controller.ifOnHour
-                                        ? Colors.red
-                                        : Colors.white),
-                              );
-                            }).toList()
-                          )
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              spacing: 20,
+                              children:
+                                  controller.getCurCard1().entries.map((entry) {
+                                return Text(
+                                  '${entry.key} \n ${entry.value}',
+                                  style: TextStyle(
+                                      color: controller.ifOnHour
+                                          ? Colors.red
+                                          : Colors.white),
+                                );
+                              }).toList())
                         ],
                       ),
                     ],
@@ -128,46 +130,51 @@ class PerDayWeatherView extends GetView<WeatherController> {
                               ),
                               Divider(),
                               Expanded(
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children:
-                                  [
-                                    for(HourWeatherHourly item in controller.hourly)
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          right: 10,
-                                        ),
-                                        child: Column(
-                                          spacing: 10,
-                                          children: [
-                                            Text(
-
-                                              '${item.fxTime}',
-                                              style: TextStyle(
-                                                  color: controller.ifOnHour
-                                                      ? Colors.red
-                                                      : Colors.white),
-                                            ),
-                                            SvgPicture.asset(
-                                              'imgs/weather/${item.icon}.svg',
-                                              fit: BoxFit.cover,
-                                              height: 35,
-                                              width: 35,
-                                              colorFilter: ColorFilter.mode(
-                                                  Colors.white,
-                                                  BlendMode.srcIn),
-                                            ),
-                                            Text(
-                                              '${item.temp}℃',
-                                              style: TextStyle(
-                                                  color: controller.ifOnHour
-                                                      ? Colors.red
-                                                      : Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                  ],
+                                child: RawScrollbar(
+                                  thumbVisibility: true,
+                                  thumbColor: Colors.white,
+                                  radius: const Radius.circular(4),
+                                  child: ListView(
+                                    primary: true,
+                                    // controller: controller.hourController,
+                                    scrollDirection: Axis.horizontal,
+                                    children: [
+                                      for (HourWeatherHourly item
+                                          in controller.hourly)
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              right: 10, left: 10),
+                                          child: Column(
+                                            spacing: 10,
+                                            children: [
+                                              Text(
+                                                '${item.fxTime}',
+                                                style: TextStyle(
+                                                    color: controller.ifOnHour
+                                                        ? Colors.red
+                                                        : Colors.white),
+                                              ),
+                                              SvgPicture.asset(
+                                                'imgs/weather/${item.icon}.svg',
+                                                fit: BoxFit.cover,
+                                                height: 35,
+                                                width: 35,
+                                                colorFilter: ColorFilter.mode(
+                                                    Colors.white,
+                                                    BlendMode.srcIn),
+                                              ),
+                                              Text(
+                                                '${item.temp}℃',
+                                                style: TextStyle(
+                                                    color: controller.ifOnHour
+                                                        ? Colors.red
+                                                        : Colors.white),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -207,7 +214,7 @@ class PerDayWeatherView extends GetView<WeatherController> {
                                 ],
                               ),
                               Divider(),
-                              for(DayWeatherDaily item in controller.daily)
+                              for (DayWeatherDaily item in controller.daily)
                                 Row(
                                   spacing: 10,
                                   children: [
@@ -238,8 +245,12 @@ class PerDayWeatherView extends GetView<WeatherController> {
                                               : Colors.white),
                                     ),
                                     Expanded(
-                                        child:
-                                            CustomeProcess(controller.getMinTemp(), controller.getMaxTemp(), double.parse(item.tempMin), double.parse(item.tempMax), 5)),
+                                        child: CustomeProcess(
+                                            controller.getMinTemp(),
+                                            controller.getMaxTemp(),
+                                            double.parse(item.tempMin),
+                                            double.parse(item.tempMax),
+                                            5)),
                                     Text(
                                       '${item.tempMax}℃',
                                       style: TextStyle(
@@ -286,37 +297,40 @@ class PerDayWeatherView extends GetView<WeatherController> {
                               ),
                               Divider(),
                               Expanded(
-                                  child: GridView.builder(
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  // crossAxisSpacing: 3,
-                                  childAspectRatio: 3,
+                                child: GridView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    // crossAxisSpacing: 3,
+                                    childAspectRatio: 3,
+                                  ),
+                                  itemCount: controller.indicesDaily.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return ListTile(
+                                      leading: Icon(
+                                        Icons.ac_unit_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      title: Text(
+                                        '${controller.indicesDaily[index].name}',
+                                        style: TextStyle(
+                                            color: controller.ifOnHour
+                                                ? Colors.red
+                                                : Colors.white),
+                                      ),
+                                      subtitle: Text(
+                                        '${controller.indicesDaily[index].category}',
+                                        style: TextStyle(
+                                            color: controller.ifOnHour
+                                                ? Colors.red
+                                                : Colors.white),
+                                      ),
+                                    );
+                                  },
                                 ),
-                                itemCount: controller.indicesDaily.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ListTile(
-                                    leading: Icon(
-                                      Icons.ac_unit_outlined,
-                                      color: Colors.white,
-                                    ),
-                                    title: Text(
-                                      '${controller.indicesDaily[index].name}',
-                                      style: TextStyle(
-                                          color: controller.ifOnHour
-                                              ? Colors.red
-                                              : Colors.white),
-                                    ),
-                                    subtitle: Text(
-                                      '${controller.indicesDaily[index].category}',
-                                      style: TextStyle(
-                                          color: controller.ifOnHour
-                                              ? Colors.red
-                                              : Colors.white),
-                                    ),
-                                  );
-                                },
-                              )),
+                              ),
                             ],
                           )),
                     ],

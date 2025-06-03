@@ -56,6 +56,9 @@ class WeatherController extends GetxController {
   late Map<int, String> minMaxTemp = {};
   late List<IndicesWeatherDaily> indicesDaily = [];
 
+  ScrollController hourController = ScrollController();
+  bool showToTopBtn = false; //是否显示“返回到顶部”按钮
+
   List<Widget> mainView = [
     PerDayWeatherView(),
     PerHourWeatherView(),
@@ -171,8 +174,11 @@ class WeatherController extends GetxController {
     return weatherMaps[index][key];
   }
 
-  void changeIndexLeft1(int n) {
+  Future<void> changeIndexLeft1(int n) async {
     currentPage = n;
+    await getCard2(n);
+    await getCard3(n);
+    await getCard4(n);
     update();
   }
 

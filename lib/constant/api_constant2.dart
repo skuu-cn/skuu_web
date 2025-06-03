@@ -3,8 +3,8 @@ class ApiConstant2 {
   static const String HE_FENG_BASE_API =
       'https://np6hewbpx7.re.qweatherapi.com';
 
-  // static const String API_KEY = '4119cc50b08743198978cf2a97b0bd34';
-  static const String API_KEY = '65e4469558bc45709fd6adfe554c270e';
+  static const String API_KEY = '4119cc50b08743198978cf2a97b0bd34';
+  // static const String API_KEY = '65e4469558bc45709fd6adfe554c270e';
 
   //城市搜索,
   static const String HE_CITY_API = HE_FENG_BASE_API + '/geo/v2/city/lookup';

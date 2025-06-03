@@ -24,6 +24,7 @@ import 'package:skuu/app/pages/tool/url_tool_page.dart';
 import 'package:skuu/app/pages/weather/views/perday_weather_view.dart';
 import 'package:skuu/app/pages/weather/weather_home_page.dart';
 
+import '../js/disable_back.dart';
 import '../pages/fabu/bindings/fabu_zuopin_binding.dart';
 import '../pages/fabu/views/fabu_dynamic_page.dart';
 import '../pages/fabu/views/fabu_goods_page.dart';
@@ -39,6 +40,17 @@ import '../pages/weather/weather_left_page.dart';
 
 part 'app_routes.dart';
 
+// 中间件用于初始化禁用后退逻辑
+class DisableBackMiddleware extends GetMiddleware {
+  @override
+  GetPage<dynamic>? onPageCalled(GetPage<dynamic>? page) {
+    // Call JavaScript to disable back navigation
+    disableBackNavigation();
+    // Return the page unchanged
+    return page;
+  }
+}
+
 class AppPages {
   AppPages._();
 
@@ -49,6 +61,9 @@ class AppPages {
       name: Routes.HOME,
       page: () => MyHomePage(),
       binding: MyHomeBinding(),
+      middlewares: [
+        DisableBackMiddleware(),
+      ],
     ),
     GetPage(
       name: Routes.searchPage,
@@ -151,7 +166,6 @@ class AppPages {
       page: () => HomeAppBarItemPage(),
       binding: MyHomeBinding(),
     ),
-
     GetPage(
       name: Routes.publishGoodsPageUrl,
       page: () => FabuGoodsPage(),
@@ -168,29 +182,29 @@ class AppPages {
       binding: ToolBing(),
     ),
     GetPage(
-      name: Routes.publishZuoPinPageUrl,
-      page: () => FabuZuoPinPage(),
-      binding: FabuZuoPinBinding(),
-    ),
+        name: Routes.publishZuoPinPageUrl,
+        page: () => FabuZuoPinPage(),
+        binding: FabuZuoPinBinding(),
+        popGesture: false),
     GetPage(
       name: Routes.weatherPageUrl,
       page: () => WeatherHomePage(),
       binding: WeatherBinding(),
     ),
     GetPage(
-      name: Routes.weatherLeftPageUrl,
-      page: () => WeatherLeftPage(),
-      binding: WeatherBinding(),
-    ),
+        name: Routes.weatherLeftPageUrl,
+        page: () => WeatherLeftPage(),
+        binding: WeatherBinding(),
+        popGesture: false),
     GetPage(
-      name: Routes.weatherRightPageUrl,
-      page: () => WeatherDetailView(),
-      binding: WeatherBinding(),
-    ),
+        name: Routes.weatherRightPageUrl,
+        page: () => WeatherDetailView(),
+        binding: WeatherBinding(),
+        popGesture: false),
     GetPage(
-      name: Routes.weatherRightPageUrl,
-      page: () => PerDayWeatherView(),
-      binding: WeatherBinding(),
-    ),
+        name: Routes.weatherRightPageUrl,
+        page: () => PerDayWeatherView(),
+        binding: WeatherBinding(),
+        popGesture: false),
   ];
 }
