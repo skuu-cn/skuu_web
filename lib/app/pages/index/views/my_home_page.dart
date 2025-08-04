@@ -80,14 +80,15 @@ class _MyHomePage extends State<MyHomePage> with TickerProviderStateMixin {
                 alignment: Alignment.bottomRight,
               ),
         bottomNavigationBar: 1.sw <= 500
-            ? AnimatedBottomBar(
+            ? SafeArea(
+                child: AnimatedBottomBar(
                 barItems: controller.barItems,
                 onBarTap: (index) {
                   changeIndex(index);
                 },
                 animationDuration: const Duration(milliseconds: 150),
                 barStyle: BarStyle(fontSize: 15.0, iconSize: 20.0),
-              )
+              ))
             : null,
       );
     });

@@ -6,10 +6,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
+import 'package:skuu/app/data/models/weather_city_entity.dart';
+import 'package:skuu/app/services/base_client.dart';
+import 'package:skuu/constant/api_constant.dart';
 
 import '../../../data/models/address_entity.dart';
+import '../../../data/models/skuu_blog_save_entity.dart';
+import '../../../services/api_call_status.dart';
+import 'fabu_zuopin_controller.dart';
 
 class FabuDynamicController extends GetxController {
+  ApiCallStatus apiCallStatus = ApiCallStatus.holding;
+
   //菜单和路由
   final publishController = TextEditingController();
 
@@ -19,8 +28,9 @@ class FabuDynamicController extends GetxController {
   List<String> whoCanSee = [];
 
   late AddressEntity? selAddressEntity = null;
-  late String? whoCanSeeSel = '';
-  late List<String> huatiSel = [];
+  late int? whoCanSeeSel = 0;
+  late Map<int, String> huatiSel = {};
+  late int blogType;
 
   @override
   void onInit() {
@@ -33,12 +43,12 @@ class FabuDynamicController extends GetxController {
     super.onInit();
   }
 
-  void setWhoCanSee(String who) {
+  void setWhoCanSee(int who) {
     whoCanSeeSel = who;
     update();
   }
 
-  void setHuati(List<String> huati) {
+  void setHuati(Map<int, String> huati) {
     huatiSel = huati;
     update();
   }
@@ -98,6 +108,35 @@ class FabuDynamicController extends GetxController {
       files.addAll(value);
     }
     update();
+  }
+
+  void fabu() {
+    SkuuBlogSaveEntity saveEntity = SkuuBlogSaveEntity();
+    blogType = videoFiles.isEmpty ? 2 : 1;
+    List<String> resources = [];
+    List<XFile> resourcesAll = [];
+    resourcesAll.addAll(files);
+    resourcesAll.addAll(videoFiles);
+    resourcesAll.forEach((XFile xFile) => {
+
+    });
+    saveEntity.resources = resources.join(",");
+    saveEntity.content = publishController.text;
+    saveEntity.blogType = blogType;
+    saveEntity.addressId = selAddressEntity!.id;
+    saveEntity.categary = 1;
+    saveEntity.shareType = whoCanSeeSel!;
+    saveEntity.squareId = 1;
+    saveEntity.topicIds = huatiSel.keys.join(",");
+
+    ApiBaseClient.safeApiCall(ApiConstant.BLOG_SAVE, RequestType.post,
+        queryParameters: saveEntity.toJson(),
+        onLoading: () {},
+        onSuccess: (res) {}, onError: (error) {
+      ApiBaseClient.handleApiError(error);
+      apiCallStatus = ApiCallStatus.error;
+      update();
+    });
   }
 
   @override

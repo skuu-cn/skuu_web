@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -7,6 +8,9 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:skuu/app/pages/index/controllers/my_home_controller.dart';
 
+import '../../../../config/translations/strings_enum.dart';
+import '../../../components/api_error_widget.dart';
+import '../../../components/my_widgets_animator.dart';
 import 'myimg_item.dart';
 import 'myindex_video_item.dart';
 
@@ -84,34 +88,57 @@ class _HomeItemPage extends State<HomeItemPage> {
               }
               return false;
             },
-            child: MasonryGridView.count(
-              itemCount: _items.length,
-              crossAxisCount: colCount,
-              controller: scrollController,
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
-              itemBuilder: (BuildContext context, int index) {
-                if (index % 2 == 0) {
-                  return Material(
-                    child: Container(
-                      height:
-                          getImgItemHeight(index > 6 ? 6 : index, index * 100),
-                      child: MyImgItem(
-                        id: index > 6 ? 6 : index,
+            child: MyWidgetsAnimator(
+              apiCallStatus: myHomeController.apiCallStatus,
+              loadingWidget: () => const Center(
+                child: CupertinoActivityIndicator(),
+              ),
+              errorWidget: () => ApiErrorWidget(
+                message: Strings.internetError.tr,
+                retryAction: () => myHomeController.getDataFromApi(),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+              ),
+              successWidget: () => MasonryGridView.count(
+                itemCount: myHomeController.skuuBlogPageData.records.length,
+                crossAxisCount: colCount,
+                controller: scrollController,
+                mainAxisSpacing: 4.0,
+                crossAxisSpacing: 4.0,
+                itemBuilder: (BuildContext context, int index) {
+                  if (myHomeController
+                          .skuuBlogPageDataRecords[index].blogType ==
+                      1) {
+                    return Material(
+                      child: Container(
+                        height: getImgItemHeight(
+                            myHomeController.skuuBlogPageDataRecords[index]
+                                        .resources
+                                        .split(",")
+                                        .length >
+                                    6
+                                ? 6
+                                : myHomeController
+                                    .skuuBlogPageDataRecords[index].resources
+                                    .split(",")
+                                    .length,
+                            index * 100),
+                        child: MyImgItem(
+                          id: index,
+                        ),
                       ),
-                    ),
-                    borderRadius: BorderRadius.circular(10.0),
-                  );
-                } else {
-                  return Material(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Container(
-                      height: getVideoItemHeight(),
-                      child: MyIndexVideoItem(),
-                    ),
-                  );
-                }
-              },
+                      borderRadius: BorderRadius.circular(10.0),
+                    );
+                  } else {
+                    return Material(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Container(
+                        height: getVideoItemHeight(),
+                        child: MyIndexVideoItem(id: index),
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
           )),
     );

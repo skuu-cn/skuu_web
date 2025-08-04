@@ -5,9 +5,12 @@ import 'package:skuu/app/pages/fabu/views/fabu_goods_page.dart';
 import '../views/fabu_aixin_page.dart';
 import '../views/fabu_dynamic_page.dart';
 import '../views/fabu_video_page.dart';
+import 'fabu_dynamic_controller.dart';
 
 class FabuZuoPinController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  late FabuDynamicController fabuDynamicController = Get.put(FabuDynamicController());
+
   //tab控制
   late TabController tabController;
   late List<String> tabTitle = [
@@ -22,6 +25,15 @@ class FabuZuoPinController extends GetxController
     FabuGoodsPage(),
     FabuAiXinPage(),
   ];
+
+  void fabu(){
+    int index =  tabController.index;
+    if(index == 1){
+      fabuDynamicController.fabu();
+    }else if(index ==2){
+
+    }
+  }
 
   @override
   void onInit() {

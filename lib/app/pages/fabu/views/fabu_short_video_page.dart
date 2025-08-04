@@ -257,7 +257,7 @@ class FabuShortVideoPage extends GetView<FabuShortVideoController> {
               leading: Icon(Icons.tag),
               title: controller.huatiSel.isEmpty
                   ? Text('话题')
-                  : Text(controller.huatiSel.join(",")),
+                  : Text(controller.huatiSel.values.join(",")),
               trailing: Icon(Icons.chevron_right),
             ),
           ),

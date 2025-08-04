@@ -16,7 +16,7 @@ class FabuShortVideoController extends GetxController{
 
   late AddressEntity? selAddressEntity = null;
   late String? whoCanSeeSel = '';
-  late List<String> huatiSel = [];
+  late Map<int, String> huatiSel = {};
 
   @override
   void onInit() {

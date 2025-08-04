@@ -2,8 +2,10 @@ import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../constant/api_constant.dart';
 import '../../../../util/constants.dart';
 import '../../../components/AnimatedBottomBar.dart';
+import '../../../data/models/skuu_blog_page_entity.dart';
 import '../../../services/api_call_status.dart';
 import '../../../services/base_client.dart';
 import '../../friends/chat_page_list.dart';
@@ -35,6 +37,8 @@ class MyHomeController extends GetxController {
   late List<Widget> tabBoby;
 
   final controller = TextEditingController();
+  late SkuuBlogPageData skuuBlogPageData = SkuuBlogPageData();
+  late List<SkuuBlogPageDataRecords> skuuBlogPageDataRecords = [];
 
   final List<BarItem> barItems = [
     BarItem(
@@ -67,6 +71,7 @@ class MyHomeController extends GetxController {
   @override
   void onInit() {
     // getDataLocal();
+    getDataFromApi();
     super.onInit();
   }
 
@@ -79,8 +84,8 @@ class MyHomeController extends GetxController {
   // getting data from api
   getDataFromApi() async {
     // *) perform api call
-    await BaseClient.safeApiCall(
-      Constants.todosApiUrl, // url
+    await ApiBaseClient.safeApiCall(
+      ApiConstant.BLOG_PAGE, // url
       RequestType.get, // request type (get,post,delete,put)
       onLoading: () {
         // *) indicate loading state
@@ -88,9 +93,10 @@ class MyHomeController extends GetxController {
         update();
       },
       onSuccess: (response) {
-        // api done successfully
-        data = List.from(response.data);
-        // *) indicate success state
+        SkuuBlogPageEntity skuuBlogPageEntity =
+            SkuuBlogPageEntity.fromJson(response.data);
+        skuuBlogPageData = skuuBlogPageEntity.data;
+        skuuBlogPageDataRecords = skuuBlogPageData.records;
         apiCallStatus = ApiCallStatus.success;
         update();
       },
@@ -98,7 +104,7 @@ class MyHomeController extends GetxController {
       // will automaticly handle error and show message to user
       onError: (error) {
         // show error message to user
-        BaseClient.handleApiError(error);
+        ApiBaseClient.handleApiError(error);
         // *) indicate error status
         apiCallStatus = ApiCallStatus.error;
         update();
@@ -170,14 +176,14 @@ class MyHomeController extends GetxController {
     update();
   }
 
-  void changeShowSearch(bool ifShow){
-    if(hasSearch != ifShow){
+  void changeShowSearch(bool ifShow) {
+    if (hasSearch != ifShow) {
       hasSearch = ifShow;
       update();
     }
   }
 
-  void changeMenuType(int n){
+  void changeMenuType(int n) {
     bottomMenuType = n;
     update();
   }

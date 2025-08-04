@@ -17,7 +17,7 @@ enum RequestType {
   delete,
 }
 
-class BaseClient {
+class ApiBaseClient {
   static final Dio _dio = Dio(
       BaseOptions(
           headers: {

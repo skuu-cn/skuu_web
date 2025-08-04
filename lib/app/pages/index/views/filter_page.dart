@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 import '../../../../constant/color_constant.dart';
-
+import '../../../data/models/huati_entity.dart';
 
 class FilterPage extends StatefulWidget {
-  List<String> commonNamesSel = [];
+  Map<int, String> commonNamesSel = {};
 
   FilterPage(this.commonNamesSel, {super.key});
 
@@ -15,35 +19,24 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPage extends State<FilterPage> {
-  List<String> commonNames = [];
+  // List<String> commonNames = [];
+  Map<int, String> commonNameMap = {};
 
   @override
   void initState() {
+    loadHuatiData();
+    print('$commonNameMap');
     super.initState();
-    commonNames.addAll([
-      '热榜',
-      '小说',
-      '娱乐',
-      '科技',
-      '军事',
-      '国际',
-      '漫画',
-      '游戏',
-      '影视',
-      '搞笑',
-      '故事',
-      '法律',
-      '车辆',
-      '健康',
-      '三农',
-      '情感',
-      '家居',
-      '星座',
-      '养生',
-      '育儿',
-      '股票',
-      '彩票',
-    ]);
+  }
+
+  void loadHuatiData() async {
+    await rootBundle.loadString('mock/huati.json').then((value) {
+      List list = json.decode(value);
+      list.forEach((v) {
+        HuatiEntity huatiEntity = HuatiEntity.fromJson(v);
+        commonNameMap[huatiEntity.code] = huatiEntity.name;
+      });
+    });
   }
 
   @override
@@ -70,26 +63,26 @@ class _FilterPage extends State<FilterPage> {
               runSpacing: 4.0, // 纵轴（垂直）方向间距
               alignment: WrapAlignment.start, //沿主轴方向居中
               children: <Widget>[
-                for (var value in commonNames)
+                for (int value in commonNameMap.keys)
                   ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: ColorConstant.lightBlue),
                       onPressed: () {
                         setState(() {
-                          if (widget.commonNamesSel.contains(value)) {
+                          if (widget.commonNamesSel.containsKey(value)) {
                             widget.commonNamesSel.remove(value);
                           } else {
-                            widget.commonNamesSel.add(value);
+                            widget.commonNamesSel.addAll({value:commonNameMap[value]!});
                           }
                         });
                       },
-                      icon: widget.commonNamesSel.contains(value)
+                      icon: widget.commonNamesSel.containsKey(value)
                           ? Icon(Icons.offline_pin)
                           : Icon(
                               Icons.add_circle,
                               color: Colors.green,
                             ),
-                      label: Text(value))
+                      label: Text(commonNameMap[value]!))
               ],
             ),
             Spacer(),

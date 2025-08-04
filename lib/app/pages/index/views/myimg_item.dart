@@ -9,6 +9,7 @@ import 'package:skuu/constant/constant.dart';
 import '../../../components/level_icon.dart';
 import '../../../components/myshare_page.dart';
 import '../../../routes/app_pages.dart';
+import '../controllers/my_home_controller.dart';
 
 
 //首页--图片
@@ -31,6 +32,8 @@ class _MyImgItem extends State<MyImgItem> {
   bool _zan = false;
   late int length;
   String split_o = Constant.SPLIT_O;
+  MyHomeController myHomeController = Get.put(MyHomeController());
+
 
   //网络请求,获取详情
   @override
@@ -129,7 +132,7 @@ class _MyImgItem extends State<MyImgItem> {
           Padding(
             padding: EdgeInsets.only(left: 5, right: 5),
             child: SelectableText(
-              '长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。长风破浪会有时，直挂云帆济沧海。',
+              '${myHomeController.skuuBlogPageDataRecords[widget.id].content}',
               scrollPhysics: NeverScrollableScrollPhysics(),
               maxLines: 3,
               minLines: 1,
@@ -139,7 +142,7 @@ class _MyImgItem extends State<MyImgItem> {
               ),
             ),
           ),
-          if (length > 0)
+          if (myHomeController.skuuBlogPageDataRecords[widget.id].resources.split(",").length > 0)
             Expanded(
               // flex: 9,
               child: InkWell(
@@ -151,14 +154,14 @@ class _MyImgItem extends State<MyImgItem> {
                       padding: EdgeInsets.only(top: 2.0),
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: getCount(length),
+                          crossAxisCount: getCount(myHomeController.skuuBlogPageDataRecords[widget.id].resources.split(",").length),
                           childAspectRatio: 1,
                           mainAxisSpacing: 2.0,
                           crossAxisSpacing: 2.0),
-                      itemCount: length,
+                      itemCount: myHomeController.skuuBlogPageDataRecords[widget.id].resources.split(",").length,
                       itemBuilder: (context, index) {
-                        return Image.asset(
-                          'imgs/defbak.png',
+                        return Image.network(
+                          '${myHomeController.skuuBlogPageDataRecords[widget.id].resources.split(",")[index]}',
                           fit: BoxFit.fill,
                         );
                       }),

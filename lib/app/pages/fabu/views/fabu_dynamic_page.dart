@@ -257,7 +257,7 @@ class FabuDynamicPage extends GetView<FabuDynamicController> {
               leading: Icon(Icons.tag),
               title: controller.huatiSel.isEmpty
                   ? Text('话题')
-                  : Text(controller.huatiSel.join(",")),
+                  : Text(controller.huatiSel.values.join(",")),
               trailing: Icon(Icons.chevron_right),
             ),
           ),
@@ -286,7 +286,7 @@ class FabuDynamicPage extends GetView<FabuDynamicController> {
                                 : null,
                             onTap: () {
                               controller.setWhoCanSee(
-                                  controller.whoCanSee[index]);
+                                  index);
                               Navigator.pop(context);
                             },
                           );
@@ -300,9 +300,9 @@ class FabuDynamicPage extends GetView<FabuDynamicController> {
             },
             child: ListTile(
               leading: Icon(Icons.perm_identity),
-              title: controller.whoCanSeeSel!.isEmpty
+              title: controller.whoCanSeeSel==0
                   ? Text('谁可以看')
-                  : Text(controller.whoCanSeeSel!),
+                  : Text(controller.whoCanSee[controller.whoCanSeeSel!]),
               trailing: Icon(Icons.chevron_right),
             ),
           ),

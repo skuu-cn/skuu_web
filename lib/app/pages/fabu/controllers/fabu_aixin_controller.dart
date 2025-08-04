@@ -20,8 +20,8 @@ class FabuAiXinController extends GetxController {
 
   late AddressEntity? selAddressEntity = null;
   late String? whoCanSeeSel = '';
-  late List<String> huatiSel = [];
   int aixinType = 0;
+  late Map<int, String> huatiSel = {};
 
   @override
   void onInit() {
@@ -44,7 +44,7 @@ class FabuAiXinController extends GetxController {
     update();
   }
 
-  void setHuati(List<String> huati) {
+  void setHuati(Map<int,String> huati) {
     huatiSel = huati;
     update();
   }

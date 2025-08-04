@@ -78,7 +78,7 @@ class WeatherController extends GetxController {
   }
 
   Future<void> getCityList() async {
-    await BaseClient.safeApiCall(
+    await ApiBaseClient.safeApiCall(
       ApiConstant.WEATHER_USER_CITY_LIST,
       RequestType.get,
       onLoading: () {
@@ -93,7 +93,7 @@ class WeatherController extends GetxController {
         update();
       },
       onError: (error) {
-        BaseClient.handleApiError(error);
+        ApiBaseClient.handleApiError(error);
         apiCallStatus = ApiCallStatus.error;
         update();
       },
@@ -112,7 +112,7 @@ class WeatherController extends GetxController {
           location;
       Map<String, dynamic> header = {};
       header.assign('X-QW-Api-Key', ApiConstant2.API_KEY);
-      await BaseClient.safeApiCall(url, RequestType.get, headers: header,
+      await ApiBaseClient.safeApiCall(url, RequestType.get, headers: header,
           onLoading: () {
         apiCallStatus = ApiCallStatus.loading;
         update();
@@ -126,7 +126,7 @@ class WeatherController extends GetxController {
         apiCallStatus = ApiCallStatus.success;
         update();
       }, onError: (error) {
-        BaseClient.handleApiError(error);
+        ApiBaseClient.handleApiError(error);
         apiCallStatus = ApiCallStatus.error;
         update();
       });
@@ -301,7 +301,7 @@ class WeatherController extends GetxController {
     Map<String, dynamic> header = {};
     // header.assign('X-QW-Api-Key', ApiConstant2.API_KEY);
 
-    await BaseClient.safeApiCall(
+    await ApiBaseClient.safeApiCall(
       url, RequestType.get, headers: header,
       onSuccess: (res) {
         curCity = CityModelEntity.fromJson(res.data);
@@ -317,7 +317,7 @@ class WeatherController extends GetxController {
     String url = ApiConstant2.HOUR_WEATHER + '?location=${weatherCitys[n].id}';
     Map<String, dynamic> header = {};
     header.assign('X-QW-Api-Key', ApiConstant2.API_KEY);
-    await BaseClient.safeApiCall(url, RequestType.get, headers: header,
+    await ApiBaseClient.safeApiCall(url, RequestType.get, headers: header,
         onLoading: () {
       // apiCallStatus = ApiCallStatus.loading;
       update();
@@ -334,7 +334,7 @@ class WeatherController extends GetxController {
       apiCallStatus = ApiCallStatus.success;
       update();
     }, onError: (error) {
-      BaseClient.handleApiError(error);
+      ApiBaseClient.handleApiError(error);
       apiCallStatus = ApiCallStatus.error;
       update();
     });
@@ -344,7 +344,7 @@ class WeatherController extends GetxController {
     String url = ApiConstant2.DAY_WEATHER + '?location=${weatherCitys[n].id}';
     Map<String, dynamic> header = {};
     header.assign('X-QW-Api-Key', ApiConstant2.API_KEY);
-    await BaseClient.safeApiCall(url, RequestType.get, headers: header,
+    await ApiBaseClient.safeApiCall(url, RequestType.get, headers: header,
         onLoading: () {
       // apiCallStatus = ApiCallStatus.loading;
       // update();
@@ -370,7 +370,7 @@ class WeatherController extends GetxController {
       apiCallStatus = ApiCallStatus.success;
       update();
     }, onError: (error) {
-      BaseClient.handleApiError(error);
+      ApiBaseClient.handleApiError(error);
       apiCallStatus = ApiCallStatus.error;
       update();
     });
@@ -381,7 +381,7 @@ class WeatherController extends GetxController {
         ApiConstant2.DAY_INDICES + '?type=0&location=${weatherCitys[n].id}';
     Map<String, dynamic> header = {};
     header.assign('X-QW-Api-Key', ApiConstant2.API_KEY);
-    await BaseClient.safeApiCall(url, RequestType.get, headers: header,
+    await ApiBaseClient.safeApiCall(url, RequestType.get, headers: header,
         onLoading: () {
       // apiCallStatus = ApiCallStatus.loading;
       // update();
@@ -392,7 +392,7 @@ class WeatherController extends GetxController {
       apiCallStatus = ApiCallStatus.success;
       update();
     }, onError: (error) {
-      BaseClient.handleApiError(error);
+      ApiBaseClient.handleApiError(error);
       apiCallStatus = ApiCallStatus.error;
       update();
     });

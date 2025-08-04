@@ -9,12 +9,15 @@ import 'package:skuu/app/data/models/city_menu_model_entity.dart';
 import 'package:skuu/app/data/models/city_model_entity.dart';
 import 'package:skuu/app/data/models/day_weather_entity.dart';
 import 'package:skuu/app/data/models/hour_weather_entity.dart';
+import 'package:skuu/app/data/models/huati_entity.dart';
 import 'package:skuu/app/data/models/idCard_bean_entity.dart';
 import 'package:skuu/app/data/models/id_bean_entity.dart';
 import 'package:skuu/app/data/models/indices_weather_entity.dart';
 import 'package:skuu/app/data/models/ip_bean_entity.dart';
 import 'package:skuu/app/data/models/message_entity.dart';
 import 'package:skuu/app/data/models/real_time_weather_entity.dart';
+import 'package:skuu/app/data/models/skuu_blog_page_entity.dart';
+import 'package:skuu/app/data/models/skuu_blog_save_entity.dart';
 import 'package:skuu/app/data/models/weather_city_entity.dart';
 
 JsonConvert jsonConvert = JsonConvert();
@@ -197,6 +200,10 @@ class JsonConvert {
       return data.map<HourWeatherRefer>((Map<String, dynamic> e) =>
           HourWeatherRefer.fromJson(e)).toList() as M;
     }
+    if (<HuatiEntity>[] is M) {
+      return data.map<HuatiEntity>((Map<String, dynamic> e) =>
+          HuatiEntity.fromJson(e)).toList() as M;
+    }
     if (<IdCardBeanEntity>[] is M) {
       return data.map<IdCardBeanEntity>((Map<String, dynamic> e) =>
           IdCardBeanEntity.fromJson(e)).toList() as M;
@@ -253,6 +260,22 @@ class JsonConvert {
       return data.map<RealTimeWeatherRefer>((Map<String, dynamic> e) =>
           RealTimeWeatherRefer.fromJson(e)).toList() as M;
     }
+    if (<SkuuBlogPageEntity>[] is M) {
+      return data.map<SkuuBlogPageEntity>((Map<String, dynamic> e) =>
+          SkuuBlogPageEntity.fromJson(e)).toList() as M;
+    }
+    if (<SkuuBlogPageData>[] is M) {
+      return data.map<SkuuBlogPageData>((Map<String, dynamic> e) =>
+          SkuuBlogPageData.fromJson(e)).toList() as M;
+    }
+    if (<SkuuBlogPageDataRecords>[] is M) {
+      return data.map<SkuuBlogPageDataRecords>((Map<String, dynamic> e) =>
+          SkuuBlogPageDataRecords.fromJson(e)).toList() as M;
+    }
+    if (<SkuuBlogSaveEntity>[] is M) {
+      return data.map<SkuuBlogSaveEntity>((Map<String, dynamic> e) =>
+          SkuuBlogSaveEntity.fromJson(e)).toList() as M;
+    }
     if (<WeatherCityEntity>[] is M) {
       return data.map<WeatherCityEntity>((Map<String, dynamic> e) =>
           WeatherCityEntity.fromJson(e)).toList() as M;
@@ -293,6 +316,7 @@ class JsonConvertClassCollection {
     (HourWeatherEntity).toString(): HourWeatherEntity.fromJson,
     (HourWeatherHourly).toString(): HourWeatherHourly.fromJson,
     (HourWeatherRefer).toString(): HourWeatherRefer.fromJson,
+    (HuatiEntity).toString(): HuatiEntity.fromJson,
     (IdCardBeanEntity).toString(): IdCardBeanEntity.fromJson,
     (IdCardBeanData).toString(): IdCardBeanData.fromJson,
     (IdBeanEntity).toString(): IdBeanEntity.fromJson,
@@ -307,6 +331,10 @@ class JsonConvertClassCollection {
     (RealTimeWeatherEntity).toString(): RealTimeWeatherEntity.fromJson,
     (RealTimeWeatherNow).toString(): RealTimeWeatherNow.fromJson,
     (RealTimeWeatherRefer).toString(): RealTimeWeatherRefer.fromJson,
+    (SkuuBlogPageEntity).toString(): SkuuBlogPageEntity.fromJson,
+    (SkuuBlogPageData).toString(): SkuuBlogPageData.fromJson,
+    (SkuuBlogPageDataRecords).toString(): SkuuBlogPageDataRecords.fromJson,
+    (SkuuBlogSaveEntity).toString(): SkuuBlogSaveEntity.fromJson,
     (WeatherCityEntity).toString(): WeatherCityEntity.fromJson,
     (WeatherCityData).toString(): WeatherCityData.fromJson,
   };

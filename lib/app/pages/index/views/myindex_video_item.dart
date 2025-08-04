@@ -10,10 +10,11 @@ import '../../../components/index_video_player/index_video_player.dart';
 import '../../../components/level_icon.dart';
 import '../../../components/myshare_page.dart';
 import '../../../routes/app_pages.dart';
+import '../controllers/my_home_controller.dart';
 
 //首页-视频
 class MyIndexVideoItem extends StatefulWidget {
-  MyIndexVideoItem({this.id = 0});
+  MyIndexVideoItem({this.id = 1});
 
   final int id;
 
@@ -28,6 +29,7 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
   bool _care = false;
   bool _zan = false;
   String split_o = Constant.SPLIT_O;
+  MyHomeController myHomeController = Get.put(MyHomeController());
 
   //网络请求,获取详情
   @override
@@ -118,7 +120,7 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
           Padding(
             padding: EdgeInsets.only(left: 5, right: 5),
             child: SelectableText(
-              '一寸光阴一寸金，寸金难买寸光阴。',
+              '${myHomeController.skuuBlogPageDataRecords[widget.id].content}',
               maxLines: 1,
               style: TextStyle(fontSize: 20, overflow: TextOverflow.ellipsis),
             ),
@@ -129,7 +131,11 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
           ),
           Expanded(
             flex: 9,
-            child: IndexVideoPlayer(),
+            child: IndexVideoPlayer(
+              url:
+                  myHomeController.skuuBlogPageDataRecords[widget.id].resources,
+              allUrls: '',
+            ),
             // child: AspectRatio(
             //   aspectRatio: 15 / 9,
             //   child: MyVideo(
@@ -144,7 +150,7 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
               TextButton.icon(
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Colors.transparent)),
+                        WidgetStateProperty.all(Colors.transparent)),
                 onPressed: () => {
                   setState(() {
                     _zan = !_zan;
@@ -161,7 +167,7 @@ class _MyIndexVideoItem extends State<MyIndexVideoItem> {
               TextButton.icon(
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Colors.transparent)),
+                        WidgetStateProperty.all(Colors.transparent)),
                 onPressed: () => {Get.toNamed(Routes.watchVideo)},
                 icon: Icon(Icons.comment),
                 label: Text('评论'),

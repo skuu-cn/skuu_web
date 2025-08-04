@@ -9,7 +9,10 @@ import 'index_data_manager.dart';
 import 'index_video_control.dart';
 
 class IndexVideoPlayer extends StatefulWidget {
-  IndexVideoPlayer({Key? key}) : super(key: key);
+  IndexVideoPlayer({Key? key, required this.url, required this.allUrls})
+      : super(key: key);
+  final String url;
+  final String allUrls;
 
   @override
   _IndexVideoPlayer createState() => _IndexVideoPlayer();
@@ -23,14 +26,16 @@ class _IndexVideoPlayer extends State<IndexVideoPlayer> {
   void initState() {
     super.initState();
     flickManager = FlickManager(
+      // autoInitialize: 1.sw > 1000 ? false : true,
       autoPlay: 1.sw > 1000 ? false : true,
-      videoPlayerController: VideoPlayerController.networkUrl(
-          Uri.parse(mockData["items"][1]["trailer_url"])),
+      videoPlayerController:
+          VideoPlayerController.networkUrl(Uri.parse(widget.url)),
+      // Uri.parse(mockData["items"][1]["trailer_url"])),
     );
-    List<String> urls = (mockData["items"] as List)
-        .map<String>((item) => item["trailer_url"])
-        .toList();
-
+    List<String> urls = widget.allUrls.split(",").toList();
+    // List<String> urls = (mockData["items"] as List)
+    //     .map<String>((item) => item["trailer_url"])
+    //     .toList();
     dataManager = IndexDataManager(flickManager: flickManager, urls: urls);
   }
 

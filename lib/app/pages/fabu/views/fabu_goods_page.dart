@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:skuu/app/data/models/address_entity.dart';
-import 'package:skuu/app/pages/fabu/controllers/fabu_dynamic_controller.dart';
 
 import '../../../components/video_player_public/public_video_player.dart';
 import '../../index/views/filter_page.dart';
@@ -447,7 +446,7 @@ class FabuGoodsPage extends GetView<FabuGoodsController> {
             },
             child: ListTile(
               leading: Icon(Icons.category),
-              title: controller.huatiSel.isEmpty ? Text('分类') : Text(controller.huatiSel.join(",")),
+              title: controller.huatiSel.isEmpty ? Text('分类') : Text(controller.huatiSel.values.join(",")),
               trailing: Icon(Icons.chevron_right),
             ),
           ),

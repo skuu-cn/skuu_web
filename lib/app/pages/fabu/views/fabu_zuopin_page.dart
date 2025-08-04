@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:skuu/app/pages/fabu/views/fabu_aixin_page.dart';
 import 'package:skuu/app/pages/fabu/views/fabu_goods_page.dart';
 
 import '../../../../constant/color_constant.dart';
+import '../controllers/fabu_zuopin_controller.dart';
 import 'fabu_dynamic_page.dart';
 import 'fabu_video_page.dart';
 
@@ -18,6 +21,9 @@ class FabuZuoPinPage extends StatefulWidget {
 
 class _FabuZuoPinPage extends State<FabuZuoPinPage>
     with SingleTickerProviderStateMixin {
+  late FabuZuoPinController fabuZuoPinController =
+      Get.put(FabuZuoPinController());
+
   //tab控制
   late TabController tabController;
   late List<String> tabTitle = [
@@ -32,7 +38,6 @@ class _FabuZuoPinPage extends State<FabuZuoPinPage>
     FabuGoodsPage(),
     FabuAiXinPage(),
   ];
-
 
   @override
   void initState() {
@@ -61,7 +66,9 @@ class _FabuZuoPinPage extends State<FabuZuoPinPage>
                 }).toList()),
             actions: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  fabuZuoPinController.fabu();
+                },
                 child: Text(
                   '发布',
                   style: TextStyle(color: Colors.white),

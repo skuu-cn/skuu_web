@@ -353,7 +353,7 @@ class FabuVideoPage extends GetView<FabuVideoController> {
               leading: Icon(Icons.category),
               title: controller.huatiSel.isEmpty
                   ? Text('分类')
-                  : Text(controller.huatiSel.join(",")),
+                  : Text(controller.huatiSel.values.join(",")),
               trailing: Icon(Icons.chevron_right),
             ),
           ),

@@ -21,7 +21,7 @@ class FabuVideoController extends GetxController {
 
   late AddressEntity? selAddressEntity = null;
   late String? whoCanSeeSel = '';
-  late List<String> huatiSel = [];
+  late Map<int, String> huatiSel = {};
 
 
   @override
@@ -91,7 +91,7 @@ class FabuVideoController extends GetxController {
     update();
   }
 
-  void setHuati(List<String> huati) {
+  void setHuati(Map<int,String> huati) {
     huatiSel = huati;
     update();
   }
