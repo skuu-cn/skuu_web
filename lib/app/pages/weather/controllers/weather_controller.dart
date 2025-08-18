@@ -29,7 +29,7 @@ class WeatherController extends GetxController {
   int currentPage = -1;
 
   static const String _locationServicesDisabledMessage =
-      'Location services are disabled.';
+      'data services are disabled.';
   static const String _permissionDeniedMessage = 'Permission denied.';
   static const String _permissionDeniedForeverMessage =
       'Permission denied forever.';
@@ -106,10 +106,10 @@ class WeatherController extends GetxController {
       double lon = value.lon;
       String latStr = lat.toStringAsFixed(2);
       String lonStr = lon.toStringAsFixed(2);
-      String location = '?location=$lonStr,$latStr';
+      String data = '?data=$lonStr,$latStr';
       String url = ApiConstant2.HE_FENG_BASE_API +
           ApiConstant2.REALTIME_WEATHER +
-          location;
+          data;
       Map<String, dynamic> header = {};
       header.assign('X-QW-Api-Key', ApiConstant2.API_KEY);
       await ApiBaseClient.safeApiCall(url, RequestType.get, headers: header,
@@ -197,7 +197,7 @@ class WeatherController extends GetxController {
     try {
       await rootBundle.loadString('mock/weather_city.json').then((value) {
         final Map<String, dynamic> jsonData = jsonDecode(value);
-        citys = CityModelEntity.fromJson(jsonData).location;
+        citys = CityModelEntity.fromJson(jsonData).data;
       });
       update();
     } catch (e) {
@@ -294,8 +294,8 @@ class WeatherController extends GetxController {
   Future<void> getCurCity(double lat, double lon) async {
     String latStr = lat.toStringAsFixed(2);
     String lonStr = lon.toStringAsFixed(2);
-    String location = '?lon=$lonStr&lat=$latStr';
-    String url = ApiConstant.getByGPS + location;
+    String data = '?lon=$lonStr&lat=$latStr';
+    String url = ApiConstant.getByGPS + data;
     print('City URL: $url'); // Debug URL
     // Map<String, dynamic> header = {'X-QW-Api-Key': ApiConstant2.API_KEY};
     Map<String, dynamic> header = {};
@@ -314,7 +314,7 @@ class WeatherController extends GetxController {
   }
 
   Future<void> getCard2(int n) async {
-    String url = ApiConstant2.HOUR_WEATHER + '?location=${weatherCitys[n].id}';
+    String url = ApiConstant2.HOUR_WEATHER + '?data=${weatherCitys[n].id}';
     Map<String, dynamic> header = {};
     header.assign('X-QW-Api-Key', ApiConstant2.API_KEY);
     await ApiBaseClient.safeApiCall(url, RequestType.get, headers: header,
@@ -341,7 +341,7 @@ class WeatherController extends GetxController {
   }
 
   Future<void> getCard3(int n) async {
-    String url = ApiConstant2.DAY_WEATHER + '?location=${weatherCitys[n].id}';
+    String url = ApiConstant2.DAY_WEATHER + '?data=${weatherCitys[n].id}';
     Map<String, dynamic> header = {};
     header.assign('X-QW-Api-Key', ApiConstant2.API_KEY);
     await ApiBaseClient.safeApiCall(url, RequestType.get, headers: header,
@@ -378,7 +378,7 @@ class WeatherController extends GetxController {
 
   Future<void> getCard4(int n) async {
     String url =
-        ApiConstant2.DAY_INDICES + '?type=0&location=${weatherCitys[n].id}';
+        ApiConstant2.DAY_INDICES + '?type=0&data=${weatherCitys[n].id}';
     Map<String, dynamic> header = {};
     header.assign('X-QW-Api-Key', ApiConstant2.API_KEY);
     await ApiBaseClient.safeApiCall(url, RequestType.get, headers: header,
@@ -406,7 +406,7 @@ class WeatherController extends GetxController {
     }
     final Position position = await _geolocatorPlatform.getCurrentPosition();
     await getCurCity(position.latitude, position.longitude);
-    // CityModelLocation cityModelLocation = curCity.location.first;
+    // CityModelLocation cityModelLocation = curCity.data.first;
     // citys.addAll(['当前：${cityModelLocation.name}', "朝阳", "海淀", "郓城"]);
     // await loadAddressData();
     // await _updateRealTimeWeather(position.latitude, position.longitude);
@@ -423,12 +423,12 @@ class WeatherController extends GetxController {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // Test if location services are enabled.
+    // Test if data services are enabled.
     serviceEnabled = await _geolocatorPlatform.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      // Location services are not enabled don't continue
+      // data services are not enabled don't continue
       // accessing the position and request users of the
-      // App to enable the location services.
+      // App to enable the data services.
 
       return false;
     }

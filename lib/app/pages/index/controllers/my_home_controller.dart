@@ -96,7 +96,7 @@ class MyHomeController extends GetxController {
         SkuuBlogPageEntity skuuBlogPageEntity =
             SkuuBlogPageEntity.fromJson(response.data);
         skuuBlogPageData = skuuBlogPageEntity.data;
-        skuuBlogPageDataRecords = skuuBlogPageData.records;
+        skuuBlogPageDataRecords = skuuBlogPageData.list;
         apiCallStatus = ApiCallStatus.success;
         update();
       },

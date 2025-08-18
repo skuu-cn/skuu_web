@@ -6,7 +6,7 @@ export 'package:skuu/generated/json/city_model_entity.g.dart';
 @JsonSerializable()
 class CityModelEntity {
 	late String code;
-	late List<CityModelLocation> location;
+	late List<CityModelLocation> data;
 	late CityModelRefer refer;
 
 	CityModelEntity();

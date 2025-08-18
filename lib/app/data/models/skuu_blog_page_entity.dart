@@ -23,7 +23,7 @@ class SkuuBlogPageEntity {
 
 @JsonSerializable()
 class SkuuBlogPageData {
-	late List<SkuuBlogPageDataRecords> records;
+	late List<SkuuBlogPageDataRecords> list;
 	late String total;
 	late String size;
 	late String current;

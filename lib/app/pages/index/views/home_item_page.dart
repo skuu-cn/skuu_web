@@ -99,7 +99,7 @@ class _HomeItemPage extends State<HomeItemPage> {
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
               ),
               successWidget: () => MasonryGridView.count(
-                itemCount: myHomeController.skuuBlogPageData.records.length,
+                itemCount: myHomeController.skuuBlogPageData.list.length,
                 crossAxisCount: colCount,
                 controller: scrollController,
                 mainAxisSpacing: 4.0,

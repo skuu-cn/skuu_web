@@ -42,13 +42,13 @@ extension SkuuBlogPageEntityExtension on SkuuBlogPageEntity {
 
 SkuuBlogPageData $SkuuBlogPageDataFromJson(Map<String, dynamic> json) {
   final SkuuBlogPageData skuuBlogPageData = SkuuBlogPageData();
-  final List<SkuuBlogPageDataRecords>? records = (json['records'] as List<
+  final List<SkuuBlogPageDataRecords>? list = (json['list'] as List<
       dynamic>?)?.map(
           (e) =>
       jsonConvert.convert<SkuuBlogPageDataRecords>(
           e) as SkuuBlogPageDataRecords).toList();
-  if (records != null) {
-    skuuBlogPageData.records = records;
+  if (list != null) {
+    skuuBlogPageData.list = list;
   }
   final String? total = jsonConvert.convert<String>(json['total']);
   if (total != null) {
@@ -85,7 +85,7 @@ SkuuBlogPageData $SkuuBlogPageDataFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> $SkuuBlogPageDataToJson(SkuuBlogPageData entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
-  data['records'] = entity.records.map((v) => v.toJson()).toList();
+  data['list'] = entity.list.map((v) => v.toJson()).toList();
   data['total'] = entity.total;
   data['size'] = entity.size;
   data['current'] = entity.current;
@@ -98,7 +98,7 @@ Map<String, dynamic> $SkuuBlogPageDataToJson(SkuuBlogPageData entity) {
 
 extension SkuuBlogPageDataExtension on SkuuBlogPageData {
   SkuuBlogPageData copyWith({
-    List<SkuuBlogPageDataRecords>? records,
+    List<SkuuBlogPageDataRecords>? list,
     String? total,
     String? size,
     String? current,
@@ -108,7 +108,7 @@ extension SkuuBlogPageDataExtension on SkuuBlogPageData {
     String? pages,
   }) {
     return SkuuBlogPageData()
-      ..records = records ?? this.records
+      ..list = list ?? this.list
       ..total = total ?? this.total
       ..size = size ?? this.size
       ..current = current ?? this.current

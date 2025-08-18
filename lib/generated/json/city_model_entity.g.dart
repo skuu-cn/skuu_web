@@ -7,12 +7,12 @@ CityModelEntity $CityModelEntityFromJson(Map<String, dynamic> json) {
   if (code != null) {
     cityModelEntity.code = code;
   }
-  final List<CityModelLocation>? location = (json['location'] as List<dynamic>?)
+  final List<CityModelLocation>? data = (json['data'] as List<dynamic>?)
       ?.map(
           (e) => jsonConvert.convert<CityModelLocation>(e) as CityModelLocation)
       .toList();
-  if (location != null) {
-    cityModelEntity.location = location;
+  if (data != null) {
+    cityModelEntity.data = data;
   }
   final CityModelRefer? refer = jsonConvert.convert<CityModelRefer>(
       json['refer']);
@@ -25,7 +25,7 @@ CityModelEntity $CityModelEntityFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> $CityModelEntityToJson(CityModelEntity entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['code'] = entity.code;
-  data['location'] = entity.location.map((v) => v.toJson()).toList();
+  data['data'] = entity.data.map((v) => v.toJson()).toList();
   data['refer'] = entity.refer.toJson();
   return data;
 }
@@ -33,12 +33,12 @@ Map<String, dynamic> $CityModelEntityToJson(CityModelEntity entity) {
 extension CityModelEntityExtension on CityModelEntity {
   CityModelEntity copyWith({
     String? code,
-    List<CityModelLocation>? location,
+    List<CityModelLocation>? data,
     CityModelRefer? refer,
   }) {
     return CityModelEntity()
       ..code = code ?? this.code
-      ..location = location ?? this.location
+      ..data = data ?? this.data
       ..refer = refer ?? this.refer;
   }
 }
