@@ -37,7 +37,6 @@ class MyHomeController extends GetxController {
   late List<Widget> tabBoby;
 
   final controller = TextEditingController();
-  late SkuuBlogPageData skuuBlogPageData = SkuuBlogPageData();
   late List<SkuuBlogPageDataRecords> skuuBlogPageDataRecords = [];
 
   final List<BarItem> barItems = [
@@ -95,8 +94,7 @@ class MyHomeController extends GetxController {
       onSuccess: (response) {
         SkuuBlogPageEntity skuuBlogPageEntity =
             SkuuBlogPageEntity.fromJson(response.data);
-        skuuBlogPageData = skuuBlogPageEntity.data;
-        skuuBlogPageDataRecords = skuuBlogPageData.list;
+        skuuBlogPageDataRecords = skuuBlogPageEntity.data.list;
         apiCallStatus = ApiCallStatus.success;
         update();
       },
