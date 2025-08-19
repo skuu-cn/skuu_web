@@ -61,87 +61,89 @@ class _HomeItemPage extends State<HomeItemPage> {
     setState(() {
       colCount = getColCount(MediaQuery.of(context).size.width);
     });
-    return Scaffold(
-      backgroundColor: Colors.black12,
-      body: Padding(
-          padding: EdgeInsets.only(left: 5, right: 5),
-          // ignore: missing_required_param
-          child: NotificationListener<ScrollNotification>(
-            onNotification: (ScrollNotification notification) {
-              switch (notification.runtimeType) {
-                // case ScrollStartNotification:
-                //   if (scrollController.offset == 0) {
-                //     myHomeController.changeShowSearch(true);
-                //   }
-                //   break;
-                // case ScrollUpdateNotification:
-                //   print("正在滚动"+scrollController.offset.toString());
-                //   break;
-                case ScrollEndNotification:
-                  double curOffset = scrollController.offset;
-                  myHomeController.changeShowSearch(curOffset < scrollOffset);
-                  scrollOffset = curOffset;
-                  break;
-                // case OverscrollNotification:
-                //   print("滚动到边界"+scrollController.offset.toString());
-                //   break;
-              }
-              return false;
-            },
-            child: MyWidgetsAnimator(
-              apiCallStatus: myHomeController.apiCallStatus,
-              loadingWidget: () => const Center(
-                child: CupertinoActivityIndicator(),
-              ),
-              errorWidget: () => ApiErrorWidget(
-                message: Strings.internetError.tr,
-                retryAction: () => myHomeController.getDataFromApi(),
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-              ),
-              successWidget: () => MasonryGridView.count(
-                itemCount: myHomeController.skuuBlogPageDataRecords.length,
-                crossAxisCount: colCount,
-                controller: scrollController,
-                mainAxisSpacing: 4.0,
-                crossAxisSpacing: 4.0,
-                itemBuilder: (BuildContext context, int index) {
-                  if (myHomeController
-                          .skuuBlogPageDataRecords[index].blogType ==
-                      1) {
-                    return Material(
-                      child: Container(
-                        height: getImgItemHeight(
-                            myHomeController.skuuBlogPageDataRecords[index]
-                                        .resources
-                                        .split(",")
-                                        .length >
-                                    6
-                                ? 6
-                                : myHomeController
-                                    .skuuBlogPageDataRecords[index].resources
-                                    .split(",")
-                                    .length,
-                            index * 100),
-                        child: MyImgItem(
-                          id: index,
+    return GetBuilder<MyHomeController>(builder: (_) {
+      return Scaffold(
+        backgroundColor: Colors.black12,
+        body: Padding(
+            padding: EdgeInsets.only(left: 5, right: 5),
+            // ignore: missing_required_param
+            child: NotificationListener<ScrollNotification>(
+              onNotification: (ScrollNotification notification) {
+                switch (notification.runtimeType) {
+                  // case ScrollStartNotification:
+                  //   if (scrollController.offset == 0) {
+                  //     myHomeController.changeShowSearch(true);
+                  //   }
+                  //   break;
+                  // case ScrollUpdateNotification:
+                  //   print("正在滚动"+scrollController.offset.toString());
+                  //   break;
+                  case ScrollEndNotification:
+                    double curOffset = scrollController.offset;
+                    myHomeController.changeShowSearch(curOffset < scrollOffset);
+                    scrollOffset = curOffset;
+                    break;
+                  // case OverscrollNotification:
+                  //   print("滚动到边界"+scrollController.offset.toString());
+                  //   break;
+                }
+                return false;
+              },
+              child: MyWidgetsAnimator(
+                apiCallStatus: myHomeController.apiCallStatus,
+                loadingWidget: () => const Center(
+                  child: CupertinoActivityIndicator(),
+                ),
+                errorWidget: () => ApiErrorWidget(
+                  message: Strings.internetError.tr,
+                  retryAction: () => myHomeController.getDataFromApi(),
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                ),
+                successWidget: () => MasonryGridView.count(
+                  itemCount: myHomeController.skuuBlogPageDataRecords.length,
+                  crossAxisCount: colCount,
+                  controller: scrollController,
+                  mainAxisSpacing: 4.0,
+                  crossAxisSpacing: 4.0,
+                  itemBuilder: (BuildContext context, int index) {
+                    if (myHomeController
+                            .skuuBlogPageDataRecords[index].blogType ==
+                        1) {
+                      return Material(
+                        child: Container(
+                          height: getImgItemHeight(
+                              myHomeController.skuuBlogPageDataRecords[index]
+                                          .resources
+                                          .split(",")
+                                          .length >
+                                      6
+                                  ? 6
+                                  : myHomeController
+                                      .skuuBlogPageDataRecords[index].resources
+                                      .split(",")
+                                      .length,
+                              index * 100),
+                          child: MyImgItem(
+                            id: index,
+                          ),
                         ),
-                      ),
-                      borderRadius: BorderRadius.circular(10.0),
-                    );
-                  } else {
-                    return Material(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Container(
-                        height: getVideoItemHeight(),
-                        child: MyIndexVideoItem(id: index),
-                      ),
-                    );
-                  }
-                },
+                        borderRadius: BorderRadius.circular(10.0),
+                      );
+                    } else {
+                      return Material(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Container(
+                          height: getVideoItemHeight(),
+                          child: MyIndexVideoItem(id: index),
+                        ),
+                      );
+                    }
+                  },
+                ),
               ),
-            ),
-          )),
-    );
+            )),
+      );
+    });
   }
 
   int getColCount(double len) {
