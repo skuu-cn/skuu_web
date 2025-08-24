@@ -64,4 +64,10 @@ class ShortVideoPlayerState extends State<ShortVideoPlayer> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    flickMultiManager.toggleMute();
+    super.dispose();
+  }
 }

@@ -6,6 +6,10 @@ abstract class Routes {
 
   //路由管理
   static const String HOME = "/";
+  static const String indexPage = "/index_page";
+  static const String videoPage = "/video_page";
+  static const String messagePage = "/message_page";
+  static const String mePage = "/me_page";
   static const String chat = "/chat";
   static const String friendDetail = "/friend_detail";
   static const String userDetail = "/user_detail";

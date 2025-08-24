@@ -1,5 +1,5 @@
-import 'package:skuu/generated/json/base/json_convert_content.dart';
 import 'package:skuu/app/data/models/skuu_blog_page_entity.dart';
+import 'package:skuu/generated/json/base/json_convert_content.dart';
 
 SkuuBlogPageEntity $SkuuBlogPageEntityFromJson(Map<String, dynamic> json) {
   final SkuuBlogPageEntity skuuBlogPageEntity = SkuuBlogPageEntity();
@@ -11,8 +11,8 @@ SkuuBlogPageEntity $SkuuBlogPageEntityFromJson(Map<String, dynamic> json) {
   if (message != null) {
     skuuBlogPageEntity.message = message;
   }
-  final SkuuBlogPageData? data = jsonConvert.convert<SkuuBlogPageData>(
-      json['data']);
+  final SkuuBlogPageData? data =
+      jsonConvert.convert<SkuuBlogPageData>(json['data']);
   if (data != null) {
     skuuBlogPageEntity.data = data;
   }
@@ -42,11 +42,10 @@ extension SkuuBlogPageEntityExtension on SkuuBlogPageEntity {
 
 SkuuBlogPageData $SkuuBlogPageDataFromJson(Map<String, dynamic> json) {
   final SkuuBlogPageData skuuBlogPageData = SkuuBlogPageData();
-  final List<SkuuBlogPageDataRecords>? list = (json['list'] as List<
-      dynamic>?)?.map(
-          (e) =>
-      jsonConvert.convert<SkuuBlogPageDataRecords>(
-          e) as SkuuBlogPageDataRecords).toList();
+  final List<SkuuBlogPageDataRecords>? list = (json['list'] as List<dynamic>?)
+      ?.map((e) => jsonConvert.convert<SkuuBlogPageDataRecords>(e)
+          as SkuuBlogPageDataRecords)
+      .toList();
   if (list != null) {
     skuuBlogPageData.list = list;
   }
@@ -62,13 +61,13 @@ SkuuBlogPageData $SkuuBlogPageDataFromJson(Map<String, dynamic> json) {
   if (current != null) {
     skuuBlogPageData.current = current;
   }
-  final List<dynamic>? orders = (json['orders'] as List<dynamic>?)?.map(
-          (e) => e).toList();
+  final List<dynamic>? orders =
+      (json['orders'] as List<dynamic>?)?.map((e) => e).toList();
   if (orders != null) {
     skuuBlogPageData.orders = orders;
   }
-  final bool? optimizeCountSql = jsonConvert.convert<bool>(
-      json['optimizeCountSql']);
+  final bool? optimizeCountSql =
+      jsonConvert.convert<bool>(json['optimizeCountSql']);
   if (optimizeCountSql != null) {
     skuuBlogPageData.optimizeCountSql = optimizeCountSql;
   }
@@ -121,7 +120,8 @@ extension SkuuBlogPageDataExtension on SkuuBlogPageData {
 
 SkuuBlogPageDataRecords $SkuuBlogPageDataRecordsFromJson(
     Map<String, dynamic> json) {
-  final SkuuBlogPageDataRecords skuuBlogPageDataRecords = SkuuBlogPageDataRecords();
+  final SkuuBlogPageDataRecords skuuBlogPageDataRecords =
+      SkuuBlogPageDataRecords();
   final String? id = jsonConvert.convert<String>(json['id']);
   if (id != null) {
     skuuBlogPageDataRecords.id = id;
@@ -158,6 +158,14 @@ SkuuBlogPageDataRecords $SkuuBlogPageDataRecordsFromJson(
   if (deleted != null) {
     skuuBlogPageDataRecords.deleted = deleted;
   }
+  final bool? care = jsonConvert.convert<bool>(json['care']);
+  if (care != null) {
+    skuuBlogPageDataRecords.care = care;
+  }
+  final bool? zan = jsonConvert.convert<bool>(json['zan']);
+  if (zan != null) {
+    skuuBlogPageDataRecords.zan = zan;
+  }
   final String? creator = jsonConvert.convert<String>(json['creator']);
   if (creator != null) {
     skuuBlogPageDataRecords.creator = creator;
@@ -189,42 +197,11 @@ Map<String, dynamic> $SkuuBlogPageDataRecordsToJson(
   data['resources'] = entity.resources;
   data['shareType'] = entity.shareType;
   data['deleted'] = entity.deleted;
+  data['care'] = entity.care;
+  data['zan'] = entity.zan;
   data['creator'] = entity.creator;
   data['updater'] = entity.updater;
   data['createTime'] = entity.createTime;
   data['updateTime'] = entity.updateTime;
   return data;
-}
-
-extension SkuuBlogPageDataRecordsExtension on SkuuBlogPageDataRecords {
-  SkuuBlogPageDataRecords copyWith({
-    String? id,
-    String? squareId,
-    int? topicId,
-    int? categary,
-    int? blogType,
-    String? content,
-    String? resources,
-    int? shareType,
-    bool? deleted,
-    String? creator,
-    String? updater,
-    String? createTime,
-    String? updateTime,
-  }) {
-    return SkuuBlogPageDataRecords()
-      ..id = id ?? this.id
-      ..squareId = squareId ?? this.squareId
-      ..topicId = topicId ?? this.topicId
-      ..categary = categary ?? this.categary
-      ..blogType = blogType ?? this.blogType
-      ..content = content ?? this.content
-      ..resources = resources ?? this.resources
-      ..shareType = shareType ?? this.shareType
-      ..deleted = deleted ?? this.deleted
-      ..creator = creator ?? this.creator
-      ..updater = updater ?? this.updater
-      ..createTime = createTime ?? this.createTime
-      ..updateTime = updateTime ?? this.updateTime;
-  }
 }

@@ -55,6 +55,8 @@ class SkuuBlogPageDataRecords {
 	late String resources;
 	late int shareType;
 	late bool deleted;
+	late bool care;
+	late bool zan;
 	late String creator;
 	late String updater;
 	late String createTime;

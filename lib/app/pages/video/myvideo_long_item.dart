@@ -3,33 +3,19 @@ import 'package:flutter/material.dart';
 import 'myvideo_img_item.dart';
 
 //视频-长视频页面
-class MyVideoLongItem extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _MyVideoLongItem();
-  }
-}
-
-class _MyVideoLongItem extends State<MyVideoLongItem>{
-  final List<String> _items = [];
-
-
-  @override
-  void initState() {
-    super.initState();
-    _items.addAll([
-      '1',
-      '1',
-      '1',
-      '1',
-      '1',
-      '1',
-      '1',
-      '1',
-      '1',
-      '1',
-    ]);
-  }
+class MyVideoLongItem extends StatelessWidget {
+  final List<String> _items = [
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +37,4 @@ class _MyVideoLongItem extends State<MyVideoLongItem>{
           }),
     ));
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

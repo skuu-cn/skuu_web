@@ -68,9 +68,11 @@ class _HomeAppBarItemPage extends State<HomeAppBarItemPage> {
                     child: Container(
                       height:
                           getImgItemHeight(index > 6 ? 6 : index, index * 100),
-                      child: MyImgItem(
-                        id: index > 6 ? 6 : index,
-                      ),
+
+                      child:Container(),
+                      // MyImgItem(
+                      //   id: index > 6 ? 6 : index,
+                      // ),
                     ),
                     borderRadius: BorderRadius.circular(10.0),
                   );
@@ -79,7 +81,8 @@ class _HomeAppBarItemPage extends State<HomeAppBarItemPage> {
                     borderRadius: BorderRadius.circular(10.0),
                     child: Container(
                       height: getVideoItemHeight(),
-                      child: MyIndexVideoItem(),
+                      child: Container(),
+                      // child: MyIndexVideoItem(),
                     ),
                   );
                 }
