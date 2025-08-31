@@ -17,6 +17,8 @@ abstract class Routes {
   static const String collect = "/collects";
   static const String watchVideo = "/watchs";
   static const String whatArticle = "/look_art";
+  static const String watchImgUrl = "/watchImg";
+  static const String fullVideoUrl = "/fullVideo";
   static const String searchPage = "/search_page";
   static const String dateToolPageUrl = "/data_tool_page";
   static const String urlToolPageUrl = "/url_tool_page";

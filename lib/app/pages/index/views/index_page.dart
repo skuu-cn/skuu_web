@@ -5,6 +5,7 @@ import 'package:skuu/app/pages/blog/views/blog_view.dart';
 import 'package:skuu/app/pages/index/views/widgets/slide_transition_x.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../components/KeepAliveTabWrapper.dart';
 import '../../../routes/app_pages.dart';
 import '../../drawer_page.dart';
 import '../../goods/goods_page.dart';
@@ -26,16 +27,16 @@ class IndexPage extends GetView<IndexController> {
         body: Center(
             child: TabBarView(
           controller: controller.tabController,
-          physics: const AlwaysScrollableScrollPhysics(), //禁止滑动
+          physics: const AlwaysScrollableScrollPhysics(),
           children: [
-            BlogView(),
-            BlogView(),
-            BlogView(),
-            MyWorks(),
-            GoodsPage(),
-            HelpItemPage(),
-            HelpItemPage(),
-            ToolPage()
+            KeepAliveTabWrapper(child: BlogView(0)),
+            KeepAliveTabWrapper(child: BlogView(1)),
+            KeepAliveTabWrapper(child: BlogView(2)),
+            KeepAliveTabWrapper(child: MyWorks()),
+            KeepAliveTabWrapper(child: GoodsPage()),
+            KeepAliveTabWrapper(child: HelpItemPage()),
+            KeepAliveTabWrapper(child: HelpItemPage()),
+            KeepAliveTabWrapper(child: ToolPage())
           ],
         )),
       );
@@ -99,17 +100,25 @@ class IndexPage extends GetView<IndexController> {
           );
         },
         child: controller.hasSearch.value
-            ? Container(
-                width: 100,
-                child: TextButton(
-                  child: Text(
-                    '京ICP备2022023998号-2',
-                    style: TextStyle(color: Colors.grey, fontSize: 10),
-                  ),
-                  onPressed: () {
-                    _launchURL(Uri(scheme: 'https', host: 'beian.miit.gov.cn'));
-                  },
-                ),
+            ? Row(
+                children: [
+                  IconButton(onPressed: (){
+                    controller.changeTab(1);
+                  }, icon: Icon(Icons.switch_right),),
+                  Container(
+                    width: 100,
+                    child: TextButton(
+                      child: Text(
+                        '京ICP备2022023998号-2',
+                        style: TextStyle(color: Colors.grey, fontSize: 10),
+                      ),
+                      onPressed: () {
+                        _launchURL(
+                            Uri(scheme: 'https', host: 'beian.miit.gov.cn'));
+                      },
+                    ),
+                  )
+                ],
               )
             : Row(
                 children: [

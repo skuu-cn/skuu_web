@@ -136,7 +136,7 @@ class LongVideoItemView extends StatelessWidget {
                         ),
                       ),
                       PopupMenuButton(
-                        tooltip: "更多",
+                        tooltip: "",
                         icon: Icon(
                           Icons.more_horiz,
                           color: Colors.black54,

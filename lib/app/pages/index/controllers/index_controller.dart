@@ -8,7 +8,16 @@ class IndexController extends GetxController with GetTickerProviderStateMixin {
 
   late TabController tabController;
 
-  late TextEditingController controller = TextEditingController();
+  final Map<int, ScrollController> controllers = {};
+
+  ScrollController getScrollController(int tabIndex) {
+    if (!controllers.containsKey(tabIndex)) {
+      controllers[tabIndex] = ScrollController();
+      // 可以在这里添加监听器等
+      // _controllers[tabIndex]!.addListener(() { ... });
+    }
+    return controllers[tabIndex]!;
+  }
 
   @override
   void onInit() {
@@ -40,6 +49,10 @@ class IndexController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
+  void changeTab(int tab){
+    tabController.animateTo(tab);
+  }
+
   void initTabView() {
     getTabviewMenu();
     tabController = TabController(
@@ -55,10 +68,27 @@ class IndexController extends GetxController with GetTickerProviderStateMixin {
       });
   }
 
+  void scrollToTop(int tabIndex) {
+    final controller = controllers[tabIndex];
+    if (controller != null && controller.hasClients) {
+      controller.animateTo(
+        0.0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      print(
+          "⚠️ Cannot scroll Tab $tabIndex to top: Controller not initialized or no ScrollView attached.");
+    }
+  }
+
   @override
   void onClose() {
+    // 遍历 Map 中的所有 Controller 并调用 dispose()
+    controllers.values.forEach((controller) => controller.dispose());
+    // 清空 Map，防止内存泄漏
+    controllers.clear();
     tabController.dispose();
-    controller.dispose();
     super.onClose();
   }
 }

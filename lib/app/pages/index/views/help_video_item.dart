@@ -8,7 +8,7 @@ import 'package:skuu/constant/constant.dart';
 import '../../../../constant/color_constant.dart';
 import '../../../components/level_icon.dart';
 import '../../../components/myshare_page.dart';
-import '../../../components/myvideo_play.dart';
+import '../../../components/video_player_detail/myvideo_play.dart';
 import '../../../routes/app_pages.dart';
 
 //互助-视频
@@ -131,11 +131,12 @@ class _HelpVideoItem extends State<HelpVideoItem> {
             flex: 9,
             child: AspectRatio(
               aspectRatio: 15 / 9,
-              child: MyVideo(
-                url:
-                    'https://cloud.video.taobao.com//play/u/153810888/p/2/e/6/t/1/395124651263.mp4',
-                color: Colors.black,
-              ),
+              child: Container()
+              // MyVideo(
+              //   url:
+              //       'https://cloud.video.taobao.com//play/u/153810888/p/2/e/6/t/1/395124651263.mp4',
+              //   color: Colors.black,
+              // ),
             ),
           ),
           Container(
@@ -193,7 +194,7 @@ class _HelpVideoItem extends State<HelpVideoItem> {
               MySharePage(),
               Spacer(),
               PopupMenuButton(
-                tooltip: "更多",
+                tooltip: "",
                 icon: Icon(
                   Icons.more_vert,
                   color: Colors.black54,

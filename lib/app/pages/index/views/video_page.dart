@@ -4,9 +4,8 @@ import 'package:get/get.dart';
 import 'package:skuu/app/pages/index/controllers/video_controller.dart';
 
 import '../../../routes/app_pages.dart';
-import '../../demo/flickvideo/short_video_player/homepage/short_video_homepage.dart';
-import '../../demo/flickvideo/short_video_player/short_video_player/short_video_player.dart';
 import '../../drawer_page.dart';
+import '../../video/short_video_player/short_video_player/short_video_player.dart';
 import '../../video/views/long_video_view.dart';
 
 class VideoPage extends GetView<VideoController> {

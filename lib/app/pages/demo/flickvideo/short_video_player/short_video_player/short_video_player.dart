@@ -33,7 +33,6 @@ class ShortVideoPlayerState extends State<ShortVideoPlayer> {
         VideoService.getVideoPath(data['trailer_url'])
     ]);
     items.addAll(paths);
-    if (mounted) setState(() {});
   }
 
   @override

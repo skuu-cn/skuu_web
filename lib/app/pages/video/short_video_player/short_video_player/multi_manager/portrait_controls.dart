@@ -326,7 +326,7 @@ class _FeedPlayerPortraitControls extends State<FeedPlayerPortraitControls> {
                 ),
                 Text('212'),
                 PopupMenuButton(
-                  tooltip: "更多",
+                  tooltip: "",
                   icon: Icon(
                     Icons.more_vert,
                     color: Colors.black54,

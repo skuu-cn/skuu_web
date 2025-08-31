@@ -6,12 +6,13 @@ import 'package:skuu/app/pages/blog/domain/entity/blog_page_model.dart';
 
 import '../../../../constant/color_constant.dart';
 import '../../../../constant/constant.dart';
-import '../../../components/index_video_player/index_video_player.dart';
 import '../../../components/level_icon.dart';
 import '../../../components/myshare_page.dart';
+import '../../../components/video_player_detail/myvideo_play.dart';
 
 class BlogVideoItemView extends StatelessWidget {
   final BlogItem blogItem;
+  final int categary;
 
   //头像
   final VoidCallback? onAvatarTap;
@@ -33,7 +34,8 @@ class BlogVideoItemView extends StatelessWidget {
       this.onAvatarTap,
       this.onCardTap,
       this.onZanTap,
-      this.onCareTap});
+      this.onCareTap,
+      required this.categary});
 
   @override
   Widget build(BuildContext context) {
@@ -124,18 +126,14 @@ class BlogVideoItemView extends StatelessWidget {
           ),
           Expanded(
             flex: 9,
-            child: IndexVideoPlayer(
-              url: blogItem.resources!,
-              allUrls: '',
+            child: AspectRatio(
+              aspectRatio: 15 / 9,
+              child: MyVideo(
+                blogItem: blogItem,
+                color: Colors.black,
+                categary: categary,
+              ),
             ),
-            // child: AspectRatio(
-            //   aspectRatio: 15 / 9,
-            //   child: MyVideo(
-            //     url:
-            //         'https://cloud.video.taobao.com//play/u/153810888/p/2/e/6/t/1/395124651263.mp4',
-            //     color: Colors.black,
-            //   ),
-            // ),
           ),
           Row(
             children: <Widget>[
@@ -163,7 +161,7 @@ class BlogVideoItemView extends StatelessWidget {
               MySharePage(),
               Spacer(),
               PopupMenuButton(
-                tooltip: "更多",
+                tooltip: "",
                 icon: Icon(
                   Icons.more_vert,
                   color: Colors.black54,

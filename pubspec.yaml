@@ -41,10 +41,18 @@ dependencies:
   dio: ^5.4.0
   extended_nested_scroll_view: ^6.2.1
   easy_refresh: ^3.3.4
-  flick_video_player: ^0.9.0
+  flick_video_player:
+    git:
+      url: https://github.com/daicx/flick-video-player.git
+  video_player: ^2.10.0
+  # 基础的点击
+  tapped: ^2.0.0
+  # map取值
+  safemap: ^2.1.0
+  # 加载动画库
+  flutter_spinkit: ^5.2.1
   provider: ^6.0.1
   visibility_detector: ^0.4.0+2
-  video_player: ^2.8.2
   spring: ^2.0.2
   easy_sidemenu: ^0.6.1
   file_selector: ^1.0.3
@@ -72,6 +80,7 @@ dependencies:
   qiniu_flutter_sdk: ^0.7.2
   file_picker: ^8.0.0+1
   flutter_widget_from_html: ^0.16.0
+  carousel_slider: ^5.1.1
 
 dev_dependencies:
   flutter_webrtc: ^0.9.11

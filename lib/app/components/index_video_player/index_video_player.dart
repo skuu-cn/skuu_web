@@ -27,7 +27,7 @@ class _IndexVideoPlayer extends State<IndexVideoPlayer> {
     super.initState();
     flickManager = FlickManager(
       // autoInitialize: 1.sw > 1000 ? false : true,
-      autoPlay: 1.sw > 1000 ? false : true,
+      autoPlay: false,
       videoPlayerController:
           VideoPlayerController.networkUrl(Uri.parse(widget.url)),
       // Uri.parse(mockData["items"][1]["trailer_url"])),

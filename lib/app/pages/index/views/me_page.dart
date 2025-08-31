@@ -1,27 +1,27 @@
+import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:skuu/app/pages/index/controllers/me_controller.dart';
 
+import '../../../../constant/color_constant.dart';
 import '../../../routes/app_pages.dart';
 import '../../drawer_page.dart';
+import '../../me/me_detail_page.dart';
 
 class MePage extends GetView<MeController> {
   const MePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MeController>(builder: (a) {
+    return Obx(() {
       return Scaffold(
         //导航栏
         appBar: getAppbar2(),
         drawer: const DrawerPage(),
         body: Center(
-            child: TabBarView(
-          controller: controller.tabController,
-          physics: const AlwaysScrollableScrollPhysics(), //禁止滑动
-          children: controller.tabBoby,
-        )),
+          child: MeDetailPage(controller.name.value),
+        ),
       );
     });
   }
@@ -41,30 +41,12 @@ class MePage extends GetView<MeController> {
         },
       ),
       automaticallyImplyLeading: false,
-      // centerTitle: false,
-      title: TabBar(
-          controller: controller.tabController,
-          indicatorSize: TabBarIndicatorSize.label,
-          isScrollable: controller.tabTitle.length > 2 ? true : false,
-          tabs: controller.tabTitle.map((e) {
-            return Container(
-              height: 120.h,
-              width: 100.w,
-              alignment: Alignment.center,
-              child: Text(e),
-            );
-          }).toList()),
+      title: animatedTitle(),
       actions: [
         IconButton(
           icon: Icon(Icons.add),
           onPressed: () {
             Get.toNamed(Routes.publishZuoPinPageUrl);
-            // showModalBottomSheet(
-            //     constraints: BoxConstraints(maxHeight: 350.h),
-            //     context: context,
-            //     builder: (BuildContext build) {
-            //       return PublicSheets();
-            //     });
           },
         ),
         IconButton(
@@ -72,24 +54,30 @@ class MePage extends GetView<MeController> {
           onPressed: () {
             Get.toNamed(Routes.searchPage);
           },
-        )
+        ),
       ],
     );
   }
 
   Widget animatedTitle() {
-    return TabBar(
-        controller: controller.tabController,
-        indicatorSize: TabBarIndicatorSize.label,
-        isScrollable: controller.tabTitle.length > 2 ? true : false,
-        tabs: controller.tabTitle.map((e) {
-          return Container(
-            height: 120.h,
-            width: 100.w,
-            alignment: Alignment.center,
-            child: Text(e),
-          );
-        }).toList());
+    return InkWell(
+      onTap: () {
+        Get.toNamed(Routes.searchPage);
+      },
+      child: Container(
+          width: 0.8.sw,
+          height: 40,
+          margin: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 10.0),
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: Colors.white,
+          ),
+          child: TextButton.icon(
+              onPressed: null,
+              icon: const Icon(Icons.search),
+              label: Text("英雄联盟手游"))),
+    );
   }
 
   Widget animateActions() {

@@ -131,7 +131,7 @@ class _MyVideoImgItemV2 extends State<MyVideoImgItemV2> {
                                 color: Colors.black54,
                               )),
                       PopupMenuButton(
-                        tooltip: "更多",
+                        tooltip: "",
                         icon: Icon(
                           Icons.more_vert,
                           color: Colors.black54,

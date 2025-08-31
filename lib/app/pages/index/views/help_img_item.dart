@@ -224,7 +224,7 @@ class _HelpImgItem extends State<HelpImgItem> {
               MySharePage(),
               Spacer(),
               PopupMenuButton(
-                tooltip: "更多",
+                tooltip: "",
                 icon: Icon(
                   Icons.more_vert,
                   color: Colors.black54,

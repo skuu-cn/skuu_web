@@ -1,14 +1,12 @@
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:skuu/app/pages/blog/domain/adapters/iblog_page_repo.dart';
 import 'package:skuu/app/pages/blog/domain/entity/blog_page_model.dart';
 import 'package:skuu/app/routes/app_pages.dart';
 
-class BlogController extends GetxController {
+import '../../../components/imgcomment/previewImg.dart';
 
+class BlogController extends GetxController {
   final blogPageModel = BlogPageModel().obs;
   final RxnNum total = RxnNum(0);
   final RxList<BlogItem> blogItems = <BlogItem>[].obs;
@@ -19,9 +17,7 @@ class BlogController extends GetxController {
 
   BlogController({required this.blogPageRepo});
 
-  late int colCount = 2;
   late double scrollOffset = 0;
-  ScrollController scrollController = ScrollController();
 
   @override
   void onInit() {
@@ -57,6 +53,16 @@ class BlogController extends GetxController {
     }
   }
 
+  // 跳转到图片预览页
+  void onBlogImgItemTap(BlogItem blogItem, int index, String heroTag) {
+    PreviewImg previewImg = PreviewImg().copyWith(
+        id: blogItem.id,
+        url: blogItem.resources,
+        index: index,
+        heroTag: heroTag);
+    Get.toNamed(Routes.watchImgUrl, arguments: previewImg);
+  }
+
   //点击头像事件
   void onUserAvatarTap(BlogItem blogItem) {
     Get.toNamed(Routes.whatArticle, arguments: blogItem);
@@ -68,20 +74,22 @@ class BlogController extends GetxController {
   //点赞
   void onZanTap(BlogItem blogItem) {}
 
-  void setColCount(double len) {
-    if (len < 1000) {
-      colCount = 1;
-    } else {
-      colCount = 2;
-    }
-  }
-
   void setScrollOffset(double curScrollOffset) {
     scrollOffset = curScrollOffset;
   }
 
+  double getImgGridHeight(int itemCount) {
+    if (itemCount == 1) {
+      return 500;
+    } else if (itemCount > 1 && itemCount <= 3) {
+      return 300;
+    } else {
+      return 600;
+    }
+  }
+
   //动态根据图片个数算item高度
-  double getImgItemHeight(int itemCount, double length) {
+  double getImgItemHeight(int itemCount, double length, int colCount) {
     length = length == 0 ? 100 : length;
     double widthItem = 1.sw;
     if (colCount > 1) {
@@ -96,6 +104,10 @@ class BlogController extends GetxController {
     if (itemCount == 0) {
       return wordHeight;
     }
+    return getImgGridHeight(itemCount) + wordHeight;
+    if (itemCount == 1) {
+      return 300 + wordHeight;
+    }
     //图片超过3个的时候，高度固定
     if (itemCount > 3) {
       return (2 / 3) * widthItem + wordHeight;
@@ -103,7 +115,7 @@ class BlogController extends GetxController {
     return widthItem / itemCount + wordHeight;
   }
 
-  double getVideoItemHeight() {
+  double getVideoItemHeight(int colCount) {
     double widthItem = 1.sw;
     if (colCount > 1) {
       widthItem = 0.5.sw;
@@ -111,13 +123,8 @@ class BlogController extends GetxController {
     return widthItem / (15 / 9) + 150;
   }
 
-  int getImgItemCount() {
-    return Random().nextInt(3) + 1;
-  }
-
   @override
   void onClose() {
-    scrollController.dispose();
     super.onClose();
   }
 }

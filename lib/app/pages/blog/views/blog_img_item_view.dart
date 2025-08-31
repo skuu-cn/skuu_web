@@ -2,15 +2,20 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:skuu/app/pages/blog/controllers/blog_controller.dart';
 import 'package:skuu/app/pages/blog/domain/entity/blog_page_model.dart';
 
 import '../../../../constant/color_constant.dart';
 import '../../../../constant/constant.dart';
 import '../../../components/level_icon.dart';
 import '../../../components/myshare_page.dart';
+import '../../index/controllers/home_controller.dart';
 
 class BlogImgItemView extends StatelessWidget {
   final BlogItem blogItem;
+  final int categary;
 
   //头像
   final VoidCallback? onAvatarTap;
@@ -24,18 +29,22 @@ class BlogImgItemView extends StatelessWidget {
   //关注
   final VoidCallback? onCareTap;
 
-  const BlogImgItemView(
+  //预览图片
+  final blogController = Get.find<BlogController>();
+
+  BlogImgItemView(
       {super.key,
       required this.blogItem,
       this.onAvatarTap,
       this.onCardTap,
       this.onZanTap,
-      this.onCareTap});
+      this.onCareTap,
+      required this.categary});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(1),
+      padding: const EdgeInsets.all(5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -107,44 +116,51 @@ class BlogImgItemView extends StatelessWidget {
               )
             ],
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 5, right: 5),
-            child: SelectableText(
-              blogItem.content!,
-              scrollPhysics: NeverScrollableScrollPhysics(),
-              maxLines: 3,
-              minLines: 1,
-              style: TextStyle(
-                fontSize: 20,
-                overflow: TextOverflow.ellipsis,
-              ),
+          SelectableText(
+            blogItem.content!,
+            scrollPhysics: NeverScrollableScrollPhysics(),
+            maxLines: 3,
+            minLines: 1,
+            style: TextStyle(
+              fontSize: 20,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
-          if (blogItem.resources!.split(",").length > 0)
-            Expanded(
-              // flex: 9,
-              child: InkWell(
-                onTap: onCardTap,
-                child: Container(
-                  child: GridView.builder(
-                      padding: EdgeInsets.only(top: 2.0),
-                      physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount:
-                              getCount(blogItem.resources!.split(",").length),
-                          childAspectRatio: 1,
-                          mainAxisSpacing: 2.0,
-                          crossAxisSpacing: 2.0),
-                      itemCount: blogItem.resources!.split(",").length,
-                      itemBuilder: (context, index) {
-                        return Image.network(
-                          blogItem.resources!.split(",")[index],
-                          fit: BoxFit.fill,
-                        );
-                      }),
-                ),
-              ),
-            ),
+          SizedBox(
+            height: 10,
+          ),
+          LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              double parentWidth = constraints.maxWidth;
+              return Wrap(
+                children: [
+                  for (int i = 0;
+                      i < blogItem.resources!.split(",").length;
+                      i++)
+                    Padding(
+                      padding: EdgeInsets.only(right: 10, bottom: 10),
+                      child: InkWell(
+                        child: Hero(
+                          child: SizedBox(
+                            height: getImgGridHeight(
+                                blogItem.resources!.split(",").length,
+                                parentWidth),
+                            child: Image.network(
+                              blogItem.resources!.split(",")[i],
+                            ),
+                          ),
+                          tag: 'lookBlogImg-${categary}-${blogItem.id}-$i',
+                        ),
+                        onTap: () {
+                          blogController.onBlogImgItemTap(blogItem, i,
+                              'lookBlogImg-${categary}-${blogItem.id}-$i');
+                        },
+                      ),
+                    )
+                ],
+              );
+            },
+          ),
           Row(
             children: <Widget>[
               TextButton.icon(
@@ -176,7 +192,7 @@ class BlogImgItemView extends StatelessWidget {
               MySharePage(),
               Spacer(),
               PopupMenuButton(
-                tooltip: "更多",
+                tooltip: '',
                 icon: Icon(
                   Icons.more_vert,
                   color: Colors.black54,
@@ -217,11 +233,21 @@ class BlogImgItemView extends StatelessWidget {
     );
   }
 
-  int getCount(int count) {
-    if (count <= 3) {
-      return count;
+  double getImgGridHeight(int itemCount, double parentWidth) {
+    if (itemCount == 1) {
+      return 300;
+    } else if (itemCount == 3 || itemCount == 5 || itemCount == 6) {
+      return (parentWidth - 30) / 3;
     } else {
-      return 3;
+      return parentWidth / 3;
     }
+  }
+}
+
+int getCount(int count) {
+  if (count <= 3) {
+    return count;
+  } else {
+    return 3;
   }
 }

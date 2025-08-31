@@ -3,16 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:skuu/app/pages/index/controllers/message_controller.dart';
 
-import '../../../../constant/constant.dart';
 import '../../../routes/app_pages.dart';
 import '../../drawer_page.dart';
+import '../../friends/chat_page_list.dart';
+import '../../friends/friends_page.dart';
 
 class MessagePage extends GetView<MessageController> {
   const MessagePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MessageController>(builder: (a) {
+    return Obx(() {
       return Scaffold(
         //导航栏
         appBar: getAppbar2(),
@@ -20,10 +21,11 @@ class MessagePage extends GetView<MessageController> {
         body: Center(
             child: TabBarView(
           controller: controller.tabController,
-          physics: 1.sw >= Constant.CHAT_TWO_VIEW_WIDTH
-              ? const NeverScrollableScrollPhysics()
-              : const AlwaysScrollableScrollPhysics(), //禁止滑动
-          children: controller.tabBoby,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            ChatPageList(),
+            FriendsPage(),
+          ],
         )),
       );
     });
