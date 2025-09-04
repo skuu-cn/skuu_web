@@ -1,7 +1,7 @@
 class ApiConstant {
-  // static const String BASE_URL = 'https://qqai.cn';
+  static const String BASE_URL = 'https://qqai.cn';
 
-  static const String BASE_URL = 'http://localhost:58080';
+  // static const String BASE_URL = 'http://localhost:58080';
   static const String DAY_HISTORY_NEWS_URL =
       '/app-api/blog/news/dayHistory/news';
   static const String DAYHOT_NEWS_URL = '/app-api/blog/news/dayHot/news';

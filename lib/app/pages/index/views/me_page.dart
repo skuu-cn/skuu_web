@@ -17,8 +17,8 @@ class MePage extends GetView<MeController> {
     return Obx(() {
       return Scaffold(
         //导航栏
-        appBar: getAppbar2(),
-        drawer: const DrawerPage(),
+        // appBar: getAppbar2(),
+        // drawer: const DrawerPage(),
         body: Center(
           child: MeDetailPage(controller.name.value),
         ),

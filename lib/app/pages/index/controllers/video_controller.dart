@@ -11,13 +11,13 @@ import '../../demo/flickvideo/short_video_player/homepage/short_video_homepage.d
 import '../../video/myvideo_long_item.dart';
 
 class VideoController extends GetxController with GetTickerProviderStateMixin {
-  final tabTitle = <String>[].obs;
+  // final tabTitle = <String>[].obs;
 
-  late TabController tabController;
+  // late TabController tabController;
 
   @override
   void onInit() {
-    initTabView();
+    // initTabView();
     super.onInit();
   }
 
@@ -26,24 +26,24 @@ class VideoController extends GetxController with GetTickerProviderStateMixin {
     super.onReady();
   }
 
-  void getTabviewMenu() {
-    tabTitle.value = [
-      '影视',
-      '短视频',
-    ];
-  }
-
-  void initTabView() {
-    getTabviewMenu();
-    tabController = TabController(
-      length: tabTitle.length,
-      vsync: this,
-    );
-  }
+  // void getTabviewMenu() {
+  //   tabTitle.value = [
+  //     '影视',
+  //     '短视频',
+  //   ];
+  // }
+  //
+  // void initTabView() {
+  //   getTabviewMenu();
+  //   tabController = TabController(
+  //     length: tabTitle.length,
+  //     vsync: this,
+  //   );
+  // }
 
   @override
   void onClose() {
-    tabController.dispose();
+    // tabController.dispose();
     super.onClose();
   }
 }

@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 class IndexController extends GetxController with GetTickerProviderStateMixin {
   final RxBool hasSearch = true.obs;
 
-  final tabTitle = <String>[].obs;
+  // final tabTitle = <String>[].obs;
 
-  late TabController tabController;
+  // late TabController tabController;
 
   final Map<int, ScrollController> controllers = {};
 
@@ -21,7 +21,7 @@ class IndexController extends GetxController with GetTickerProviderStateMixin {
 
   @override
   void onInit() {
-    initTabView();
+    // initTabView();
     super.onInit();
   }
 
@@ -30,18 +30,18 @@ class IndexController extends GetxController with GetTickerProviderStateMixin {
     super.onReady();
   }
 
-  void getTabviewMenu() {
-    tabTitle.value = [
-      '推荐',
-      '关注',
-      '本地',
-      '广场',
-      '商场',
-      '聚力',
-      '共享',
-      '工具',
-    ];
-  }
+  // void getTabviewMenu() {
+  //   tabTitle.value = [
+  //     '推荐',
+  //     '关注',
+  //     '本地',
+  //     '广场',
+  //     '商场',
+  //     '聚力',
+  //     '共享',
+  //     '工具',
+  //   ];
+  // }
 
   void changeShowSearch(bool ifShow) {
     if (hasSearch.value != ifShow) {
@@ -49,24 +49,24 @@ class IndexController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
-  void changeTab(int tab){
-    tabController.animateTo(tab);
-  }
+  // void changeTab(int tab){
+  //   tabController.animateTo(tab);
+  // }
 
-  void initTabView() {
-    getTabviewMenu();
-    tabController = TabController(
-      length: tabTitle.length,
-      vsync: this,
-    )..addListener(() {
-        //搜索框
-        if (tabController.index == 0) {
-          hasSearch.value = true;
-        } else {
-          hasSearch.value = false;
-        }
-      });
-  }
+  // void initTabView() {
+  //   getTabviewMenu();
+  //   tabController = TabController(
+  //     length: tabTitle.length,
+  //     vsync: this,
+  //   )..addListener(() {
+  //       //搜索框
+  //       if (tabController.index == 0) {
+  //         hasSearch.value = true;
+  //       } else {
+  //         hasSearch.value = false;
+  //       }
+  //     });
+  // }
 
   void scrollToTop(int tabIndex) {
     final controller = controllers[tabIndex];
@@ -88,7 +88,7 @@ class IndexController extends GetxController with GetTickerProviderStateMixin {
     controllers.values.forEach((controller) => controller.dispose());
     // 清空 Map，防止内存泄漏
     controllers.clear();
-    tabController.dispose();
+    // tabController.dispose();
     super.onClose();
   }
 }

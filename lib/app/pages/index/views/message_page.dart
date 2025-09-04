@@ -4,31 +4,31 @@ import 'package:get/get.dart';
 import 'package:skuu/app/pages/index/controllers/message_controller.dart';
 
 import '../../../routes/app_pages.dart';
-import '../../drawer_page.dart';
 import '../../friends/chat_page_list.dart';
 import '../../friends/friends_page.dart';
+import '../controllers/home_controller.dart';
 
 class MessagePage extends GetView<MessageController> {
-  const MessagePage({super.key});
+  MessagePage({super.key});
+
+  final HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Scaffold(
-        //导航栏
-        appBar: getAppbar2(),
-        drawer: const DrawerPage(),
-        body: Center(
-            child: TabBarView(
-          controller: controller.tabController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            ChatPageList(),
-            FriendsPage(),
-          ],
-        )),
-      );
-    });
+    return Scaffold(
+      //导航栏
+      // appBar: getAppbar2(),
+      // drawer: const DrawerPage(),
+      body: Center(
+          child: TabBarView(
+        controller: homeController.tabController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          ChatPageList(),
+          FriendsPage(),
+        ],
+      )),
+    );
   }
 
   PreferredSizeWidget getAppbar2() {

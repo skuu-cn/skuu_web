@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:skuu/app/pages/index/views/index_page.dart';
 import 'package:skuu/app/pages/index/views/me_page.dart';
@@ -8,19 +7,15 @@ import 'package:skuu/app/pages/index/views/video_page.dart';
 
 import '../../../components/AnimatedBottomBar.dart';
 
-class HomeController extends GetxController {
-  List<dynamic>? data;
+class HomeController extends GetxController with GetTickerProviderStateMixin {
+  TabController? tabController;
+  final RxBool hasSearch = true.obs;
 
   String imgPath = 'imgs/';
   final selected = 0.obs;
   final bottomMenuType = 1.obs;
   final tabTitle = <String>[].obs;
-  final tabBoby = <Widget>[].obs;
   final colCount = 2.obs;
-
-  final Rx<Offset> fabOffset = Offset.zero.obs;
-  final RxDouble fabSize = 56.0.obs;
-  final RxBool isDragging = false.obs;
 
   // 定义一个工厂函数列表，而不是实例列表
   final List<Widget Function()> mainPageBuilders = [
@@ -30,10 +25,53 @@ class HomeController extends GetxController {
     () => MePage(),
   ];
 
+  List<String> getTabviewMenu(int index) {
+    switch (index) {
+      case 0:
+        return ['推荐', '关注', '本地', '广场', '商场', '聚力', '共享', '工具'];
+      case 1:
+        return ['影视', '短视频'];
+      case 2:
+        return ['消息', '好友'];
+      default:
+        return [];
+    }
+  }
+
+  void initTabView(int index) {
+    final titles = getTabviewMenu(index);
+    tabTitle.value = titles;
+    // ✅ 安全释放旧 controller
+    // if (tabController != null && index != 0) {
+    //   tabController!.dispose();
+    // }
+    tabController = TabController(
+      length: titles.length,
+      vsync: this,
+      initialIndex: 0,
+    )..addListener((_handleTabChange));
+  }
+
+  void _handleTabChange() {
+    if (selected.value == 0 && tabController?.index == 0) {
+      hasSearch.value = true;
+    } else {
+      hasSearch.value = false;
+    }
+  }
+
+  void changeTab(int tab) {
+    if (tabController != null && tab >= 0 && tab < tabController!.length) {
+      tabController?.animateTo(tab);
+    }
+  }
+
 // 在 changeMainPage 中
   void changeMainPage(int index) {
     if (index >= 0 && index < mainPageBuilders.length) {
       selected.value = index;
+      initTabView(index);
+      _handleTabChange();
     }
   }
 
@@ -72,43 +110,10 @@ class HomeController extends GetxController {
     }
   }
 
-  void onDragStart(DragStartDetails details) {
-    isDragging.value = true;
-  }
-
-  void onDragUpdate(DragUpdateDetails details) {
-    final minX = 0.0;
-    final maxX = 1.sw - fabSize.value;
-    final minY = MediaQuery.of(Get.context!).padding.top;
-    final maxY = 1.sh - fabSize.value - MediaQuery.of(Get.context!).padding.bottom;
-    fabOffset.value = Offset(
-      (fabOffset.value.dx + details.delta.dx).clamp(minX, maxX),
-      (fabOffset.value.dy + details.delta.dy).clamp(minY, maxY),
-    );
-  }
-
-  void onDragEnd(DragEndDetails details) {
-    isDragging.value = false;
-    final double midScreenX = 1.sw / 2;
-    final double margin = 16.0;
-    final double endX = fabOffset.value.dx < midScreenX ? margin : 1.sw - fabSize.value - margin;
-    final minY = MediaQuery.of(Get.context!).padding.top + margin;
-    final maxY = 1.sh - fabSize.value - MediaQuery.of(Get.context!).padding.bottom - margin;
-    fabOffset.value = Offset(endX, fabOffset.value.dy.clamp(minY, maxY));
-  }
-
   @override
   void onInit() {
+    changeMainPage(0);
     super.onInit();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final screenSize = Get.size;
-      final padding = Get.mediaQuery.padding;
-      fabSize.value = 56.0.w;
-      fabOffset.value = Offset(
-        screenSize.width - fabSize.value - 116.w,
-        screenSize.height - fabSize.value - padding.bottom - 116.h,
-      );
-    });
   }
 
   @override
@@ -118,6 +123,8 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
+    tabController?.removeListener(_handleTabChange);
+    tabController?.dispose();
     super.onClose();
   }
 }
