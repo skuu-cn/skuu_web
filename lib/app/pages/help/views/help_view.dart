@@ -6,12 +6,15 @@ import 'package:skuu/app/pages/blog/controllers/blog_controller.dart';
 import 'package:skuu/app/pages/blog/domain/entity/blog_page_model.dart';
 import 'package:skuu/app/pages/blog/views/blog_img_item_view.dart';
 import 'package:skuu/app/pages/blog/views/blog_video_item_view.dart';
+import 'package:skuu/app/pages/help/controllers/help_controller.dart';
+import 'package:skuu/app/pages/help/views/help_img_item_view.dart';
+import 'package:skuu/app/pages/help/views/help_video_item_view.dart';
 import 'package:skuu/app/pages/index/controllers/home_controller.dart';
 
 import '../../index/controllers/index_controller.dart';
 
-class BlogView extends GetView<BlogController> {
-  BlogView(this.categary, {super.key});
+class HelpView extends GetView<HelpController> {
+  HelpView(this.categary, {super.key});
 
   final int categary;
   final indexController = Get.find<IndexController>();
@@ -26,12 +29,12 @@ class BlogView extends GetView<BlogController> {
         body: MasonryGridView.count(
           itemCount: controller.blogItems.length,
           crossAxisCount: homeController.colCount.value,
-          controller: indexController.controllers[0],
+          controller: indexController.controllers[6],
           itemBuilder: (context, index) {
             BlogItem blogItem = controller.blogItems[index];
             if (blogItem.blogType == 1) {
               return Card(
-                child: BlogImgItemView(
+                child: HelpImgItemView(
                   blogItem: blogItem,
                   categary: categary,
                   onAvatarTap: () => controller.onUserAvatarTap(blogItem),
@@ -45,7 +48,7 @@ class BlogView extends GetView<BlogController> {
                 child: SizedBox(
                   height: controller
                       .getVideoItemHeight(homeController.colCount.value),
-                  child: BlogVideoItemView(
+                  child: HelpVideoItemView(
                     blogItem: blogItem,
                     categary: categary,
                     onCardTap: () => controller.onBlogItemTap(blogItem),

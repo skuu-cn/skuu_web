@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:skuu/app/pages/blog/views/blog_view.dart';
+import 'package:skuu/app/pages/help/views/help_view.dart';
 import 'package:skuu/app/pages/index/controllers/home_controller.dart';
 import 'package:skuu/app/pages/index/views/widgets/slide_transition_x.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,6 +11,8 @@ import '../../../components/KeepAliveTabWrapper.dart';
 import '../../../routes/app_pages.dart';
 import '../../goods/goods_page.dart';
 import '../../me/myworks.dart';
+import '../../share/views/share_view.dart';
+import '../../square/views/square_view.dart';
 import '../../tool/tool_page.dart';
 import '../controllers/index_controller.dart';
 import 'help_item_page.dart';
@@ -30,10 +33,10 @@ class IndexPage extends GetView<IndexController> {
           KeepAliveTabWrapper(child: BlogView(0)),
           KeepAliveTabWrapper(child: BlogView(1)),
           KeepAliveTabWrapper(child: BlogView(2)),
-          KeepAliveTabWrapper(child: MyWorks()),
+          KeepAliveTabWrapper(child: SquareView()),
           KeepAliveTabWrapper(child: GoodsPage()),
-          KeepAliveTabWrapper(child: HelpItemPage()),
-          KeepAliveTabWrapper(child: HelpItemPage()),
+          KeepAliveTabWrapper(child: HelpView(6)),
+          KeepAliveTabWrapper(child: ShareView(7)),
           KeepAliveTabWrapper(child: ToolPage())
         ],
       )),
