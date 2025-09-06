@@ -30,7 +30,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       case 0:
         return ['推荐', '关注', '本地', '广场', '商场', '聚力', '共享', '工具'];
       case 1:
-        return ['影视', '短视频'];
+        return ['影视', '芊视'];
       case 2:
         return ['消息', '好友'];
       default:

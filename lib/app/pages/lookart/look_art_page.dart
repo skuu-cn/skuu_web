@@ -51,6 +51,17 @@ class _LookArticalPage extends State<LookArticalPage>
     return Scaffold(
       appBar: AppBar(
         title: Text('详情'),
+        leading: Semantics(
+          label: '',
+          excludeSemantics: true,
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            tooltip: '',
+          ),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
@@ -313,7 +324,7 @@ class _LookArticalPage extends State<LookArticalPage>
                           ..onTap = () {
                             print('新飞飞1');
                           }),
-                    TextSpan(text: '：'+text, style: TextStyle(height: 1.8))
+                    TextSpan(text: '：' + text, style: TextStyle(height: 1.8))
                   ])),
                   SelectableText.rich(TextSpan(children: [
                     TextSpan(
@@ -323,7 +334,7 @@ class _LookArticalPage extends State<LookArticalPage>
                           ..onTap = () {
                             print('新飞飞1');
                           }),
-                    TextSpan(text: '：'+text, style: TextStyle(height: 1.8))
+                    TextSpan(text: '：' + text, style: TextStyle(height: 1.8))
                   ])),
                   SelectableText.rich(TextSpan(children: [
                     TextSpan(
@@ -333,7 +344,7 @@ class _LookArticalPage extends State<LookArticalPage>
                           ..onTap = () {
                             print('新飞飞1');
                           }),
-                    TextSpan(text: '：'+text, style: TextStyle(height: 1.8))
+                    TextSpan(text: '：' + text, style: TextStyle(height: 1.8))
                   ])),
                   SelectableText.rich(TextSpan(children: [
                     TextSpan(
@@ -343,7 +354,7 @@ class _LookArticalPage extends State<LookArticalPage>
                           ..onTap = () {
                             print('新飞飞1');
                           }),
-                    TextSpan(text: '：'+text, style: TextStyle(height: 1.8))
+                    TextSpan(text: '：' + text, style: TextStyle(height: 1.8))
                   ])),
                   CommengSecondItem(),
                 ],
