@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -28,9 +29,12 @@ class SquareItemView extends StatelessWidget {
               flex: 2,
               child: Container(
                 width: 1.sw,
-                child: Image.network(
-                  'https://file.qqai.cn/qqai/2025/09/square.jpg',
-                  fit: BoxFit.fill,
+                child: CachedNetworkImage(
+                  imageUrl: 'https://file.qqai.cn/qqai/2025/09/square.webp',
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  // 图片加载完成后淡入显示（提升体验）
+                  fadeInDuration: Duration(milliseconds: 300),
                 ),
               ),
             ),

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -145,8 +146,14 @@ class BlogImgItemView extends StatelessWidget {
                             height: getImgGridHeight(
                                 blogItem.resources!.split(",").length,
                                 parentWidth),
-                            child: Image.network(
-                              blogItem.resources!.split(",")[i],
+                            child: CachedNetworkImage(
+                              imageUrl: blogItem.resources!.split(",")[i],
+                              placeholder: (context, url) =>
+                                  CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                              // 图片加载完成后淡入显示（提升体验）
+                              fadeInDuration: Duration(milliseconds: 300),
                             ),
                           ),
                           tag: 'lookBlogImg-${categary}-${blogItem.id}-$i',
