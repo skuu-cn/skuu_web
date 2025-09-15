@@ -1,10 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:skuu/constant/constant.dart';
 
+import '../../components/chat/chat_widget.dart';
 import '../../routes/app_pages.dart';
-import 'chat_pagev3.dart';
 
 void main() => runApp(MyApp());
 
@@ -73,7 +74,7 @@ class _ChatPageList extends State<ChatPageList> {
           flex: 5,
           child: Container(
             color: Colors.greenAccent,
-            child: ChatPage(chatId: index),
+            child:  ChatWidget(currentUserId: '', chatId: 'DEFAULT_CHAT_ID', initialMessages: [],dio: Dio(),),
           ),
         ),
     ]);

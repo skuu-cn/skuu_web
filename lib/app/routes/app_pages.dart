@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:skuu/app/components/video_player_detail/FullScreenVideoPlayer.dart';
-import 'package:skuu/app/pages/friends/chat_pagev2.dart';
 import 'package:skuu/app/pages/friends/friends_page.dart';
 import 'package:skuu/app/pages/friends/user_detail_page.dart';
 import 'package:skuu/app/pages/goods/goods_detail_page.dart';
 import 'package:skuu/app/pages/goods/goods_page.dart';
 import 'package:skuu/app/pages/index/bindings/home_binding.dart';
 import 'package:skuu/app/pages/index/views/home_appbar_item_page.dart';
+import 'package:skuu/app/pages/lookart/views/look_art_view.dart';
 import 'package:skuu/app/pages/meleft/mycare_page.dart';
 import 'package:skuu/app/pages/meleft/mycollect_page.dart';
 import 'package:skuu/app/pages/tool/ai_page.dart';
@@ -27,7 +27,7 @@ import '../pages/fabu/bindings/fabu_zuopin_binding.dart';
 import '../pages/fabu/views/fabu_goods_page.dart';
 import '../pages/fabu/views/fabu_zuopin_page.dart';
 import '../pages/index/views/home_page.dart';
-import '../pages/lookart/look_art_page.dart';
+import '../pages/lookart/bindings/loog_art_binding.dart';
 import '../pages/search/search_page.dart';
 import '../pages/watchvideo/play_video_page.dart';
 import '../pages/weather/bindings/weather_binding.dart';
@@ -72,7 +72,6 @@ class AppPages {
       binding: HomeBinding(),
     ),
 
-
     GetPage(
       name: Routes.searchPage,
       page: () => SearchPage(),
@@ -96,11 +95,6 @@ class AppPages {
     GetPage(
       name: Routes.care,
       page: () => MyCarePage(),
-      binding: HomeBinding(),
-    ),
-    GetPage(
-      name: Routes.chat,
-      page: () => ChatPageV2(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -156,8 +150,8 @@ class AppPages {
     ),
     GetPage(
       name: Routes.whatArticle,
-      page: () => LookArticalPage(),
-      binding: HomeBinding(),
+      page: () => LookartView(),
+      binding: LoogArtBinding(),
     ),
 
     GetPage(

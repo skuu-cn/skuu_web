@@ -14,7 +14,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 /// The API key to use when accessing the Gemini API.
@@ -352,7 +351,7 @@ class MessageWidget extends StatelessWidget {
                 ),
                 margin: const EdgeInsets.only(bottom: 8),
                 child: Column(children: [
-                  if (text case final text?) MarkdownBody(data: text),
+                  // if (text case final text?) MarkdownBody(data: text),
                   if (image case final image?) image,
                 ]))),
       ],

@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:skuu/app/components/chat/chat_widget.dart';
 import 'package:skuu/app/pages/index/controllers/message_controller.dart';
 
 import '../../../routes/app_pages.dart';
